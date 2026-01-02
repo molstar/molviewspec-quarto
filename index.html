@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.13">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MolViewSpec Quarto Extension Example</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-a126389619fad6dbfb296a5315d49fef.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-7d52103a208c030741cc79fae131c136.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="index_files/libs/quarto-contrib/molviewspec-quarto-1.0.0/molstar.js"></script>
+<script src="index_files/libs/quarto-contrib/molviewspec-quarto-1.0.0/molviewspec.js" type="module"></script>
+<link href="index_files/libs/quarto-contrib/molviewspec-quarto-1.0.0/molstar.css" rel="stylesheet">
+<link href="index_files/libs/quarto-contrib/molviewspec-quarto-1.0.0/molviewspec.css" rel="stylesheet">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#basic-example" id="toc-basic-example" class="nav-link" data-scroll-target="#basic-example">Basic Example</a></li>
+  <li><a href="#example-with-custom-colors" id="toc-example-with-custom-colors" class="nav-link" data-scroll-target="#example-with-custom-colors">Example with Custom Colors</a></li>
+  <li><a href="#example-with-ligands" id="toc-example-with-ligands" class="nav-link" data-scroll-target="#example-with-ligands">Example with Ligands</a></li>
+  <li><a href="#multiple-components" id="toc-multiple-components" class="nav-link" data-scroll-target="#multiple-components">Multiple Components</a></li>
+  <li><a href="#without-title" id="toc-without-title" class="nav-link" data-scroll-target="#without-title">Without Title</a></li>
+  <li><a href="#story-code-and-scene-code" id="toc-story-code-and-scene-code" class="nav-link" data-scroll-target="#story-code-and-scene-code">Story Code and Scene Code</a></li>
+  <li><a href="#supported-attributes" id="toc-supported-attributes" class="nav-link" data-scroll-target="#supported-attributes">Supported Attributes</a></li>
+  <li><a href="#technical-details" id="toc-technical-details" class="nav-link" data-scroll-target="#technical-details">Technical Details</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">MolViewSpec Quarto Extension Example</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>To use this extension in your Quarto project, run the following command in your terminal:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add zachcp/molviewspec-quarto</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then add the filter to your document’s YAML front matter:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Document"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> molviewspec-quarto</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This document demonstrates the MolViewSpec Quarto filter extension, which creates interactive molecular structure viewers using the MolStar visualization library and the MolViewSpec builder API.</p>
+</section>
+<section id="basic-example" class="level2">
+<h2 class="anchored" data-anchor-id="basic-example">Basic Example</h2>
+<p>Here’s a simple example that loads and displays a protein structure:</p>
+<script>
+(function() {
+  // Determine the base path for extension resources
+  var scripts = document.getElementsByTagName('script');
+  var basePath = '';
+  for (var i = 0; i < scripts.length; i++) {
+    var src = scripts[i].src;
+    if (src && src.indexOf('molviewspec-quarto') !== -1) {
+      basePath = src.substring(0, src.lastIndexOf('/') + 1);
+      break;
+    }
+  }
+
+  // Try to load Monaco from local extension files first
+  var script = document.createElement('script');
+  var localPath = basePath + 'vs/loader.js';
+  script.src = localPath;
+
+  script.onerror = function() {
+    // Fallback to CDN if local files not found
+    console.log('Loading Monaco from CDN (local files not available at ' + localPath + ')');
+    var cdnScript = document.createElement('script');
+    cdnScript.src = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js';
+    cdnScript.onload = function() {
+      require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' }});
+      require(['vs/editor/editor.main'], function() {
+        console.log('Monaco Editor loaded from CDN');
+      });
+    };
+    document.head.appendChild(cdnScript);
+  };
+
+  script.onload = function() {
+    // Configure for local files
+    var vsPath = basePath + 'vs';
+    require.config({ paths: { vs: vsPath }});
+    require(['vs/editor/editor.main'], function() {
+      console.log('Monaco Editor loaded from local files at ' + vsPath);
+    });
+  };
+
+  document.head.appendChild(script);
+})();
+</script>
+
+<div class="molviewspec-container" id="molviewspec-1" style="height: 400px; width: 100%;">
+  <div class="molviewspec-header"><h4 class="molviewspec-title anchored">Basic Protein Structure (1CBS)</h4></div>
+  <script type="application/json" id="molviewspec-1-story"></script>
+  <script type="application/json" id="molviewspec-1-scene">const structure = builder
+  .download({ url: 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif' })
+  .parse({ format: 'bcif' })
+  .modelStructure();
+
+structure
+  .component({ selector: 'polymer' })
+  .representation({ type: 'cartoon' });</script>
+  <div class="molviewspec-viewer" id="molviewspec-1-viewer"></div>
+</div>
+
+</section>
+<section id="example-with-custom-colors" class="level2">
+<h2 class="anchored" data-anchor-id="example-with-custom-colors">Example with Custom Colors</h2>
+<p>This example shows a protein with custom coloring:</p>
+
+<div class="molviewspec-container" id="molviewspec-2" style="height: 400px; width: 100%;">
+  <div class="molviewspec-header"><h4 class="molviewspec-title anchored">Colored Protein Representation</h4></div>
+  <script type="application/json" id="molviewspec-2-story"></script>
+  <script type="application/json" id="molviewspec-2-scene">const structure = builder
+  .download({ url: 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif' })
+  .parse({ format: 'bcif' })
+  .modelStructure();
+
+structure
+  .component({ selector: 'polymer' })
+  .representation({ type: 'cartoon' })
+  .color({ color: 'blue' });</script>
+  <div class="molviewspec-viewer" id="molviewspec-2-viewer"></div>
+</div>
+
+</section>
+<section id="example-with-ligands" class="level2">
+<h2 class="anchored" data-anchor-id="example-with-ligands">Example with Ligands</h2>
+<p>This example highlights a ligand with a label and focus:</p>
+
+<div class="molviewspec-container" id="molviewspec-3" style="height: 400px; width: 100%;">
+  <div class="molviewspec-header"><h4 class="molviewspec-title anchored">Protein with Ligand</h4></div>
+  <script type="application/json" id="molviewspec-3-story"></script>
+  <script type="application/json" id="molviewspec-3-scene">const structure = builder
+  .download({ url: 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif' })
+  .parse({ format: 'bcif' })
+  .modelStructure();
+
+structure
+  .component({ selector: 'polymer' })
+  .representation({ type: 'cartoon' })
+  .color({ color: 'green' });
+
+structure
+  .component({ selector: 'ligand' })
+  .representation({ type: 'ball_and_stick' })
+  .color({ color: '#cc3399' });</script>
+  <div class="molviewspec-viewer" id="molviewspec-3-viewer"></div>
+</div>
+
+</section>
+<section id="multiple-components" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-components">Multiple Components</h2>
+<p>You can add multiple components with different representations:</p>
+
+<div class="molviewspec-container" id="molviewspec-4" style="height: 400px; width: 100%;">
+  <div class="molviewspec-header"><h4 class="molviewspec-title anchored">Multiple Representations</h4></div>
+  <script type="application/json" id="molviewspec-4-story"></script>
+  <script type="application/json" id="molviewspec-4-scene">const structure = builder
+  .download({ url: 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif' })
+  .parse({ format: 'bcif' })
+  .modelStructure();
+
+structure
+  .component({ selector: 'polymer' })
+  .representation({ type: 'cartoon' });
+
+structure
+  .component({ selector: 'ligand' })
+  .representation({ type: 'ball_and_stick' });
+
+structure
+  .component({ selector: 'water' })
+  .representation({ type: 'ball_and_stick' })
+  .color({ color: 'lightblue' });</script>
+  <div class="molviewspec-viewer" id="molviewspec-4-viewer"></div>
+</div>
+
+</section>
+<section id="without-title" class="level2">
+<h2 class="anchored" data-anchor-id="without-title">Without Title</h2>
+<p>You can omit the title attribute if you don’t need a header:</p>
+
+<div class="molviewspec-container" id="molviewspec-5" style="height: 400px; width: 100%;">
+  
+  <script type="application/json" id="molviewspec-5-story"></script>
+  <script type="application/json" id="molviewspec-5-scene">const structure = builder
+  .download({ url: 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif' })
+  .parse({ format: 'bcif' })
+  .modelStructure();
+
+structure
+  .component({ selector: 'polymer' })
+  .representation({ type: 'cartoon' })
+  .color({ color: 'red' });</script>
+  <div class="molviewspec-viewer" id="molviewspec-5-viewer"></div>
+</div>
+
+</section>
+<section id="story-code-and-scene-code" class="level2">
+<h2 class="anchored" data-anchor-id="story-code-and-scene-code">Story Code and Scene Code</h2>
+<p>You can split your code into two parts using <code>---</code> as a separator: - <strong>Story code</strong> (above <code>---</code>): Runs but doesn’t appear in the editor - useful for setup, imports, or shared variables - <strong>Scene code</strong> (below <code>---</code>): Appears in the editor and is editable</p>
+
+<div class="molviewspec-container" id="molviewspec-6" style="height: 400px; width: 100%;">
+  <div class="molviewspec-header"><h4 class="molviewspec-title anchored">Using Story and Scene Code</h4></div>
+  <script type="application/json" id="molviewspec-6-story">// This is story code - it runs but won't show in the editor
+const structure = builder
+  .download({ url: 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif' })
+  .parse({ format: 'bcif' })
+  .modelStructure();
+</script>
+  <script type="application/json" id="molviewspec-6-scene">
+// This is scene code - it appears in the editor and is editable
+structuref
+  .component({ selector: 'polymer' })
+  .representation({ type: 'cartoon' })
+  .color({ color: 'purple' });</script>
+  <div class="molviewspec-viewer" id="molviewspec-6-viewer"></div>
+</div>
+
+</section>
+<section id="supported-attributes" class="level2">
+<h2 class="anchored" data-anchor-id="supported-attributes">Supported Attributes</h2>
+<p>The MolViewSpec code blocks support the following attributes:</p>
+<ul>
+<li><strong>title</strong>: Set a title for the viewer (default: empty)</li>
+<li><strong>height</strong>: Set the height of the viewer (default: “400px”)</li>
+<li><strong>width</strong>: Set the width of the viewer (default: “100%”)</li>
+</ul>
+</section>
+<section id="technical-details" class="level2">
+<h2 class="anchored" data-anchor-id="technical-details">Technical Details</h2>
+<section id="how-it-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-it-works">How It Works</h3>
+<ol type="1">
+<li>The Lua filter detects <code>{.molviewspec}</code> code blocks in your document</li>
+<li>It extracts the JavaScript builder code</li>
+<li>Generates HTML containers with unique IDs for each block</li>
+<li>Loads the bundled MolStar viewer library</li>
+<li>Creates a MolViewSpec builder and executes your code</li>
+<li>Loads the resulting view into the MolStar viewer</li>
+</ol>
+</section>
+<section id="requirements" class="level3">
+<h3 class="anchored" data-anchor-id="requirements">Requirements</h3>
+<ul>
+<li>Quarto &gt;= 1.8.0</li>
+<li>HTML output format</li>
+<li>Works offline (MolStar bundled with extension)</li>
+</ul>
+</section>
+<section id="molviewspec-builder-api" class="level3">
+<h3 class="anchored" data-anchor-id="molviewspec-builder-api">MolViewSpec Builder API</h3>
+<p>The builder API provides a fluent interface for creating molecular visualizations. Key methods include:</p>
+<ul>
+<li><code>download()</code>: Download a structure from a URL</li>
+<li><code>parse()</code>: Parse the downloaded file (formats: bcif, cif, pdb, etc.)</li>
+<li><code>modelStructure()</code>: Create a model structure node</li>
+<li><code>component()</code>: Select parts of the structure (polymer, ligand, water, etc.)</li>
+<li><code>representation()</code>: Add a visual representation (cartoon, ball_and_stick, surface, spacefill, etc.)</li>
+<li><code>color()</code>: Apply colors (named colors like ‘red’, ‘blue’, or hex codes like ‘#cc3399’)</li>
+<li><code>label()</code>: Add text labels</li>
+<li><code>focus()</code>: Focus the camera on a component</li>
+</ul>
+<p>For more information about MolViewSpec:</p>
+<ul>
+<li><a href="https://molstar.org/mol-view-spec-docs/">MolViewSpec Documentation</a></li>
+<li><a href="https://molstar.org/mol-view-spec-docs/mvs-molstar-extension/integration/">Integration Examples</a></li>
+<li><a href="https://molstar.org/">MolStar Website</a></li>
+</ul>
+</section>
+</section>
+<section id="notes" class="level2">
+<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+<ul>
+<li>Each block creates an independent interactive viewer</li>
+<li>The extension automatically manages all JavaScript and CSS dependencies</li>
+<li>The viewer is fully interactive and allows rotation, zooming, and selection</li>
+<li>Use <code>{.molviewspec}</code> with a dot prefix for the code block class</li>
+<li>The MolStar library is bundled with the extension for offline use</li>
+<li>Write JavaScript code using the <code>builder</code> variable to construct your view</li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
