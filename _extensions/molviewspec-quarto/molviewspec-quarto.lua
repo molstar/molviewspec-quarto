@@ -24,6 +24,9 @@ local function add_dependencies()
       stylesheets = {
         "assets/molstar.css",
         "molviewspec.css"
+      },
+      resources = {
+        { name = "vs", path = "assets/vs", attribs = {recursive = true} }
       }
     })
   end
@@ -32,19 +35,58 @@ local function add_dependencies()
 end
 
 -- Function to inject Monaco Editor loader (only once)
+-- Try to use local Monaco files if available, fall back to CDN
 local function inject_monaco()
   if monaco_injected then
     return ""
   end
   monaco_injected = true
 
+  -- Load Monaco from local files with CDN fallback
   return [[
-<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
 <script>
-require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' }});
-require(['vs/editor/editor.main'], function() {
-  console.log('Monaco Editor loaded and available at window.monaco');
-});
+(function() {
+  // Determine the base path for extension resources
+  var scripts = document.getElementsByTagName('script');
+  var basePath = '';
+  for (var i = 0; i < scripts.length; i++) {
+    var src = scripts[i].src;
+    if (src && src.indexOf('molviewspec-quarto') !== -1) {
+      basePath = src.substring(0, src.lastIndexOf('/') + 1);
+      break;
+    }
+  }
+
+  // Try to load Monaco from local extension files first
+  var script = document.createElement('script');
+  var localPath = basePath + 'vs/loader.js';
+  script.src = localPath;
+
+  script.onerror = function() {
+    // Fallback to CDN if local files not found
+    console.log('Loading Monaco from CDN (local files not available at ' + localPath + ')');
+    var cdnScript = document.createElement('script');
+    cdnScript.src = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js';
+    cdnScript.onload = function() {
+      require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' }});
+      require(['vs/editor/editor.main'], function() {
+        console.log('Monaco Editor loaded from CDN');
+      });
+    };
+    document.head.appendChild(cdnScript);
+  };
+
+  script.onload = function() {
+    // Configure for local files
+    var vsPath = basePath + 'vs';
+    require.config({ paths: { vs: vsPath }});
+    require(['vs/editor/editor.main'], function() {
+      console.log('Monaco Editor loaded from local files at ' + vsPath);
+    });
+  };
+
+  document.head.appendChild(script);
+})();
 </script>
 ]]
 end
