@@ -1,10 +1,5 @@
 // MolViewSpec Quarto Extension
-// Initializes EditorWithViewer components with MolViewSpec builder code using Preact
-
-// Import Preact and molstar-components directly from CDN
-const PREACT_URL = "https://esm.sh/preact@10.19.3";
-const MOLSTAR_COMPONENTS_URL =
-  "https://esm.sh/jsr/@zachcp/molstar-components@0.4.0";
+// Initializes EditorWithViewer components with MolViewSpec builder code
 
 // Initialize all molviewspec viewers when DOM is ready
 async function initializeMolViewSpecViewers() {
@@ -15,9 +10,23 @@ async function initializeMolViewSpecViewers() {
   }
 
   try {
-    // Dynamically import dependencies
-    const { h, render } = await import(PREACT_URL);
-    const { EditorWithViewer } = await import(MOLSTAR_COMPONENTS_URL);
+    // Determine the base path for extension resources
+    const scripts = document.getElementsByTagName("script");
+    let basePath = "";
+    for (let i = 0; i < scripts.length; i++) {
+      const src = scripts[i].src;
+      if (src && src.indexOf("molviewspec") !== -1) {
+        basePath = src.substring(0, src.lastIndexOf("/") + 1);
+        break;
+      }
+    }
+
+    // Dynamically import preact and molstar-components
+    const componentsPath = basePath + "assets/molstar-components.js";
+    console.log("Loading molstar-components from:", componentsPath);
+
+    const { h, render } = await import("https://esm.sh/preact@10.19.3");
+    const { EditorWithViewer } = await import(componentsPath);
 
     if (!EditorWithViewer) {
       console.error("EditorWithViewer component not found");
@@ -49,23 +58,24 @@ async function initializeMolViewSpecViewers() {
         "scene length:",
         sceneCode.length,
       );
-      console.log("Scene preview:", sceneCode.substring(0, 100));
 
       try {
         // Clear the container
         viewerElement.innerHTML = "";
 
         // Render the EditorWithViewer component using Preact
-        // Use hiddenCode prop to prepend story code before scene code
         render(
           h(EditorWithViewer, {
             initialCode: sceneCode,
-            hiddenCode: storyCode, // Story code runs but doesn't show in editor
+            hiddenCode: storyCode,
             layout: "horizontal",
             editorHeight: "400px",
             viewerHeight: "400px",
             autoRun: true,
             autoRunDelay: 500,
+            showLog: false,
+            showAutoUpdateToggle: false,
+            showBottomControlPanel: false,
           }),
           viewerElement,
         );
@@ -86,13 +96,13 @@ async function initializeMolViewSpecViewers() {
       }
     });
   } catch (error) {
-    console.error("Failed to load dependencies:", error);
+    console.error("Failed to load molstar-components:", error);
     viewers.forEach((viewerElement) => {
       viewerElement.innerHTML = `
         <div class="molviewspec-error" style="padding: 20px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px;">
-          <p style="margin: 0 0 10px 0;"><strong>Error loading dependencies:</strong></p>
+          <p style="margin: 0 0 10px 0;"><strong>Error loading molstar-components:</strong></p>
           <pre style="margin: 0; white-space: pre-wrap; word-wrap: break-word;">${error.message}</pre>
-          <p style="margin-top: 10px;">Failed to load Preact or molstar-components from CDN.</p>
+          <p style="margin-top: 10px;">The molstar-components library failed to load. Check the console for details.</p>
         </div>
       `;
     });
