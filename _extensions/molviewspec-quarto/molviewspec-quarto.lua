@@ -3,7 +3,6 @@
 
 local counter = 0
 local dependencies_added = false
-local monaco_injected = false
 
 -- Function to add HTML dependencies (JS and CSS)
 local function add_dependencies()
@@ -13,82 +12,54 @@ local function add_dependencies()
 
   -- Only add dependencies if quarto global is available
   if quarto and quarto.doc and quarto.doc.addHtmlDependency then
-    -- Add MolStar and extension assets
+    -- Add bundled molviewspec assets (all-in-one compiled bundle)
+    -- Monaco configuration must run before module loads
     quarto.doc.addHtmlDependency({
       name = "molviewspec-quarto",
-      version = "1.0.0",
+      version = "1.1.0",
+      head = [[
+<script>
+// Configure Monaco Environment before loading modules
+window.MonacoEnvironment = {
+  getWorkerUrl: function(moduleId, label) {
+    // Determine base path from script location
+    var scripts = document.getElementsByTagName('script');
+    var basePath = '';
+    for (var i = 0; i < scripts.length; i++) {
+      var src = scripts[i].src;
+      if (src && src.indexOf('molviewspec') !== -1) {
+        basePath = src.substring(0, src.lastIndexOf('/') + 1);
+        break;
+      }
+    }
+    if (label === 'typescript' || label === 'javascript') {
+      return basePath + 'assets/ts.worker.js';
+    }
+    return basePath + 'assets/editor.worker.js';
+  }
+};
+</script>
+]],
       scripts = {
         { path = "assets/molstar.js" },
         { path = "molviewspec.js", attribs = {type = "module"} }
       },
       stylesheets = {
         "assets/molstar.css",
-        "molviewspec.css"
+        "assets/molstar-components.css",
+        "molviewspec.css",
+        "molviewspec-custom.css"
       },
       resources = {
-        { name = "vs", path = "assets/vs", attribs = {recursive = true} }
+        { name = "assets/molstar.js", path = "assets/molstar.js" },
+        { name = "assets/molstar.css", path = "assets/molstar.css" },
+        { name = "assets/editor.worker.js", path = "assets/editor.worker.js" },
+        { name = "assets/ts.worker.js", path = "assets/ts.worker.js" }
       }
     })
   end
 
   dependencies_added = true
-end
-
--- Function to inject Monaco Editor loader (only once)
--- Try to use local Monaco files if available, fall back to CDN
-local function inject_monaco()
-  if monaco_injected then
-    return ""
-  end
-  monaco_injected = true
-
-  -- Load Monaco from local files with CDN fallback
-  return [[
-<script>
-(function() {
-  // Determine the base path for extension resources
-  var scripts = document.getElementsByTagName('script');
-  var basePath = '';
-  for (var i = 0; i < scripts.length; i++) {
-    var src = scripts[i].src;
-    if (src && src.indexOf('molviewspec-quarto') !== -1) {
-      basePath = src.substring(0, src.lastIndexOf('/') + 1);
-      break;
-    }
-  }
-
-  // Try to load Monaco from local extension files first
-  var script = document.createElement('script');
-  var localPath = basePath + 'vs/loader.js';
-  script.src = localPath;
-
-  script.onerror = function() {
-    // Fallback to CDN if local files not found
-    console.log('Loading Monaco from CDN (local files not available at ' + localPath + ')');
-    var cdnScript = document.createElement('script');
-    cdnScript.src = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js';
-    cdnScript.onload = function() {
-      require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' }});
-      require(['vs/editor/editor.main'], function() {
-        console.log('Monaco Editor loaded from CDN');
-      });
-    };
-    document.head.appendChild(cdnScript);
-  };
-
-  script.onload = function() {
-    // Configure for local files
-    var vsPath = basePath + 'vs';
-    require.config({ paths: { vs: vsPath }});
-    require(['vs/editor/editor.main'], function() {
-      console.log('Monaco Editor loaded from local files at ' + vsPath);
-    });
-  };
-
-  document.head.appendChild(script);
-})();
-</script>
-]]
 end
 
 -- Function to generate unique ID
@@ -134,21 +105,78 @@ function CodeBlock(el)
     local width = el.attributes.width or "100%"
     local title = el.attributes.title or ""
 
-    -- Inject Monaco loader before first viewer (only once)
-    local monaco_loader = inject_monaco()
+    -- Build component props from attributes
+    -- Extract all EditorWithViewer props
+    local props = {}
+
+    -- Track if we need extra height for bottom controls
+    local has_bottom_controls = false
+
+    -- String props
+    if el.attributes.layout then props.layout = el.attributes.layout end
+    if el.attributes.editorHeight then props.editorHeight = el.attributes.editorHeight end
+    if el.attributes.viewerHeight then props.viewerHeight = el.attributes.viewerHeight end
+
+    -- Boolean props (convert string "true"/"false" to boolean)
+    if el.attributes.autoRun then
+      props.autoRun = el.attributes.autoRun == "true"
+    end
+
+    -- Simplified controls option - when enabled, shows bottom control panel with toggles
+    -- showLog must be true to enable the log toggle functionality
+    -- The log visibility is then controlled by the user via the toggle
+    if el.attributes.controls then
+      local controls_enabled = el.attributes.controls == "true"
+      if controls_enabled then
+        props.showBottomControlPanel = true
+        props.showAutoUpdateToggle = true
+        props.showLog = true  -- Must be true for log toggle to work
+        has_bottom_controls = true
+      end
+    end
+
+    -- Number props
+    if el.attributes.autoRunDelay then
+      props.autoRunDelay = tonumber(el.attributes.autoRunDelay)
+    end
+
+    -- Convert props table to JSON string
+    local json_props = "{"
+    local first = true
+    for key, value in pairs(props) do
+      if not first then
+        json_props = json_props .. ","
+      end
+      first = false
+
+      json_props = json_props .. string.format('"%s":', key)
+      if type(value) == "string" then
+        json_props = json_props .. string.format('"%s"', value:gsub('"', '\\"'))
+      elseif type(value) == "boolean" then
+        json_props = json_props .. (value and "true" or "false")
+      elseif type(value) == "number" then
+        json_props = json_props .. tostring(value)
+      end
+    end
+    json_props = json_props .. "}"
+
+    -- Build inline styles - omit height if bottom controls are enabled (let it be responsive)
+    local inline_style = has_bottom_controls and string.format("width: %s;", width) or string.format("height: %s; width: %s;", height, width)
 
     -- Create HTML structure with separate script tags for story and scene code
-    local html = string.format([[%s
-<div class="molviewspec-container" id="%s" style="height: %s; width: %s;">
+    local html = string.format([[
+<div class="molviewspec-container" id="%s" style="%s">
   %s
   <script type="application/json" id="%s-story">%s</script>
   <script type="application/json" id="%s-scene">%s</script>
+  <script type="application/json" id="%s-props">%s</script>
   <div class="molviewspec-viewer" id="%s-viewer"></div>
 </div>
-]], monaco_loader, id, height, width,
+]], id, inline_style,
     title ~= "" and string.format('<div class="molviewspec-header"><h4 class="molviewspec-title">%s</h4></div>', title) or "",
     id, story_code,
     id, scene_code,
+    id, json_props,
     id)
 
     -- Return as raw HTML block
