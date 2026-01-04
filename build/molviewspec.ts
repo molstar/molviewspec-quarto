@@ -72,6 +72,11 @@ async function initializeMolViewSpecViewers() {
             showLog: false,
             showAutoUpdateToggle: false,
             showBottomControlPanel: false,
+            editorOptions: {
+              lineNumbersMinChars: 2,
+              glyphMargin: false,
+              folding: false,
+            },
           }),
           viewerElement,
         );
