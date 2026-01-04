@@ -47,7 +47,8 @@ window.MonacoEnvironment = {
       stylesheets = {
         "assets/molstar.css",
         "assets/molstar-components.css",
-        "molviewspec.css"
+        "molviewspec.css",
+        "molviewspec-custom.css"
       },
       resources = {
         { name = "assets/molstar.js", path = "assets/molstar.js" },

@@ -1,8 +1,8 @@
 // MolViewSpec Quarto Extension Entry Point
 // Initializes all molviewspec viewers when DOM is ready
 
-import { h, render } from "npm:preact@10.28.1";
-import { EditorWithViewer } from "jsr:@zachcp/molstar-components@0.4.13";
+import { h, render } from "preact";
+import { EditorWithViewer } from "@zachcp/molstar-components";
 
 // Note: Monaco Environment is configured in the HTML head via Lua filter
 // to ensure it runs before the module loads

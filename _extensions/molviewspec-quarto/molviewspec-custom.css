@@ -1,0 +1,27 @@
+/* ========================================
+   MolViewSpec Quarto Extension - Custom Styles
+   ======================================== */
+
+/* MolStar Viewer - Hide Controls */
+.msp-plugin-content .msp-control-panel,
+.msp-plugin-content .msp-controls-group {
+    display: none !important;
+}
+
+.msp-plugin-content .msp-btn,
+.msp-plugin-content .msp-control-row {
+    display: none !important;
+}
+
+.msp-plugin-content .msp-left-panel {
+    display: none !important;
+}
+
+.msp-plugin-content .msp-viewport {
+    width: 100% !important;
+    left: 0 !important;
+}
+
+.msp-viewport-top-left-controls {
+    display: none !important;
+}
