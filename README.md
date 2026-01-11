@@ -9,7 +9,7 @@ A Quarto filter extension that creates interactive molecular structure editors a
 - 🎨 Customizable layout and dimensions
 - 🔧 Optional interactive controls (auto-update toggle, execution log)
 - 📦 Works offline - all dependencies bundled
-- 🚀 Uses molstar-components from JSR
+- 🚀 Uses @molstar/molstar-components from JSR
 
 ## Installation
 
