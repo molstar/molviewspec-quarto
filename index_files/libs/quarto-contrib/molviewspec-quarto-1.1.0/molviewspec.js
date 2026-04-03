@@ -15,7 +15,7 @@ function tail(arr) {
   }
   return [arr.slice(0, arr.length - 1), arr[arr.length - 1]];
 }
-function equals(one, other, itemEquals2 = (a3, b) => a3 === b) {
+function equals(one, other, itemEquals2 = (a3, b2) => a3 === b2) {
   if (one === other) {
     return true;
   }
@@ -237,7 +237,7 @@ function getActualStartIndex(array4, start) {
   return start < 0 ? Math.max(start + array4.length, 0) : Math.min(start, array4.length);
 }
 function compareBy(selector, comparator) {
-  return (a3, b) => comparator(selector(a3), selector(b));
+  return (a3, b2) => comparator(selector(a3), selector(b2));
 }
 function tieBreakComparators(...comparators) {
   return (item1, item2) => {
@@ -251,16 +251,16 @@ function tieBreakComparators(...comparators) {
   };
 }
 function reverseOrder(comparator) {
-  return (a3, b) => -comparator(a3, b);
+  return (a3, b2) => -comparator(a3, b2);
 }
 function compareUndefinedSmallest(comparator) {
-  return (a3, b) => {
+  return (a3, b2) => {
     if (a3 === void 0) {
-      return b === void 0 ? CompareResult.neitherLessOrGreaterThan : CompareResult.lessThan;
-    } else if (b === void 0) {
+      return b2 === void 0 ? CompareResult.neitherLessOrGreaterThan : CompareResult.lessThan;
+    } else if (b2 === void 0) {
       return CompareResult.greaterThan;
     }
-    return comparator(a3, b);
+    return comparator(a3, b2);
   };
 }
 function sum(array4) {
@@ -290,8 +290,8 @@ var init_arrays = __esm({
       CompareResult2.lessThan = -1;
       CompareResult2.neitherLessOrGreaterThan = 0;
     })(CompareResult || (CompareResult = {}));
-    numberComparator = (a3, b) => a3 - b;
-    booleanComparator = (a3, b) => numberComparator(a3 ? 1 : 0, b ? 1 : 0);
+    numberComparator = (a3, b2) => a3 - b2;
+    booleanComparator = (a3, b2) => numberComparator(a3 ? 1 : 0, b2 ? 1 : 0);
     ArrayQueue = class {
       /**
        * Constructs a queue that is backed by the given array. Runtime is O(1).
@@ -588,8 +588,8 @@ function checkAdjacentItems(items, predicate) {
   let i4 = 0;
   while (i4 < items.length - 1) {
     const a3 = items[i4];
-    const b = items[i4 + 1];
-    if (!predicate(a3, b)) {
+    const b2 = items[i4 + 1];
+    if (!predicate(a3, b2)) {
       return false;
     }
     i4++;
@@ -1808,7 +1808,7 @@ var init_event = __esm({
         }, delay, void 0, true, void 0, disposable);
       }
       Event2.accumulate = accumulate;
-      function latch(event, equals3 = (a3, b) => a3 === b, disposable) {
+      function latch(event, equals3 = (a3, b2) => a3 === b2, disposable) {
         let firstCall = true;
         let cache;
         return filter2(event, (value) => {
@@ -1914,7 +1914,7 @@ var init_event = __esm({
           });
           return this;
         }
-        latch(equals3 = (a3, b) => a3 === b) {
+        latch(equals3 = (a3, b2) => a3 === b2) {
           let firstCall = true;
           let cache;
           this.steps.push((value) => {
@@ -4672,7 +4672,7 @@ var init_editorOptions = __esm({
               });
             }
           }
-          rulers.sort((a3, b) => a3.column - b.column);
+          rulers.sort((a3, b2) => a3.column - b2.column);
           return rulers;
         }
         return this.defaultValue;
@@ -8341,11 +8341,11 @@ var init_position = __esm({
       /**
        * Test if position `a` equals position `b`
        */
-      static equals(a3, b) {
-        if (!a3 && !b) {
+      static equals(a3, b2) {
+        if (!a3 && !b2) {
           return true;
         }
-        return !!a3 && !!b && a3.lineNumber === b.lineNumber && a3.column === b.column;
+        return !!a3 && !!b2 && a3.lineNumber === b2.lineNumber && a3.column === b2.column;
       }
       /**
        * Test if this position is before other position.
@@ -8358,14 +8358,14 @@ var init_position = __esm({
        * Test if position `a` is before position `b`.
        * If the two positions are equal, the result will be false.
        */
-      static isBefore(a3, b) {
-        if (a3.lineNumber < b.lineNumber) {
+      static isBefore(a3, b2) {
+        if (a3.lineNumber < b2.lineNumber) {
           return true;
         }
-        if (b.lineNumber < a3.lineNumber) {
+        if (b2.lineNumber < a3.lineNumber) {
           return false;
         }
-        return a3.column < b.column;
+        return a3.column < b2.column;
       }
       /**
        * Test if this position is before other position.
@@ -8378,24 +8378,24 @@ var init_position = __esm({
        * Test if position `a` is before position `b`.
        * If the two positions are equal, the result will be true.
        */
-      static isBeforeOrEqual(a3, b) {
-        if (a3.lineNumber < b.lineNumber) {
+      static isBeforeOrEqual(a3, b2) {
+        if (a3.lineNumber < b2.lineNumber) {
           return true;
         }
-        if (b.lineNumber < a3.lineNumber) {
+        if (b2.lineNumber < a3.lineNumber) {
           return false;
         }
-        return a3.column <= b.column;
+        return a3.column <= b2.column;
       }
       /**
        * A function that compares positions, useful for sorting
        */
-      static compare(a3, b) {
+      static compare(a3, b2) {
         const aLineNumber = a3.lineNumber | 0;
-        const bLineNumber = b.lineNumber | 0;
+        const bLineNumber = b2.lineNumber | 0;
         if (aLineNumber === bLineNumber) {
           const aColumn = a3.column | 0;
-          const bColumn = b.column | 0;
+          const bColumn = b2.column | 0;
           return aColumn - bColumn;
         }
         return aLineNumber - bLineNumber;
@@ -8562,27 +8562,27 @@ var init_range = __esm({
        * A reunion of the two ranges.
        * The smallest position will be used as the start point, and the largest one as the end point.
        */
-      static plusRange(a3, b) {
+      static plusRange(a3, b2) {
         let startLineNumber;
         let startColumn;
         let endLineNumber;
         let endColumn;
-        if (b.startLineNumber < a3.startLineNumber) {
-          startLineNumber = b.startLineNumber;
-          startColumn = b.startColumn;
-        } else if (b.startLineNumber === a3.startLineNumber) {
-          startLineNumber = b.startLineNumber;
-          startColumn = Math.min(b.startColumn, a3.startColumn);
+        if (b2.startLineNumber < a3.startLineNumber) {
+          startLineNumber = b2.startLineNumber;
+          startColumn = b2.startColumn;
+        } else if (b2.startLineNumber === a3.startLineNumber) {
+          startLineNumber = b2.startLineNumber;
+          startColumn = Math.min(b2.startColumn, a3.startColumn);
         } else {
           startLineNumber = a3.startLineNumber;
           startColumn = a3.startColumn;
         }
-        if (b.endLineNumber > a3.endLineNumber) {
-          endLineNumber = b.endLineNumber;
-          endColumn = b.endColumn;
-        } else if (b.endLineNumber === a3.endLineNumber) {
-          endLineNumber = b.endLineNumber;
-          endColumn = Math.max(b.endColumn, a3.endColumn);
+        if (b2.endLineNumber > a3.endLineNumber) {
+          endLineNumber = b2.endLineNumber;
+          endColumn = b2.endColumn;
+        } else if (b2.endLineNumber === a3.endLineNumber) {
+          endLineNumber = b2.endLineNumber;
+          endColumn = Math.max(b2.endColumn, a3.endColumn);
         } else {
           endLineNumber = a3.endLineNumber;
           endColumn = a3.endColumn;
@@ -8598,15 +8598,15 @@ var init_range = __esm({
       /**
        * A intersection of the two ranges.
        */
-      static intersectRanges(a3, b) {
+      static intersectRanges(a3, b2) {
         let resultStartLineNumber = a3.startLineNumber;
         let resultStartColumn = a3.startColumn;
         let resultEndLineNumber = a3.endLineNumber;
         let resultEndColumn = a3.endColumn;
-        const otherStartLineNumber = b.startLineNumber;
-        const otherStartColumn = b.startColumn;
-        const otherEndLineNumber = b.endLineNumber;
-        const otherEndColumn = b.endColumn;
+        const otherStartLineNumber = b2.startLineNumber;
+        const otherStartColumn = b2.startColumn;
+        const otherEndLineNumber = b2.endLineNumber;
+        const otherEndColumn = b2.endColumn;
         if (resultStartLineNumber < otherStartLineNumber) {
           resultStartLineNumber = otherStartLineNumber;
           resultStartColumn = otherStartColumn;
@@ -8636,11 +8636,11 @@ var init_range = __esm({
       /**
        * Test if range `a` equals `b`.
        */
-      static equalsRange(a3, b) {
-        if (!a3 && !b) {
+      static equalsRange(a3, b2) {
+        if (!a3 && !b2) {
           return true;
         }
-        return !!a3 && !!b && a3.startLineNumber === b.startLineNumber && a3.startColumn === b.startColumn && a3.endLineNumber === b.endLineNumber && a3.endColumn === b.endColumn;
+        return !!a3 && !!b2 && a3.startLineNumber === b2.startLineNumber && a3.startColumn === b2.startColumn && a3.endLineNumber === b2.endLineNumber && a3.endColumn === b2.endColumn;
       }
       /**
        * Return the end position (which will be after or equal to the start position)
@@ -8736,11 +8736,11 @@ var init_range = __esm({
       /**
        * Test if the two ranges are touching in any way.
        */
-      static areIntersectingOrTouching(a3, b) {
-        if (a3.endLineNumber < b.startLineNumber || a3.endLineNumber === b.startLineNumber && a3.endColumn < b.startColumn) {
+      static areIntersectingOrTouching(a3, b2) {
+        if (a3.endLineNumber < b2.startLineNumber || a3.endLineNumber === b2.startLineNumber && a3.endColumn < b2.startColumn) {
           return false;
         }
-        if (b.endLineNumber < a3.startLineNumber || b.endLineNumber === a3.startLineNumber && b.endColumn < a3.startColumn) {
+        if (b2.endLineNumber < a3.startLineNumber || b2.endLineNumber === a3.startLineNumber && b2.endColumn < a3.startColumn) {
           return false;
         }
         return true;
@@ -8748,11 +8748,11 @@ var init_range = __esm({
       /**
        * Test if the two ranges are intersecting. If the ranges are touching it returns true.
        */
-      static areIntersecting(a3, b) {
-        if (a3.endLineNumber < b.startLineNumber || a3.endLineNumber === b.startLineNumber && a3.endColumn <= b.startColumn) {
+      static areIntersecting(a3, b2) {
+        if (a3.endLineNumber < b2.startLineNumber || a3.endLineNumber === b2.startLineNumber && a3.endColumn <= b2.startColumn) {
           return false;
         }
-        if (b.endLineNumber < a3.startLineNumber || b.endLineNumber === a3.startLineNumber && b.endColumn <= a3.startColumn) {
+        if (b2.endLineNumber < a3.startLineNumber || b2.endLineNumber === a3.startLineNumber && b2.endColumn <= a3.startColumn) {
           return false;
         }
         return true;
@@ -8760,11 +8760,11 @@ var init_range = __esm({
       /**
        * Test if the two ranges are intersecting, but not touching at all.
        */
-      static areOnlyIntersecting(a3, b) {
-        if (a3.endLineNumber < b.startLineNumber - 1 || a3.endLineNumber === b.startLineNumber && a3.endColumn < b.startColumn - 1) {
+      static areOnlyIntersecting(a3, b2) {
+        if (a3.endLineNumber < b2.startLineNumber - 1 || a3.endLineNumber === b2.startLineNumber && a3.endColumn < b2.startColumn - 1) {
           return false;
         }
-        if (b.endLineNumber < a3.startLineNumber - 1 || b.endLineNumber === a3.startLineNumber && b.endColumn < a3.startColumn - 1) {
+        if (b2.endLineNumber < a3.startLineNumber - 1 || b2.endLineNumber === a3.startLineNumber && b2.endColumn < a3.startColumn - 1) {
           return false;
         }
         return true;
@@ -8773,19 +8773,19 @@ var init_range = __esm({
        * A function that compares ranges, useful for sorting ranges
        * It will first compare ranges on the startPosition and then on the endPosition
        */
-      static compareRangesUsingStarts(a3, b) {
-        if (a3 && b) {
+      static compareRangesUsingStarts(a3, b2) {
+        if (a3 && b2) {
           const aStartLineNumber = a3.startLineNumber | 0;
-          const bStartLineNumber = b.startLineNumber | 0;
+          const bStartLineNumber = b2.startLineNumber | 0;
           if (aStartLineNumber === bStartLineNumber) {
             const aStartColumn = a3.startColumn | 0;
-            const bStartColumn = b.startColumn | 0;
+            const bStartColumn = b2.startColumn | 0;
             if (aStartColumn === bStartColumn) {
               const aEndLineNumber = a3.endLineNumber | 0;
-              const bEndLineNumber = b.endLineNumber | 0;
+              const bEndLineNumber = b2.endLineNumber | 0;
               if (aEndLineNumber === bEndLineNumber) {
                 const aEndColumn = a3.endColumn | 0;
-                const bEndColumn = b.endColumn | 0;
+                const bEndColumn = b2.endColumn | 0;
                 return aEndColumn - bEndColumn;
               }
               return aEndLineNumber - bEndLineNumber;
@@ -8795,24 +8795,24 @@ var init_range = __esm({
           return aStartLineNumber - bStartLineNumber;
         }
         const aExists = a3 ? 1 : 0;
-        const bExists = b ? 1 : 0;
+        const bExists = b2 ? 1 : 0;
         return aExists - bExists;
       }
       /**
        * A function that compares ranges, useful for sorting ranges
        * It will first compare ranges on the endPosition and then on the startPosition
        */
-      static compareRangesUsingEnds(a3, b) {
-        if (a3.endLineNumber === b.endLineNumber) {
-          if (a3.endColumn === b.endColumn) {
-            if (a3.startLineNumber === b.startLineNumber) {
-              return a3.startColumn - b.startColumn;
+      static compareRangesUsingEnds(a3, b2) {
+        if (a3.endLineNumber === b2.endLineNumber) {
+          if (a3.endColumn === b2.endColumn) {
+            if (a3.startLineNumber === b2.startLineNumber) {
+              return a3.startColumn - b2.startColumn;
             }
-            return a3.startLineNumber - b.startLineNumber;
+            return a3.startLineNumber - b2.startLineNumber;
           }
-          return a3.endColumn - b.endColumn;
+          return a3.endColumn - b2.endColumn;
         }
-        return a3.endLineNumber - b.endLineNumber;
+        return a3.endLineNumber - b2.endLineNumber;
       }
       /**
        * Test if the range spans multiple lines.
@@ -8856,8 +8856,8 @@ var init_selection = __esm({
       /**
        * Test if the two selections are equal.
        */
-      static selectionsEqual(a3, b) {
-        return a3.selectionStartLineNumber === b.selectionStartLineNumber && a3.selectionStartColumn === b.selectionStartColumn && a3.positionLineNumber === b.positionLineNumber && a3.positionColumn === b.positionColumn;
+      static selectionsEqual(a3, b2) {
+        return a3.selectionStartLineNumber === b2.selectionStartLineNumber && a3.selectionStartColumn === b2.selectionStartColumn && a3.positionLineNumber === b2.positionLineNumber && a3.positionColumn === b2.positionColumn;
       }
       /**
        * Get directions (LTR or RTL).
@@ -8924,18 +8924,18 @@ var init_selection = __esm({
       /**
        * `a` equals `b`.
        */
-      static selectionsArrEqual(a3, b) {
-        if (a3 && !b || !a3 && b) {
+      static selectionsArrEqual(a3, b2) {
+        if (a3 && !b2 || !a3 && b2) {
           return false;
         }
-        if (!a3 && !b) {
+        if (!a3 && !b2) {
           return true;
         }
-        if (a3.length !== b.length) {
+        if (a3.length !== b2.length) {
           return false;
         }
         for (let i4 = 0, len = a3.length; i4 < len; i4++) {
-          if (!this.selectionsEqual(a3[i4], b[i4])) {
+          if (!this.selectionsEqual(a3[i4], b2[i4])) {
             return false;
           }
         }
@@ -11486,19 +11486,19 @@ function lastNonWhitespaceIndex(str4, startIndex = str4.length - 1) {
   }
   return -1;
 }
-function compare(a3, b) {
-  if (a3 < b) {
+function compare(a3, b2) {
+  if (a3 < b2) {
     return -1;
-  } else if (a3 > b) {
+  } else if (a3 > b2) {
     return 1;
   } else {
     return 0;
   }
 }
-function compareSubstring(a3, b, aStart = 0, aEnd = a3.length, bStart = 0, bEnd = b.length) {
+function compareSubstring(a3, b2, aStart = 0, aEnd = a3.length, bStart = 0, bEnd = b2.length) {
   for (; aStart < aEnd && bStart < bEnd; aStart++, bStart++) {
     const codeA = a3.charCodeAt(aStart);
-    const codeB = b.charCodeAt(bStart);
+    const codeB = b2.charCodeAt(bStart);
     if (codeA < codeB) {
       return -1;
     } else if (codeA > codeB) {
@@ -11514,18 +11514,18 @@ function compareSubstring(a3, b, aStart = 0, aEnd = a3.length, bStart = 0, bEnd 
   }
   return 0;
 }
-function compareIgnoreCase(a3, b) {
-  return compareSubstringIgnoreCase(a3, b, 0, a3.length, 0, b.length);
+function compareIgnoreCase(a3, b2) {
+  return compareSubstringIgnoreCase(a3, b2, 0, a3.length, 0, b2.length);
 }
-function compareSubstringIgnoreCase(a3, b, aStart = 0, aEnd = a3.length, bStart = 0, bEnd = b.length) {
+function compareSubstringIgnoreCase(a3, b2, aStart = 0, aEnd = a3.length, bStart = 0, bEnd = b2.length) {
   for (; aStart < aEnd && bStart < bEnd; aStart++, bStart++) {
     let codeA = a3.charCodeAt(aStart);
-    let codeB = b.charCodeAt(bStart);
+    let codeB = b2.charCodeAt(bStart);
     if (codeA === codeB) {
       continue;
     }
     if (codeA >= 128 || codeB >= 128) {
-      return compareSubstring(a3.toLowerCase(), b.toLowerCase(), aStart, aEnd, bStart, bEnd);
+      return compareSubstring(a3.toLowerCase(), b2.toLowerCase(), aStart, aEnd, bStart, bEnd);
     }
     if (isLowerAsciiLetter(codeA)) {
       codeA -= 32;
@@ -11557,8 +11557,8 @@ function isLowerAsciiLetter(code) {
 function isUpperAsciiLetter(code) {
   return code >= 65 && code <= 90;
 }
-function equalsIgnoreCase(a3, b) {
-  return a3.length === b.length && compareSubstringIgnoreCase(a3, b) === 0;
+function equalsIgnoreCase(a3, b2) {
+  return a3.length === b2.length && compareSubstringIgnoreCase(a3, b2) === 0;
 }
 function startsWithIgnoreCase(str4, candidate) {
   const len = candidate.length;
@@ -11569,23 +11569,23 @@ function endsWithIgnoreCase(str4, candidate) {
   const start = len - candidate.length;
   return start >= 0 && compareSubstringIgnoreCase(str4, candidate, start, len) === 0;
 }
-function commonPrefixLength(a3, b) {
-  const len = Math.min(a3.length, b.length);
+function commonPrefixLength(a3, b2) {
+  const len = Math.min(a3.length, b2.length);
   let i4;
   for (i4 = 0; i4 < len; i4++) {
-    if (a3.charCodeAt(i4) !== b.charCodeAt(i4)) {
+    if (a3.charCodeAt(i4) !== b2.charCodeAt(i4)) {
       return i4;
     }
   }
   return len;
 }
-function commonSuffixLength(a3, b) {
-  const len = Math.min(a3.length, b.length);
+function commonSuffixLength(a3, b2) {
+  const len = Math.min(a3.length, b2.length);
   let i4;
   const aLastIndex = a3.length - 1;
-  const bLastIndex = b.length - 1;
+  const bLastIndex = b2.length - 1;
   for (i4 = 0; i4 < len; i4++) {
-    if (a3.charCodeAt(aLastIndex - i4) !== b.charCodeAt(bLastIndex - i4)) {
+    if (a3.charCodeAt(aLastIndex - i4) !== b2.charCodeAt(bLastIndex - i4)) {
       return i4;
     }
   }
@@ -13540,8 +13540,8 @@ function doHash(obj, hashVal) {
 function numberHash(val, initialHashVal) {
   return (initialHashVal << 5) - initialHashVal + val | 0;
 }
-function booleanHash(b, initialHashVal) {
-  return numberHash(b ? 433 : 863, initialHashVal);
+function booleanHash(b2, initialHashVal) {
+  return numberHash(b2 ? 433 : 863, initialHashVal);
 }
 function stringHash(s3, hashVal) {
   hashVal = numberHash(149417, hashVal);
@@ -13710,7 +13710,7 @@ var init_hash = __esm({
           bigBlock32.setUint32(j3, leftRotate(bigBlock32.getUint32(j3 - 12, false) ^ bigBlock32.getUint32(j3 - 32, false) ^ bigBlock32.getUint32(j3 - 56, false) ^ bigBlock32.getUint32(j3 - 64, false), 1), false);
         }
         let a3 = this._h0;
-        let b = this._h1;
+        let b2 = this._h1;
         let c3 = this._h2;
         let d3 = this._h3;
         let e3 = this._h4;
@@ -13718,27 +13718,27 @@ var init_hash = __esm({
         let temp;
         for (let j3 = 0; j3 < 80; j3++) {
           if (j3 < 20) {
-            f4 = b & c3 | ~b & d3;
+            f4 = b2 & c3 | ~b2 & d3;
             k3 = 1518500249;
           } else if (j3 < 40) {
-            f4 = b ^ c3 ^ d3;
+            f4 = b2 ^ c3 ^ d3;
             k3 = 1859775393;
           } else if (j3 < 60) {
-            f4 = b & c3 | b & d3 | c3 & d3;
+            f4 = b2 & c3 | b2 & d3 | c3 & d3;
             k3 = 2400959708;
           } else {
-            f4 = b ^ c3 ^ d3;
+            f4 = b2 ^ c3 ^ d3;
             k3 = 3395469782;
           }
           temp = leftRotate(a3, 5) + f4 + e3 + k3 + bigBlock32.getUint32(j3 * 4, false) & 4294967295;
           e3 = d3;
           d3 = c3;
-          c3 = leftRotate(b, 30);
-          b = a3;
+          c3 = leftRotate(b2, 30);
+          b2 = a3;
           a3 = temp;
         }
         this._h0 = this._h0 + a3 & 4294967295;
-        this._h1 = this._h1 + b & 4294967295;
+        this._h1 = this._h1 + b2 & 4294967295;
         this._h2 = this._h2 + c3 & 4294967295;
         this._h3 = this._h3 + d3 & 4294967295;
         this._h4 = this._h4 + e3 & 4294967295;
@@ -13897,10 +13897,10 @@ var init_debugLocation = __esm({
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/base/common/equals.js
 function itemsEquals(itemEquals2 = strictEquals) {
-  return (a3, b) => equals(a3, b, itemEquals2);
+  return (a3, b2) => equals(a3, b2, itemEquals2);
 }
 function itemEquals() {
-  return (a3, b) => a3.equals(b);
+  return (a3, b2) => a3.equals(b2);
 }
 function equalsIfDefined(equalsOrV1, v22, equals3) {
   if (equals3 !== void 0) {
@@ -13919,25 +13919,25 @@ function equalsIfDefined(equalsOrV1, v22, equals3) {
     };
   }
 }
-function structuralEquals(a3, b) {
-  if (a3 === b) {
+function structuralEquals(a3, b2) {
+  if (a3 === b2) {
     return true;
   }
-  if (Array.isArray(a3) && Array.isArray(b)) {
-    if (a3.length !== b.length) {
+  if (Array.isArray(a3) && Array.isArray(b2)) {
+    if (a3.length !== b2.length) {
       return false;
     }
     for (let i4 = 0; i4 < a3.length; i4++) {
-      if (!structuralEquals(a3[i4], b[i4])) {
+      if (!structuralEquals(a3[i4], b2[i4])) {
         return false;
       }
     }
     return true;
   }
-  if (a3 && typeof a3 === "object" && b && typeof b === "object") {
-    if (Object.getPrototypeOf(a3) === Object.prototype && Object.getPrototypeOf(b) === Object.prototype) {
+  if (a3 && typeof a3 === "object" && b2 && typeof b2 === "object") {
+    if (Object.getPrototypeOf(a3) === Object.prototype && Object.getPrototypeOf(b2) === Object.prototype) {
       const aObj = a3;
-      const bObj = b;
+      const bObj = b2;
       const keysA = Object.keys(aObj);
       const keysB = Object.keys(bObj);
       const keysBSet = new Set(keysB);
@@ -13961,7 +13961,7 @@ var strictEquals;
 var init_equals = __esm({
   "../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/base/common/equals.js"() {
     init_arrays();
-    strictEquals = (a3, b) => a3 === b;
+    strictEquals = (a3, b2) => a3 === b2;
   }
 });
 
@@ -16618,8 +16618,8 @@ var init_dom = __esm({
         }
       }
       // Sort by priority (largest to lowest)
-      static sort(a3, b) {
-        return b.priority - a3.priority;
+      static sort(a3, b2) {
+        return b2.priority - a3.priority;
       }
     };
     (function() {
@@ -16744,14 +16744,14 @@ var init_dom = __esm({
           return new _Dimension(obj.width, obj.height);
         }
       }
-      static equals(a3, b) {
-        if (a3 === b) {
+      static equals(a3, b2) {
+        if (a3 === b2) {
           return true;
         }
-        if (!a3 || !b) {
+        if (!a3 || !b2) {
           return false;
         }
-        return a3.width === b.width && a3.height === b.height;
+        return a3.width === b2.width && a3.height === b2.height;
       }
     };
     sharedMutationObserver = new class {
@@ -18677,9 +18677,9 @@ var init_scanner = __esm({
 });
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/platform/contextkey/common/contextkey.js
-function expressionsAreEqualWithConstantSubstitution(a3, b) {
+function expressionsAreEqualWithConstantSubstitution(a3, b2) {
   const aExpr = a3 ? a3.substituteConstants() : void 0;
-  const bExpr = b ? b.substituteConstants() : void 0;
+  const bExpr = b2 ? b2.substituteConstants() : void 0;
   if (!aExpr && !bExpr) {
     return true;
   }
@@ -18688,8 +18688,8 @@ function expressionsAreEqualWithConstantSubstitution(a3, b) {
   }
   return aExpr.equals(bExpr);
 }
-function cmp(a3, b) {
-  return a3.cmp(b);
+function cmp(a3, b2) {
+  return a3.cmp(b2);
 }
 function withFloatOrStr(value, callback) {
   if (typeof value === "string") {
@@ -20201,19 +20201,19 @@ var init_platform2 = __esm({
 });
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/platform/keybinding/common/keybindingsRegistry.js
-function sorter(a3, b) {
-  if (a3.weight1 !== b.weight1) {
-    return a3.weight1 - b.weight1;
+function sorter(a3, b2) {
+  if (a3.weight1 !== b2.weight1) {
+    return a3.weight1 - b2.weight1;
   }
-  if (a3.command && b.command) {
-    if (a3.command < b.command) {
+  if (a3.command && b2.command) {
+    if (a3.command < b2.command) {
       return -1;
     }
-    if (a3.command > b.command) {
+    if (a3.command > b2.command) {
       return 1;
     }
   }
-  return a3.weight2 - b.weight2;
+  return a3.weight2 - b2.weight2;
 }
 var KeybindingsRegistryImpl, KeybindingsRegistry, Extensions;
 var init_keybindingsRegistry = __esm({
@@ -22623,7 +22623,7 @@ var init_editorExtensions = __esm({
        */
       addImplementation(priority, name, implementation, when) {
         this._implementations.push({ priority, name, implementation, when });
-        this._implementations.sort((a3, b) => b.priority - a3.priority);
+        this._implementations.sort((a3, b2) => b2.priority - a3.priority);
         return {
           dispose: () => {
             for (let i4 = 0; i4 < this._implementations.length; i4++) {
@@ -22760,7 +22760,7 @@ var init_editorExtensions = __esm({
        */
       addImplementation(priority, implementation) {
         this._implementations.push([priority, implementation]);
-        this._implementations.sort((a3, b) => b[0] - a3[0]);
+        this._implementations.sort((a3, b2) => b2[0] - a3[0]);
         return {
           dispose: () => {
             for (let i4 = 0; i4 < this._implementations.length; i4++) {
@@ -23579,7 +23579,7 @@ var init_characterPair = __esm({
         if (config.autoClosingPairs) {
           this._autoClosingPairs = config.autoClosingPairs.map((el) => new StandardAutoClosingPairConditional(el));
         } else if (config.brackets) {
-          this._autoClosingPairs = config.brackets.map((b) => new StandardAutoClosingPairConditional({ open: b[0], close: b[1] }));
+          this._autoClosingPairs = config.brackets.map((b2) => new StandardAutoClosingPairConditional({ open: b2[0], close: b2[1] }));
         } else {
           this._autoClosingPairs = [];
         }
@@ -23778,14 +23778,14 @@ var init_stringBuilder = __esm({
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/editor/common/languages/supports/richEditBrackets.js
 function groupFuzzyBrackets(brackets) {
   const N2 = brackets.length;
-  brackets = brackets.map((b) => [b[0].toLowerCase(), b[1].toLowerCase()]);
+  brackets = brackets.map((b2) => [b2[0].toLowerCase(), b2[1].toLowerCase()]);
   const group = [];
   for (let i4 = 0; i4 < N2; i4++) {
     group[i4] = i4;
   }
-  const areOverlapping = (a3, b) => {
+  const areOverlapping = (a3, b2) => {
     const [aOpen, aClose] = a3;
-    const [bOpen, bClose] = b;
+    const [bOpen, bClose] = b2;
     return aOpen === bOpen || aOpen === bClose || aClose === bOpen || aClose === bClose;
   };
   const mergeGroups = (g1, g2) => {
@@ -23800,8 +23800,8 @@ function groupFuzzyBrackets(brackets) {
   for (let i4 = 0; i4 < N2; i4++) {
     const a3 = brackets[i4];
     for (let j3 = i4 + 1; j3 < N2; j3++) {
-      const b = brackets[j3];
-      if (areOverlapping(a3, b)) {
+      const b2 = brackets[j3];
+      if (areOverlapping(a3, b2)) {
         mergeGroups(group[i4], group[j3]);
       }
     }
@@ -23844,8 +23844,8 @@ function collectSuperstrings(str4, brackets, currentIndex, dest) {
     }
   }
 }
-function lengthcmp(a3, b) {
-  return a3.length - b.length;
+function lengthcmp(a3, b2) {
+  return a3.length - b2.length;
 }
 function unique(arr) {
   if (arr.length <= 1) {
@@ -23963,8 +23963,8 @@ var init_richEditBrackets = __esm({
       constructor(languageId, _brackets) {
         this._richEditBracketsBrand = void 0;
         const brackets = groupFuzzyBrackets(_brackets);
-        this.brackets = brackets.map((b, index) => {
-          return new RichEditBracket(languageId, index, b.open, b.close, getRegexForBracketPair(b.open, b.close, brackets, index), getReversedRegexForBracketPair(b.open, b.close, brackets, index));
+        this.brackets = brackets.map((b2, index) => {
+          return new RichEditBracket(languageId, index, b2.open, b2.close, getRegexForBracketPair(b2.open, b2.close, brackets, index), getReversedRegexForBracketPair(b2.open, b2.close, brackets, index));
         });
         this.forwardRegex = getRegexForBrackets(this.brackets);
         this.reversedRegex = getReversedRegexForBrackets(this.brackets);
@@ -25279,11 +25279,11 @@ var init_languageConfigurationRegistry = __esm({
         this.priority = priority;
         this.order = order;
       }
-      static cmp(a3, b) {
-        if (a3.priority === b.priority) {
-          return a3.order - b.order;
+      static cmp(a3, b2) {
+        if (a3.priority === b2.priority) {
+          return a3.order - b2.order;
         }
-        return a3.priority - b.priority;
+        return a3.priority - b2.priority;
       }
     };
     LanguageConfigurationChangeEvent = class {
@@ -27919,7 +27919,7 @@ function findLastMax(array4, comparator) {
   return max;
 }
 function findFirstMin(array4, comparator) {
-  return findFirstMax(array4, (a3, b) => -comparator(a3, b));
+  return findFirstMax(array4, (a3, b2) => -comparator(a3, b2));
 }
 function findMaxIdx(array4, comparator) {
   if (array4.length === 0) {
@@ -28091,8 +28091,8 @@ var init_lineRange = __esm({
       intersectsOrTouches(other) {
         return this.startLineNumber <= other.endLineNumberExclusive && other.startLineNumber <= this.endLineNumberExclusive;
       }
-      equals(b) {
-        return this.startLineNumber === b.startLineNumber && this.endLineNumberExclusive === b.endLineNumberExclusive;
+      equals(b2) {
+        return this.startLineNumber === b2.startLineNumber && this.endLineNumberExclusive === b2.endLineNumberExclusive;
       }
       toInclusiveRange() {
         if (this.isEmpty) {
@@ -28563,7 +28563,7 @@ var init_textEdit = __esm({
       }
       constructor(replacements) {
         this.replacements = replacements;
-        assertFn(() => checkAdjacentItems(replacements, (a3, b) => a3.range.getEndPosition().isBeforeOrEqual(b.range.getStartPosition())));
+        assertFn(() => checkAdjacentItems(replacements, (a3, b2) => a3.range.getEndPosition().isBeforeOrEqual(b2.range.getStartPosition())));
       }
       mapPosition(position) {
         let lineDelta = 0;
@@ -29435,8 +29435,8 @@ var init_diffAlgorithm = __esm({
     SequenceDiff = class _SequenceDiff {
       static invert(sequenceDiffs, doc1Length) {
         const result = [];
-        forEachAdjacent(sequenceDiffs, (a3, b) => {
-          result.push(_SequenceDiff.fromOffsetPairs(a3 ? a3.getEndExclusives() : OffsetPair.zero, b ? b.getStarts() : new OffsetPair(doc1Length, (a3 ? a3.seq2Range.endExclusive - a3.seq1Range.endExclusive : 0) + doc1Length)));
+        forEachAdjacent(sequenceDiffs, (a3, b2) => {
+          result.push(_SequenceDiff.fromOffsetPairs(a3 ? a3.getEndExclusives() : OffsetPair.zero, b2 ? b2.getStarts() : new OffsetPair(doc1Length, (a3 ? a3.seq2Range.endExclusive - a3.seq1Range.endExclusive : 0) + doc1Length)));
         });
         return result;
       }
@@ -30671,7 +30671,7 @@ var init_defaultLinesDiffComputer = __esm({
         this.myersDiffingAlgorithm = new MyersDiffAlgorithm();
       }
       computeDiff(originalLines, modifiedLines, options) {
-        if (originalLines.length <= 1 && equals(originalLines, modifiedLines, (a3, b) => a3 === b)) {
+        if (originalLines.length <= 1 && equals(originalLines, modifiedLines, (a3, b2) => a3 === b2)) {
           return new LinesDiff([], [], false);
         }
         if (originalLines.length === 1 && originalLines[0].length === 0 || modifiedLines.length === 1 && modifiedLines[0].length === 0) {
@@ -30842,15 +30842,15 @@ var RGBA, HSLA, HSVA, Color2;
 var init_color = __esm({
   "../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/base/common/color.js"() {
     RGBA = class {
-      constructor(r3, g2, b, a3 = 1) {
+      constructor(r3, g2, b2, a3 = 1) {
         this._rgbaBrand = void 0;
         this.r = Math.min(255, Math.max(0, r3)) | 0;
         this.g = Math.min(255, Math.max(0, g2)) | 0;
-        this.b = Math.min(255, Math.max(0, b)) | 0;
+        this.b = Math.min(255, Math.max(0, b2)) | 0;
         this.a = roundFloat(Math.max(Math.min(1, a3), 0), 3);
       }
-      static equals(a3, b) {
-        return a3.r === b.r && a3.g === b.g && a3.b === b.b && a3.a === b.a;
+      static equals(a3, b2) {
+        return a3.r === b2.r && a3.g === b2.g && a3.b === b2.b && a3.a === b2.a;
       }
     };
     HSLA = class _HSLA {
@@ -30861,8 +30861,8 @@ var init_color = __esm({
         this.l = roundFloat(Math.max(Math.min(1, l3), 0), 3);
         this.a = roundFloat(Math.max(Math.min(1, a3), 0), 3);
       }
-      static equals(a3, b) {
-        return a3.h === b.h && a3.s === b.s && a3.l === b.l && a3.a === b.a;
+      static equals(a3, b2) {
+        return a3.h === b2.h && a3.s === b2.s && a3.l === b2.l && a3.a === b2.a;
       }
       /**
        * Converts an RGB color value to HSL. Conversion formula
@@ -30873,10 +30873,10 @@ var init_color = __esm({
       static fromRGBA(rgba) {
         const r3 = rgba.r / 255;
         const g2 = rgba.g / 255;
-        const b = rgba.b / 255;
+        const b2 = rgba.b / 255;
         const a3 = rgba.a;
-        const max = Math.max(r3, g2, b);
-        const min = Math.min(r3, g2, b);
+        const max = Math.max(r3, g2, b2);
+        const min = Math.min(r3, g2, b2);
         let h4 = 0;
         let s3 = 0;
         const l3 = (min + max) / 2;
@@ -30885,12 +30885,12 @@ var init_color = __esm({
           s3 = Math.min(l3 <= 0.5 ? chroma / (2 * l3) : chroma / (2 - 2 * l3), 1);
           switch (max) {
             case r3:
-              h4 = (g2 - b) / chroma + (g2 < b ? 6 : 0);
+              h4 = (g2 - b2) / chroma + (g2 < b2 ? 6 : 0);
               break;
             case g2:
-              h4 = (b - r3) / chroma + 2;
+              h4 = (b2 - r3) / chroma + 2;
               break;
-            case b:
+            case b2:
               h4 = (r3 - g2) / chroma + 4;
               break;
           }
@@ -30926,17 +30926,17 @@ var init_color = __esm({
       static toRGBA(hsla) {
         const h4 = hsla.h / 360;
         const { s: s3, l: l3, a: a3 } = hsla;
-        let r3, g2, b;
+        let r3, g2, b2;
         if (s3 === 0) {
-          r3 = g2 = b = l3;
+          r3 = g2 = b2 = l3;
         } else {
           const q3 = l3 < 0.5 ? l3 * (1 + s3) : l3 + s3 - l3 * s3;
           const p3 = 2 * l3 - q3;
           r3 = _HSLA._hue2rgb(p3, q3, h4 + 1 / 3);
           g2 = _HSLA._hue2rgb(p3, q3, h4);
-          b = _HSLA._hue2rgb(p3, q3, h4 - 1 / 3);
+          b2 = _HSLA._hue2rgb(p3, q3, h4 - 1 / 3);
         }
-        return new RGBA(Math.round(r3 * 255), Math.round(g2 * 255), Math.round(b * 255), a3);
+        return new RGBA(Math.round(r3 * 255), Math.round(g2 * 255), Math.round(b2 * 255), a3);
       }
     };
     HSVA = class _HSVA {
@@ -30947,25 +30947,25 @@ var init_color = __esm({
         this.v = roundFloat(Math.max(Math.min(1, v3), 0), 3);
         this.a = roundFloat(Math.max(Math.min(1, a3), 0), 3);
       }
-      static equals(a3, b) {
-        return a3.h === b.h && a3.s === b.s && a3.v === b.v && a3.a === b.a;
+      static equals(a3, b2) {
+        return a3.h === b2.h && a3.s === b2.s && a3.v === b2.v && a3.a === b2.a;
       }
       // from http://www.rapidtables.com/convert/color/rgb-to-hsv.htm
       static fromRGBA(rgba) {
         const r3 = rgba.r / 255;
         const g2 = rgba.g / 255;
-        const b = rgba.b / 255;
-        const cmax = Math.max(r3, g2, b);
-        const cmin = Math.min(r3, g2, b);
+        const b2 = rgba.b / 255;
+        const cmax = Math.max(r3, g2, b2);
+        const cmin = Math.min(r3, g2, b2);
         const delta = cmax - cmin;
         const s3 = cmax === 0 ? 0 : delta / cmax;
         let m3;
         if (delta === 0) {
           m3 = 0;
         } else if (cmax === r3) {
-          m3 = ((g2 - b) / delta % 6 + 6) % 6;
+          m3 = ((g2 - b2) / delta % 6 + 6) % 6;
         } else if (cmax === g2) {
-          m3 = (b - r3) / delta + 2;
+          m3 = (b2 - r3) / delta + 2;
         } else {
           m3 = (r3 - g2) / delta + 4;
         }
@@ -30977,7 +30977,7 @@ var init_color = __esm({
         const c3 = v3 * s3;
         const x2 = c3 * (1 - Math.abs(h4 / 60 % 2 - 1));
         const m3 = v3 - c3;
-        let [r3, g2, b] = [0, 0, 0];
+        let [r3, g2, b2] = [0, 0, 0];
         if (h4 < 60) {
           r3 = c3;
           g2 = x2;
@@ -30986,35 +30986,35 @@ var init_color = __esm({
           g2 = c3;
         } else if (h4 < 180) {
           g2 = c3;
-          b = x2;
+          b2 = x2;
         } else if (h4 < 240) {
           g2 = x2;
-          b = c3;
+          b2 = c3;
         } else if (h4 < 300) {
           r3 = x2;
-          b = c3;
+          b2 = c3;
         } else if (h4 <= 360) {
           r3 = c3;
-          b = x2;
+          b2 = x2;
         }
         r3 = Math.round((r3 + m3) * 255);
         g2 = Math.round((g2 + m3) * 255);
-        b = Math.round((b + m3) * 255);
-        return new RGBA(r3, g2, b, a3);
+        b2 = Math.round((b2 + m3) * 255);
+        return new RGBA(r3, g2, b2, a3);
       }
     };
     Color2 = class _Color {
       static fromHex(hex) {
         return _Color.Format.CSS.parseHex(hex) || _Color.red;
       }
-      static equals(a3, b) {
-        if (!a3 && !b) {
+      static equals(a3, b2) {
+        if (!a3 && !b2) {
           return true;
         }
-        if (!a3 || !b) {
+        if (!a3 || !b2) {
           return false;
         }
-        return a3.equals(b);
+        return a3.equals(b2);
       }
       get hsla() {
         if (this._hsla) {
@@ -31052,10 +31052,10 @@ var init_color = __esm({
        * Returns the number in the set [0, 1]. O => Darkest Black. 1 => Lightest white.
        */
       getRelativeLuminance() {
-        const R = _Color._relativeLuminanceForComponent(this.rgba.r);
+        const R2 = _Color._relativeLuminanceForComponent(this.rgba.r);
         const G2 = _Color._relativeLuminanceForComponent(this.rgba.g);
         const B3 = _Color._relativeLuminanceForComponent(this.rgba.b);
-        const luminance = 0.2126 * R + 0.7152 * G2 + 0.0722 * B3;
+        const luminance = 0.2126 * R2 + 0.7152 * G2 + 0.0722 * B3;
         return roundFloat(luminance, 4);
       }
       static _relativeLuminanceForComponent(color) {
@@ -31087,8 +31087,8 @@ var init_color = __esm({
         return new _Color(new HSLA(this.hsla.h, this.hsla.s, this.hsla.l - this.hsla.l * factor2, this.hsla.a));
       }
       transparent(factor2) {
-        const { r: r3, g: g2, b, a: a3 } = this.rgba;
-        return new _Color(new RGBA(r3, g2, b, a3 * factor2));
+        const { r: r3, g: g2, b: b2, a: a3 } = this.rgba;
+        return new _Color(new RGBA(r3, g2, b2, a3 * factor2));
       }
       isTransparent() {
         return this.rgba.a === 0;
@@ -31111,16 +31111,16 @@ var init_color = __esm({
         const otherRGBA = color.rgba;
         const r3 = thisRGBA.r + (otherRGBA.r - thisRGBA.r) * normalize3;
         const g2 = thisRGBA.g + (otherRGBA.g - thisRGBA.g) * normalize3;
-        const b = thisRGBA.b + (otherRGBA.b - thisRGBA.b) * normalize3;
+        const b2 = thisRGBA.b + (otherRGBA.b - thisRGBA.b) * normalize3;
         const a3 = thisRGBA.a + (otherRGBA.a - thisRGBA.a) * normalize3;
-        return new _Color(new RGBA(r3, g2, b, a3));
+        return new _Color(new RGBA(r3, g2, b2, a3));
       }
       makeOpaque(opaqueBackground) {
         if (this.isOpaque() || opaqueBackground.rgba.a !== 1) {
           return this;
         }
-        const { r: r3, g: g2, b, a: a3 } = this.rgba;
-        return new _Color(new RGBA(opaqueBackground.rgba.r - a3 * (opaqueBackground.rgba.r - r3), opaqueBackground.rgba.g - a3 * (opaqueBackground.rgba.g - g2), opaqueBackground.rgba.b - a3 * (opaqueBackground.rgba.b - b), 1));
+        const { r: r3, g: g2, b: b2, a: a3 } = this.rgba;
+        return new _Color(new RGBA(opaqueBackground.rgba.r - a3 * (opaqueBackground.rgba.r - r3), opaqueBackground.rgba.g - a3 * (opaqueBackground.rgba.g - g2), opaqueBackground.rgba.b - a3 * (opaqueBackground.rgba.b - b2), 1));
       }
       toString() {
         if (!this._toString) {
@@ -31240,9 +31240,9 @@ var init_color = __esm({
               }
               const r3 = parseInt(color.groups?.r ?? "0");
               const g2 = parseInt(color.groups?.g ?? "0");
-              const b = parseInt(color.groups?.b ?? "0");
+              const b2 = parseInt(color.groups?.b ?? "0");
               const a3 = parseFloat(color.groups?.a ?? "0");
-              return new Color3(new RGBA(r3, g2, b, a3));
+              return new Color3(new RGBA(r3, g2, b2, a3));
             }
             if (css.startsWith("rgb(")) {
               const color = css.match(/rgb\((?<r>(?:\+|-)?\d+), *(?<g>(?:\+|-)?\d+), *(?<b>(?:\+|-)?\d+)\)/);
@@ -31251,8 +31251,8 @@ var init_color = __esm({
               }
               const r3 = parseInt(color.groups?.r ?? "0");
               const g2 = parseInt(color.groups?.g ?? "0");
-              const b = parseInt(color.groups?.b ?? "0");
-              return new Color3(new RGBA(r3, g2, b));
+              const b2 = parseInt(color.groups?.b ?? "0");
+              return new Color3(new RGBA(r3, g2, b2));
             }
             return parseNamedKeyword(css);
           }
@@ -31570,28 +31570,28 @@ var init_color = __esm({
             if (length === 7) {
               const r3 = 16 * _parseHexDigit(hex.charCodeAt(1)) + _parseHexDigit(hex.charCodeAt(2));
               const g2 = 16 * _parseHexDigit(hex.charCodeAt(3)) + _parseHexDigit(hex.charCodeAt(4));
-              const b = 16 * _parseHexDigit(hex.charCodeAt(5)) + _parseHexDigit(hex.charCodeAt(6));
-              return new Color3(new RGBA(r3, g2, b, 1));
+              const b2 = 16 * _parseHexDigit(hex.charCodeAt(5)) + _parseHexDigit(hex.charCodeAt(6));
+              return new Color3(new RGBA(r3, g2, b2, 1));
             }
             if (length === 9) {
               const r3 = 16 * _parseHexDigit(hex.charCodeAt(1)) + _parseHexDigit(hex.charCodeAt(2));
               const g2 = 16 * _parseHexDigit(hex.charCodeAt(3)) + _parseHexDigit(hex.charCodeAt(4));
-              const b = 16 * _parseHexDigit(hex.charCodeAt(5)) + _parseHexDigit(hex.charCodeAt(6));
+              const b2 = 16 * _parseHexDigit(hex.charCodeAt(5)) + _parseHexDigit(hex.charCodeAt(6));
               const a3 = 16 * _parseHexDigit(hex.charCodeAt(7)) + _parseHexDigit(hex.charCodeAt(8));
-              return new Color3(new RGBA(r3, g2, b, a3 / 255));
+              return new Color3(new RGBA(r3, g2, b2, a3 / 255));
             }
             if (length === 4) {
               const r3 = _parseHexDigit(hex.charCodeAt(1));
               const g2 = _parseHexDigit(hex.charCodeAt(2));
-              const b = _parseHexDigit(hex.charCodeAt(3));
-              return new Color3(new RGBA(16 * r3 + r3, 16 * g2 + g2, 16 * b + b));
+              const b2 = _parseHexDigit(hex.charCodeAt(3));
+              return new Color3(new RGBA(16 * r3 + r3, 16 * g2 + g2, 16 * b2 + b2));
             }
             if (length === 5) {
               const r3 = _parseHexDigit(hex.charCodeAt(1));
               const g2 = _parseHexDigit(hex.charCodeAt(2));
-              const b = _parseHexDigit(hex.charCodeAt(3));
+              const b2 = _parseHexDigit(hex.charCodeAt(3));
               const a3 = _parseHexDigit(hex.charCodeAt(4));
-              return new Color3(new RGBA(16 * r3 + r3, 16 * g2 + g2, 16 * b + b, (16 * a3 + a3) / 255));
+              return new Color3(new RGBA(16 * r3 + r3, 16 * g2 + g2, 16 * b2 + b2, (16 * a3 + a3) / 255));
             }
             return null;
           }
@@ -31662,10 +31662,10 @@ function _parseCaptureGroups(captureGroups) {
   }
   return values;
 }
-function _toIColor(r3, g2, b, a3) {
+function _toIColor(r3, g2, b2, a3) {
   return {
     red: r3 / 255,
-    blue: b / 255,
+    blue: b2 / 255,
     green: g2 / 255,
     alpha: a3
   };
@@ -32612,12 +32612,12 @@ var init_editorWebWorker = __esm({
         }
         const result = [];
         let lastEol = void 0;
-        edits = edits.slice(0).sort((a3, b) => {
-          if (a3.range && b.range) {
-            return Range.compareRangesUsingStarts(a3.range, b.range);
+        edits = edits.slice(0).sort((a3, b2) => {
+          if (a3.range && b2.range) {
+            return Range.compareRangesUsingStarts(a3.range, b2.range);
           }
           const aRng = a3.range ? 0 : 1;
-          const bRng = b.range ? 0 : 1;
+          const bRng = b2.range ? 0 : 1;
           return aRng - bRng;
         });
         let writeIndex = 0;
@@ -33747,17 +33747,17 @@ var init_lineDecorations = __esm({
         this.type = type4;
         this._lineDecorationBrand = void 0;
       }
-      static _equals(a3, b) {
-        return a3.startColumn === b.startColumn && a3.endColumn === b.endColumn && a3.className === b.className && a3.type === b.type;
+      static _equals(a3, b2) {
+        return a3.startColumn === b2.startColumn && a3.endColumn === b2.endColumn && a3.className === b2.className && a3.type === b2.type;
       }
-      static equalsArr(a3, b) {
+      static equalsArr(a3, b2) {
         const aLen = a3.length;
-        const bLen = b.length;
+        const bLen = b2.length;
         if (aLen !== bLen) {
           return false;
         }
         for (let i4 = 0; i4 < aLen; i4++) {
-          if (!_LineDecoration._equals(a3[i4], b[i4])) {
+          if (!_LineDecoration._equals(a3[i4], b2[i4])) {
             return false;
           }
         }
@@ -33801,23 +33801,23 @@ var init_lineDecorations = __esm({
         }
         return result;
       }
-      static _typeCompare(a3, b) {
+      static _typeCompare(a3, b2) {
         const ORDER = [2, 0, 1, 3];
-        return ORDER[a3] - ORDER[b];
+        return ORDER[a3] - ORDER[b2];
       }
-      static compare(a3, b) {
-        if (a3.startColumn !== b.startColumn) {
-          return a3.startColumn - b.startColumn;
+      static compare(a3, b2) {
+        if (a3.startColumn !== b2.startColumn) {
+          return a3.startColumn - b2.startColumn;
         }
-        if (a3.endColumn !== b.endColumn) {
-          return a3.endColumn - b.endColumn;
+        if (a3.endColumn !== b2.endColumn) {
+          return a3.endColumn - b2.endColumn;
         }
-        const typeCmp = _LineDecoration._typeCompare(a3.type, b.type);
+        const typeCmp = _LineDecoration._typeCompare(a3.type, b2.type);
         if (typeCmp !== 0) {
           return typeCmp;
         }
-        if (a3.className !== b.className) {
-          return a3.className < b.className ? -1 : 1;
+        if (a3.className !== b2.className) {
+          return a3.className < b2.className ? -1 : 1;
         }
         return 0;
       }
@@ -34586,7 +34586,7 @@ var init_viewLineRenderer = __esm({
         this.renderWhitespace = renderWhitespace === "all" ? 4 : renderWhitespace === "boundary" ? 1 : renderWhitespace === "selection" ? 2 : renderWhitespace === "trailing" ? 3 : 0;
         this.renderControlCharacters = renderControlCharacters;
         this.fontLigatures = fontLigatures;
-        this.selectionsOnLine = selectionsOnLine && selectionsOnLine.sort((a3, b) => a3.start < b.start ? -1 : 1);
+        this.selectionsOnLine = selectionsOnLine && selectionsOnLine.sort((a3, b2) => a3.start < b2.start ? -1 : 1);
         this.renderNewLineWhenEmpty = renderNewLineWhenEmpty;
         this.textDirection = textDirection;
         this.verticalScrollbarSize = verticalScrollbarSize;
@@ -34821,23 +34821,23 @@ var init_viewModel = __esm({
         this.zIndex = zIndex;
         this.data = data;
       }
-      static compareByRenderingProps(a3, b) {
-        if (a3.zIndex === b.zIndex) {
-          if (a3.color < b.color) {
+      static compareByRenderingProps(a3, b2) {
+        if (a3.zIndex === b2.zIndex) {
+          if (a3.color < b2.color) {
             return -1;
           }
-          if (a3.color > b.color) {
+          if (a3.color > b2.color) {
             return 1;
           }
           return 0;
         }
-        return a3.zIndex - b.zIndex;
+        return a3.zIndex - b2.zIndex;
       }
-      static equals(a3, b) {
-        return a3.color === b.color && a3.zIndex === b.zIndex && equals(a3.data, b.data);
+      static equals(a3, b2) {
+        return a3.color === b2.color && a3.zIndex === b2.zIndex && equals(a3.data, b2.data);
       }
-      static equalsArr(a3, b) {
-        return equals(a3, b, _OverviewRulerDecorationsGroup.equals);
+      static equalsArr(a3, b2) {
+        return equals(a3, b2, _OverviewRulerDecorationsGroup.equals);
       }
     };
   }
@@ -35039,18 +35039,18 @@ var init_monarchLexer = __esm({
         }
         return result;
       }
-      static _equals(a3, b) {
-        while (a3 !== null && b !== null) {
-          if (a3 === b) {
+      static _equals(a3, b2) {
+        while (a3 !== null && b2 !== null) {
+          if (a3 === b2) {
             return true;
           }
-          if (a3.state !== b.state) {
+          if (a3.state !== b2.state) {
             return false;
           }
           a3 = a3.parent;
-          b = b.parent;
+          b2 = b2.parent;
         }
-        if (a3 === null && b === null) {
+        if (a3 === null && b2 === null) {
           return true;
         }
         return false;
@@ -35212,9 +35212,9 @@ var init_monarchLexer = __esm({
         this._tokens.push(startOffset);
         this._tokens.push(metadata);
       }
-      static _merge(a3, b, c3) {
+      static _merge(a3, b2, c3) {
         const aLen = a3 !== null ? a3.length : 0;
-        const bLen = b.length;
+        const bLen = b2.length;
         const cLen = c3 !== null ? c3.length : 0;
         if (aLen === 0 && bLen === 0 && cLen === 0) {
           return new Uint32Array(0);
@@ -35230,7 +35230,7 @@ var init_monarchLexer = __esm({
           result.set(a3);
         }
         for (let i4 = 0; i4 < bLen; i4++) {
-          result[aLen + i4] = b[i4];
+          result[aLen + i4] = b2[i4];
         }
         if (c3 !== null) {
           result.set(c3, aLen + bLen);
@@ -36573,28 +36573,28 @@ var init_editorConfiguration = __esm({
         }
         return result;
       }
-      static _deepEquals(a3, b) {
-        if (typeof a3 !== "object" || typeof b !== "object" || !a3 || !b) {
-          return a3 === b;
+      static _deepEquals(a3, b2) {
+        if (typeof a3 !== "object" || typeof b2 !== "object" || !a3 || !b2) {
+          return a3 === b2;
         }
-        if (Array.isArray(a3) || Array.isArray(b)) {
-          return Array.isArray(a3) && Array.isArray(b) ? equals(a3, b) : false;
+        if (Array.isArray(a3) || Array.isArray(b2)) {
+          return Array.isArray(a3) && Array.isArray(b2) ? equals(a3, b2) : false;
         }
-        if (Object.keys(a3).length !== Object.keys(b).length) {
+        if (Object.keys(a3).length !== Object.keys(b2).length) {
           return false;
         }
         for (const key in a3) {
-          if (!_EditorOptionsUtil._deepEquals(a3[key], b[key])) {
+          if (!_EditorOptionsUtil._deepEquals(a3[key], b2[key])) {
             return false;
           }
         }
         return true;
       }
-      static checkEquals(a3, b) {
+      static checkEquals(a3, b2) {
         const result = [];
         let somethingChanged = false;
         for (const editorOption of editorOptionsRegistry) {
-          const changed = !_EditorOptionsUtil._deepEquals(a3._read(editorOption.id), b._read(editorOption.id));
+          const changed = !_EditorOptionsUtil._deepEquals(a3._read(editorOption.id), b2._read(editorOption.id));
           result[editorOption.id] = changed;
           if (changed) {
             somethingChanged = true;
@@ -37122,13 +37122,13 @@ var init_colorUtils = __esm({
         return this.colorSchema;
       }
       toString() {
-        const sorter2 = (a3, b) => {
+        const sorter2 = (a3, b2) => {
           const cat1 = a3.indexOf(".") === -1 ? 0 : 1;
-          const cat2 = b.indexOf(".") === -1 ? 0 : 1;
+          const cat2 = b2.indexOf(".") === -1 ? 0 : 1;
           if (cat1 !== cat2) {
             return cat1 - cat2;
           }
-          return a3.localeCompare(b);
+          return a3.localeCompare(b2);
         };
         return Object.keys(this.colorsById).sort(sorter2).map((k3) => `- \`${k3}\`: ${this.colorsById[k3].description}`).join("\n");
       }
@@ -38068,7 +38068,7 @@ var init_renderingContext = __esm({
         if (!gpuRanges) {
           return domRanges;
         }
-        return domRanges.concat(gpuRanges).sort((a3, b) => a3.lineNumber - b.lineNumber);
+        return domRanges.concat(gpuRanges).sort((a3, b2) => a3.lineNumber - b2.lineNumber);
       }
       visibleRangeForPosition(position) {
         return this._viewLines.visibleRangeForPosition(position) ?? this._viewLinesGpu?.visibleRangeForPosition(position) ?? null;
@@ -38109,8 +38109,8 @@ var init_renderingContext = __esm({
       toString() {
         return `[${this.left},${this.width}]`;
       }
-      static compare(a3, b) {
-        return a3.left - b.left;
+      static compare(a3, b2) {
+        return a3.left - b2.left;
       }
     };
     HorizontalPosition = class {
@@ -39700,7 +39700,7 @@ var init_mouseTarget = __esm({
             points.push({ offset: visibleRange2.left, column: column + 1 });
           }
         }
-        points.sort((a3, b) => a3.offset - b.offset);
+        points.sort((a3, b2) => a3.offset - b2.offset);
         const mouseCoordinates = request.pos.toClientCoordinates(getWindow(ctx.viewDomNode));
         const spanNodeClientRect = spanNode.getBoundingClientRect();
         const mouseIsOverSpanNode = spanNodeClientRect.left <= mouseCoordinates.clientX && mouseCoordinates.clientX <= spanNodeClientRect.right;
@@ -40115,7 +40115,7 @@ var init_touch = __esm({
               targets.push([depth, target]);
             }
           }
-          targets.sort((a3, b) => a3[0] - b[0]);
+          targets.sort((a3, b2) => a3[0] - b2[0]);
           for (const [_2, target] of targets) {
             target.dispatchEvent(event);
             this.dispatched = true;
@@ -40946,12 +40946,12 @@ function createEaseOutCubic(from, to) {
     return from + delta * easeOutCubic(completion);
   };
 }
-function createComposed(a3, b, cut) {
+function createComposed(a3, b2, cut) {
   return function(completion) {
     if (completion < cut) {
       return a3(completion / cut);
     }
-    return b((completion - cut) / (1 - cut));
+    return b2((completion - cut) / (1 - cut));
   };
 }
 function easeInCubic(t3) {
@@ -41169,10 +41169,10 @@ var init_scrollable = __esm({
       }
     };
     SmoothScrollingUpdate = class {
-      constructor(scrollLeft, scrollTop, isDone) {
+      constructor(scrollLeft, scrollTop, isDone2) {
         this.scrollLeft = scrollLeft;
         this.scrollTop = scrollTop;
-        this.isDone = isDone;
+        this.isDone = isDone2;
       }
     };
     SmoothScrollingOperation = class _SmoothScrollingOperation {
@@ -44581,7 +44581,7 @@ var init_cursorDeleteOperations = __esm({
       static cut(config, model, selections) {
         const commands = [];
         let lastCutRange = null;
-        selections.sort((a3, b) => Position.compare(a3.getStartPosition(), b.getEndPosition()));
+        selections.sort((a3, b2) => Position.compare(a3.getStartPosition(), b2.getEndPosition()));
         for (let i4 = 0, len = selections.length; i4 < len; i4++) {
           const selection = selections[i4];
           if (selection.isEmpty()) {
@@ -51592,7 +51592,7 @@ var init_currentLineHighlight2 = __esm({
           lineNumbers.add(selection.positionLineNumber);
         }
         const cursorsLineNumbers = Array.from(lineNumbers);
-        cursorsLineNumbers.sort((a3, b) => a3 - b);
+        cursorsLineNumbers.sort((a3, b2) => a3 - b2);
         if (!equals(this._cursorLineNumbers, cursorsLineNumbers)) {
           this._cursorLineNumbers = cursorsLineNumbers;
           hasChanged = true;
@@ -51825,22 +51825,22 @@ var init_decorations2 = __esm({
             decorations[decorationsLen++] = d3;
           }
         }
-        decorations = decorations.sort((a3, b) => {
-          if (a3.options.zIndex < b.options.zIndex) {
+        decorations = decorations.sort((a3, b2) => {
+          if (a3.options.zIndex < b2.options.zIndex) {
             return -1;
           }
-          if (a3.options.zIndex > b.options.zIndex) {
+          if (a3.options.zIndex > b2.options.zIndex) {
             return 1;
           }
           const aClassName = a3.options.className;
-          const bClassName = b.options.className;
+          const bClassName = b2.options.className;
           if (aClassName < bClassName) {
             return -1;
           }
           if (aClassName > bClassName) {
             return 1;
           }
-          return Range.compareRangesUsingStarts(a3.range, b.range);
+          return Range.compareRangesUsingStarts(a3.range, b2.range);
         });
         const visibleStartLineNumber = ctx.visibleRange.startLineNumber;
         const visibleEndLineNumber = ctx.visibleRange.endLineNumber;
@@ -52199,14 +52199,14 @@ var init_glyphMargin2 = __esm({
         if (decorations.length === 0) {
           return output;
         }
-        decorations.sort((a3, b) => {
-          if (a3.className === b.className) {
-            if (a3.startLineNumber === b.startLineNumber) {
-              return a3.endLineNumber - b.endLineNumber;
+        decorations.sort((a3, b2) => {
+          if (a3.className === b2.className) {
+            if (a3.startLineNumber === b2.startLineNumber) {
+              return a3.endLineNumber - b2.endLineNumber;
             }
-            return a3.startLineNumber - b.startLineNumber;
+            return a3.startLineNumber - b2.startLineNumber;
           }
-          return a3.className < b.className ? -1 : 1;
+          return a3.className < b2.className ? -1 : 1;
         });
         let prevClassName = null;
         let prevEndLineIndex = 0;
@@ -52383,23 +52383,23 @@ var init_glyphMargin2 = __esm({
         const requests = [];
         this._collectDecorationBasedGlyphRenderRequest(ctx, requests);
         this._collectWidgetBasedGlyphRenderRequest(ctx, requests);
-        requests.sort((a3, b) => {
-          if (a3.lineNumber === b.lineNumber) {
-            if (a3.laneIndex === b.laneIndex) {
-              if (a3.zIndex === b.zIndex) {
-                if (b.type === a3.type) {
-                  if (a3.type === 0 && b.type === 0) {
-                    return a3.className < b.className ? -1 : 1;
+        requests.sort((a3, b2) => {
+          if (a3.lineNumber === b2.lineNumber) {
+            if (a3.laneIndex === b2.laneIndex) {
+              if (a3.zIndex === b2.zIndex) {
+                if (b2.type === a3.type) {
+                  if (a3.type === 0 && b2.type === 0) {
+                    return a3.className < b2.className ? -1 : 1;
                   }
                   return 0;
                 }
-                return b.type - a3.type;
+                return b2.type - a3.type;
               }
-              return b.zIndex - a3.zIndex;
+              return b2.zIndex - a3.zIndex;
             }
-            return a3.laneIndex - b.laneIndex;
+            return a3.laneIndex - b2.laneIndex;
           }
-          return a3.lineNumber - b.lineNumber;
+          return a3.lineNumber - b2.lineNumber;
         });
         return requests;
       }
@@ -52850,7 +52850,7 @@ var init_guidesTextModelPart = __esm({
           }
         }
         for (const guides of result) {
-          guides.sort((a3, b) => a3.visibleColumn - b.visibleColumn);
+          guides.sort((a3, b2) => a3.visibleColumn - b2.visibleColumn);
         }
         return result;
       }
@@ -53329,7 +53329,7 @@ var init_lineNumbers2 = __esm({
         const visibleStartLineNumber = ctx.visibleRange.startLineNumber;
         const visibleEndLineNumber = ctx.visibleRange.endLineNumber;
         const lineNoDecorations = this._context.viewModel.getDecorationsInViewport(ctx.visibleRange).filter((d3) => !!d3.options.lineNumberClassName);
-        lineNoDecorations.sort((a3, b) => Range.compareRangesUsingEnds(a3.range, b.range));
+        lineNoDecorations.sort((a3, b2) => Range.compareRangesUsingEnds(a3.range, b2.range));
         let decorationStartIndex = 0;
         const lineCount = this._context.viewModel.getLineCount();
         const output = [];
@@ -54542,11 +54542,11 @@ var init_rgba = __esm({
       static {
         this.Empty = new _RGBA8(0, 0, 0, 0);
       }
-      constructor(r3, g2, b, a3) {
+      constructor(r3, g2, b2, a3) {
         this._rgba8Brand = void 0;
         this.r = _RGBA8._clamp(r3);
         this.g = _RGBA8._clamp(g2);
-        this.b = _RGBA8._clamp(b);
+        this.b = _RGBA8._clamp(b2);
         this.a = _RGBA8._clamp(a3);
       }
       equals(other) {
@@ -56071,7 +56071,7 @@ var init_minimap2 = __esm({
           const selections = this._model.getSelections();
           selections.sort(Range.compareRangesUsingStarts);
           const decorations = this._model.getMinimapDecorationsInViewport(layout2.startLineNumber, layout2.endLineNumber);
-          decorations.sort((a3, b) => (a3.options.zIndex || 0) - (b.options.zIndex || 0));
+          decorations.sort((a3, b2) => (a3.options.zIndex || 0) - (b2.options.zIndex || 0));
           const { canvasInnerWidth, canvasInnerHeight } = this._model.options;
           const minimapLineHeight = this._model.options.minimapLineHeight;
           const minimapCharWidth = this._model.options.minimapCharWidth;
@@ -56261,7 +56261,7 @@ var init_minimap2 = __esm({
         canvasContext.strokeStyle = separatorStroke;
         canvasContext.lineWidth = 0.4;
         const decorations = this._model.getSectionHeaderDecorationsInViewport(layout2.startLineNumber, layout2.endLineNumber);
-        decorations.sort((a3, b) => a3.range.startLineNumber - b.range.startLineNumber);
+        decorations.sort((a3, b2) => a3.range.startLineNumber - b2.range.startLineNumber);
         const fitWidth = _InnerMinimap._fitSectionHeader.bind(null, canvasContext, canvasInnerWidth - MINIMAP_GUTTER_WIDTH);
         for (const decoration3 of decorations) {
           const y3 = layout2.getYForLineNumber(decoration3.range.startLineNumber, minimapLineHeight) + sectionHeaderFontSize;
@@ -56679,7 +56679,7 @@ var init_overlayWidgets2 = __esm({
         this._domNode.setWidth(this._editorWidth);
         const keys = Object.keys(this._widgets);
         const stackCoordinates = Array.from({ length: 2 + 1 }, () => 0);
-        keys.sort((a3, b) => (this._widgets[a3].stack || 0) - (this._widgets[b].stack || 0));
+        keys.sort((a3, b2) => (this._widgets[a3].stack || 0) - (this._widgets[b2].stack || 0));
         for (let i4 = 0, len = keys.length; i4 < len; i4++) {
           const widgetId = keys[i4];
           this._renderWidget(this._widgets[widgetId], stackCoordinates);
@@ -56961,7 +56961,7 @@ var init_decorationsOverviewRuler = __esm({
           }
           this._cursorPositions.push({ position: e3.selections[i4].getPosition(), color });
         }
-        this._cursorPositions.sort((a3, b) => Position.compare(a3.position, b.position));
+        this._cursorPositions.sort((a3, b2) => Position.compare(a3.position, b2.position));
         return this._markRenderingIsMaybeNeeded();
       }
       onDecorationsChanged(e3) {
@@ -57004,7 +57004,7 @@ var init_decorationsOverviewRuler = __esm({
         if (this._actualShouldRender === 1 && !OverviewRulerDecorationsGroup.equalsArr(this._renderedDecorations, decorations)) {
           this._actualShouldRender = 2;
         }
-        if (this._actualShouldRender === 1 && !equals(this._renderedCursorPositions, this._cursorPositions, (a3, b) => a3.position.lineNumber === b.position.lineNumber && a3.color === b.color)) {
+        if (this._actualShouldRender === 1 && !equals(this._renderedCursorPositions, this._cursorPositions, (a3, b2) => a3.position.lineNumber === b2.position.lineNumber && a3.color === b2.color)) {
           this._actualShouldRender = 2;
         }
         if (this._actualShouldRender === 1) {
@@ -57147,14 +57147,14 @@ var init_overviewZoneManager = __esm({
         this.to = to | 0;
         this.colorId = colorId | 0;
       }
-      static compare(a3, b) {
-        if (a3.colorId === b.colorId) {
-          if (a3.from === b.from) {
-            return a3.to - b.to;
+      static compare(a3, b2) {
+        if (a3.colorId === b2.colorId) {
+          if (a3.from === b2.from) {
+            return a3.to - b2.to;
           }
-          return a3.from - b.from;
+          return a3.from - b2.from;
         }
-        return a3.colorId - b.colorId;
+        return a3.colorId - b2.colorId;
       }
     };
     OverviewRulerZone = class {
@@ -57166,17 +57166,17 @@ var init_overviewZoneManager = __esm({
         this.color = color;
         this._colorZone = null;
       }
-      static compare(a3, b) {
-        if (a3.color === b.color) {
-          if (a3.startLineNumber === b.startLineNumber) {
-            if (a3.heightInLines === b.heightInLines) {
-              return a3.endLineNumber - b.endLineNumber;
+      static compare(a3, b2) {
+        if (a3.color === b2.color) {
+          if (a3.startLineNumber === b2.startLineNumber) {
+            if (a3.heightInLines === b2.heightInLines) {
+              return a3.endLineNumber - b2.endLineNumber;
             }
-            return a3.heightInLines - b.heightInLines;
+            return a3.heightInLines - b2.heightInLines;
           }
-          return a3.startLineNumber - b.startLineNumber;
+          return a3.startLineNumber - b2.startLineNumber;
         }
-        return a3.color < b.color ? -1 : 1;
+        return a3.color < b2.color ? -1 : 1;
       }
       setColorZone(colorZone) {
         this._colorZone = colorZone;
@@ -59438,9 +59438,9 @@ var init_glyphRasterizer = __esm({
         this._workGlyph.fontBoundingBoxDescent = this._textMetrics.fontBoundingBoxDescent;
         return this._workGlyph;
       }
-      _clearColor(imageData, r3, g2, b) {
+      _clearColor(imageData, r3, g2, b2) {
         for (let offset = 0; offset < imageData.data.length; offset += 4) {
-          if (imageData.data[offset] === r3 && imageData.data[offset + 1] === g2 && imageData.data[offset + 2] === b) {
+          if (imageData.data[offset] === r3 && imageData.data[offset + 1] === g2 && imageData.data[offset + 2] === b2) {
             imageData.data[offset + 3] = 0;
           }
         }
@@ -65803,7 +65803,7 @@ var init_view = __esm({
           maxLineNumber = Math.max(maxLineNumber, range2.endLineNumber);
           return { range: range2, lane: widget.preference.lane };
         }));
-        glyphs.sort((a3, b) => Range.compareRangesUsingStarts(a3.range, b.range));
+        glyphs.sort((a3, b2) => Range.compareRangesUsingStarts(a3.range, b2.range));
         laneModel.reset(maxLineNumber);
         for (const glyph of glyphs) {
           laneModel.push(glyph.lane, glyph.range, glyph.persist);
@@ -66552,14 +66552,14 @@ var init_textModelEvents = __esm({
             result.push(new _LineInjectedText(decoration3.ownerId, decoration3.range.endLineNumber, decoration3.range.endColumn, decoration3.options.after, 1));
           }
         }
-        result.sort((a3, b) => {
-          if (a3.lineNumber === b.lineNumber) {
-            if (a3.column === b.column) {
-              return a3.order - b.order;
+        result.sort((a3, b2) => {
+          if (a3.lineNumber === b2.lineNumber) {
+            if (a3.column === b2.column) {
+              return a3.order - b2.order;
             }
-            return a3.column - b.column;
+            return a3.column - b2.column;
           }
-          return a3.lineNumber - b.lineNumber;
+          return a3.lineNumber - b2.lineNumber;
         });
         return result;
       }
@@ -66631,11 +66631,11 @@ var init_textModelEvents = __esm({
         }
         return false;
       }
-      static merge(a3, b) {
-        const changes = [].concat(a3.changes).concat(b.changes);
-        const versionId = b.versionId;
-        const isUndoing = a3.isUndoing || b.isUndoing;
-        const isRedoing = a3.isRedoing || b.isRedoing;
+      static merge(a3, b2) {
+        const changes = [].concat(a3.changes).concat(b2.changes);
+        const versionId = b2.versionId;
+        const isUndoing = a3.isUndoing || b2.isUndoing;
+        const isRedoing = a3.isRedoing || b2.isRedoing;
         return new _ModelRawContentChangedEvent(changes, versionId, isUndoing, isRedoing);
       }
     };
@@ -66664,14 +66664,14 @@ var init_textModelEvents = __esm({
         const contentChangedEvent = _InternalModelContentChangeEvent._mergeChangeEvents(this.contentChangedEvent, other.contentChangedEvent);
         return new _InternalModelContentChangeEvent(rawContentChangedEvent, contentChangedEvent);
       }
-      static _mergeChangeEvents(a3, b) {
-        const changes = [].concat(a3.changes).concat(b.changes);
-        const eol = b.eol;
-        const versionId = b.versionId;
-        const isUndoing = a3.isUndoing || b.isUndoing;
-        const isRedoing = a3.isRedoing || b.isRedoing;
-        const isFlush = a3.isFlush || b.isFlush;
-        const isEolChange = a3.isEolChange && b.isEolChange;
+      static _mergeChangeEvents(a3, b2) {
+        const changes = [].concat(a3.changes).concat(b2.changes);
+        const eol = b2.eol;
+        const versionId = b2.versionId;
+        const isUndoing = a3.isUndoing || b2.isUndoing;
+        const isRedoing = a3.isRedoing || b2.isRedoing;
+        const isFlush = a3.isFlush || b2.isFlush;
+        const isEolChange = a3.isEolChange && b2.isEolChange;
         return {
           changes,
           eol,
@@ -66680,8 +66680,8 @@ var init_textModelEvents = __esm({
           isUndoing,
           isRedoing,
           isFlush,
-          detailedReasons: a3.detailedReasons.concat(b.detailedReasons),
-          detailedReasonsChangeLengths: a3.detailedReasonsChangeLengths.concat(b.detailedReasonsChangeLengths)
+          detailedReasons: a3.detailedReasons.concat(b2.detailedReasons),
+          detailedReasonsChangeLengths: a3.detailedReasonsChangeLengths.concat(b2.detailedReasonsChangeLengths)
         };
       }
     };
@@ -67248,7 +67248,7 @@ function lengthAdd(l1, l22) {
   return r3;
 }
 function sumLengths(items, lengthFn) {
-  return items.reduce((a3, b) => lengthAdd(a3, lengthFn(b)), lengthZero);
+  return items.reduce((a3, b2) => lengthAdd(a3, lengthFn(b2)), lengthZero);
 }
 function lengthEquals(length1, length2) {
   return length1 === length2;
@@ -69216,7 +69216,7 @@ var init_bracketPairsImpl = __esm({
           if (!closingBracketInfo) {
             return null;
           }
-          const bracketPair = this.getBracketPairsInRange(Range.fromPositions(_position, _position)).findLast((b) => closingBracketInfo.closes(b.openingBracketInfo));
+          const bracketPair = this.getBracketPairsInRange(Range.fromPositions(_position, _position)).findLast((b2) => closingBracketInfo.closes(b2.openingBracketInfo));
           if (bracketPair) {
             return bracketPair.openingBracketRange;
           }
@@ -69894,41 +69894,41 @@ var init_textChange = __esm({
       static _writeStringSize(str4) {
         return 4 + 2 * str4.length;
       }
-      static _writeString(b, str4, offset) {
+      static _writeString(b2, str4, offset) {
         const len = str4.length;
-        writeUInt32BE(b, len, offset);
+        writeUInt32BE(b2, len, offset);
         offset += 4;
         for (let i4 = 0; i4 < len; i4++) {
-          writeUInt16LE(b, str4.charCodeAt(i4), offset);
+          writeUInt16LE(b2, str4.charCodeAt(i4), offset);
           offset += 2;
         }
         return offset;
       }
-      static _readString(b, offset) {
-        const len = readUInt32BE(b, offset);
+      static _readString(b2, offset) {
+        const len = readUInt32BE(b2, offset);
         offset += 4;
-        return decodeUTF16LE(b, offset, len);
+        return decodeUTF16LE(b2, offset, len);
       }
       writeSize() {
         return 4 + 4 + _TextChange._writeStringSize(this.oldText) + _TextChange._writeStringSize(this.newText);
       }
-      write(b, offset) {
-        writeUInt32BE(b, this.oldPosition, offset);
+      write(b2, offset) {
+        writeUInt32BE(b2, this.oldPosition, offset);
         offset += 4;
-        writeUInt32BE(b, this.newPosition, offset);
+        writeUInt32BE(b2, this.newPosition, offset);
         offset += 4;
-        offset = _TextChange._writeString(b, this.oldText, offset);
-        offset = _TextChange._writeString(b, this.newText, offset);
+        offset = _TextChange._writeString(b2, this.oldText, offset);
+        offset = _TextChange._writeString(b2, this.newText, offset);
         return offset;
       }
-      static read(b, offset, dest) {
-        const oldPosition = readUInt32BE(b, offset);
+      static read(b2, offset, dest) {
+        const oldPosition = readUInt32BE(b2, offset);
         offset += 4;
-        const newPosition = readUInt32BE(b, offset);
+        const newPosition = readUInt32BE(b2, offset);
         offset += 4;
-        const oldText = _TextChange._readString(b, offset);
+        const oldText = _TextChange._readString(b2, offset);
         offset += _TextChange._writeStringSize(oldText);
-        const newText = _TextChange._readString(b, offset);
+        const newText = _TextChange._readString(b2, offset);
         offset += _TextChange._writeStringSize(newText);
         dest.push(new _TextChange(oldPosition, oldText, newPosition, newText));
         return offset;
@@ -70303,34 +70303,34 @@ var init_editStack = __esm({
       static _writeSelectionsSize(selections) {
         return 4 + 4 * 4 * (selections ? selections.length : 0);
       }
-      static _writeSelections(b, selections, offset) {
-        writeUInt32BE(b, selections ? selections.length : 0, offset);
+      static _writeSelections(b2, selections, offset) {
+        writeUInt32BE(b2, selections ? selections.length : 0, offset);
         offset += 4;
         if (selections) {
           for (const selection of selections) {
-            writeUInt32BE(b, selection.selectionStartLineNumber, offset);
+            writeUInt32BE(b2, selection.selectionStartLineNumber, offset);
             offset += 4;
-            writeUInt32BE(b, selection.selectionStartColumn, offset);
+            writeUInt32BE(b2, selection.selectionStartColumn, offset);
             offset += 4;
-            writeUInt32BE(b, selection.positionLineNumber, offset);
+            writeUInt32BE(b2, selection.positionLineNumber, offset);
             offset += 4;
-            writeUInt32BE(b, selection.positionColumn, offset);
+            writeUInt32BE(b2, selection.positionColumn, offset);
             offset += 4;
           }
         }
         return offset;
       }
-      static _readSelections(b, offset, dest) {
-        const count = readUInt32BE(b, offset);
+      static _readSelections(b2, offset, dest) {
+        const count = readUInt32BE(b2, offset);
         offset += 4;
         for (let i4 = 0; i4 < count; i4++) {
-          const selectionStartLineNumber = readUInt32BE(b, offset);
+          const selectionStartLineNumber = readUInt32BE(b2, offset);
           offset += 4;
-          const selectionStartColumn = readUInt32BE(b, offset);
+          const selectionStartColumn = readUInt32BE(b2, offset);
           offset += 4;
-          const positionLineNumber = readUInt32BE(b, offset);
+          const positionLineNumber = readUInt32BE(b2, offset);
           offset += 4;
-          const positionColumn = readUInt32BE(b, offset);
+          const positionColumn = readUInt32BE(b2, offset);
           offset += 4;
           dest.push(new Selection(selectionStartLineNumber, selectionStartColumn, positionLineNumber, positionColumn));
         }
@@ -70341,45 +70341,45 @@ var init_editStack = __esm({
         for (const change of this.changes) {
           necessarySize += change.writeSize();
         }
-        const b = new Uint8Array(necessarySize);
+        const b2 = new Uint8Array(necessarySize);
         let offset = 0;
-        writeUInt32BE(b, this.beforeVersionId, offset);
+        writeUInt32BE(b2, this.beforeVersionId, offset);
         offset += 4;
-        writeUInt32BE(b, this.afterVersionId, offset);
+        writeUInt32BE(b2, this.afterVersionId, offset);
         offset += 4;
-        writeUInt8(b, this.beforeEOL, offset);
+        writeUInt8(b2, this.beforeEOL, offset);
         offset += 1;
-        writeUInt8(b, this.afterEOL, offset);
+        writeUInt8(b2, this.afterEOL, offset);
         offset += 1;
-        offset = _SingleModelEditStackData._writeSelections(b, this.beforeCursorState, offset);
-        offset = _SingleModelEditStackData._writeSelections(b, this.afterCursorState, offset);
-        writeUInt32BE(b, this.changes.length, offset);
+        offset = _SingleModelEditStackData._writeSelections(b2, this.beforeCursorState, offset);
+        offset = _SingleModelEditStackData._writeSelections(b2, this.afterCursorState, offset);
+        writeUInt32BE(b2, this.changes.length, offset);
         offset += 4;
         for (const change of this.changes) {
-          offset = change.write(b, offset);
+          offset = change.write(b2, offset);
         }
-        return b.buffer;
+        return b2.buffer;
       }
       static deserialize(source) {
-        const b = new Uint8Array(source);
+        const b2 = new Uint8Array(source);
         let offset = 0;
-        const beforeVersionId = readUInt32BE(b, offset);
+        const beforeVersionId = readUInt32BE(b2, offset);
         offset += 4;
-        const afterVersionId = readUInt32BE(b, offset);
+        const afterVersionId = readUInt32BE(b2, offset);
         offset += 4;
-        const beforeEOL = readUInt8(b, offset);
+        const beforeEOL = readUInt8(b2, offset);
         offset += 1;
-        const afterEOL = readUInt8(b, offset);
+        const afterEOL = readUInt8(b2, offset);
         offset += 1;
         const beforeCursorState = [];
-        offset = _SingleModelEditStackData._readSelections(b, offset, beforeCursorState);
+        offset = _SingleModelEditStackData._readSelections(b2, offset, beforeCursorState);
         const afterCursorState = [];
-        offset = _SingleModelEditStackData._readSelections(b, offset, afterCursorState);
-        const changeCount = readUInt32BE(b, offset);
+        offset = _SingleModelEditStackData._readSelections(b2, offset, afterCursorState);
+        const changeCount = readUInt32BE(b2, offset);
         offset += 4;
         const changes = [];
         for (let i4 = 0; i4 < changeCount; i4++) {
-          offset = TextChange.read(b, offset, changes);
+          offset = TextChange.read(b2, offset, changes);
         }
         return new _SingleModelEditStackData(beforeVersionId, afterVersionId, beforeEOL, afterEOL, beforeCursorState, afterCursorState, changes);
       }
@@ -70578,11 +70578,11 @@ var init_editStack = __esm({
         const inverseEditOperations = this._model.applyEdits(editOperations, true, reason);
         const afterCursorState = _EditStack._computeCursorState(cursorStateComputer, inverseEditOperations);
         const textChanges = inverseEditOperations.map((op, index) => ({ index, textChange: op.textChange }));
-        textChanges.sort((a3, b) => {
-          if (a3.textChange.oldPosition === b.textChange.oldPosition) {
-            return a3.index - b.index;
+        textChanges.sort((a3, b2) => {
+          if (a3.textChange.oldPosition === b2.textChange.oldPosition) {
+            return a3.index - b2.index;
           }
-          return a3.textChange.oldPosition - b.textChange.oldPosition;
+          return a3.textChange.oldPosition - b2.textChange.oldPosition;
         });
         editStackElement.append(this._model, textChanges.map((op) => op.textChange), getModelEOL(this._model), this._model.getAlternativeVersionId(), afterCursorState);
         return afterCursorState;
@@ -70600,13 +70600,13 @@ var init_editStack = __esm({
 });
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/editor/common/model/indentationGuesser.js
-function spacesDiff(a3, aLength, b, bLength, result) {
+function spacesDiff(a3, aLength, b2, bLength, result) {
   result.spacesDiff = 0;
   result.looksLikeAlignment = false;
   let i4;
   for (i4 = 0; i4 < aLength && i4 < bLength; i4++) {
     const aCharCode = a3.charCodeAt(i4);
-    const bCharCode = b.charCodeAt(i4);
+    const bCharCode = b2.charCodeAt(i4);
     if (aCharCode !== bCharCode) {
       break;
     }
@@ -70622,7 +70622,7 @@ function spacesDiff(a3, aLength, b, bLength, result) {
   }
   let bSpacesCnt = 0, bTabsCount = 0;
   for (let j3 = i4; j3 < bLength; j3++) {
-    const bCharCode = b.charCodeAt(j3);
+    const bCharCode = b2.charCodeAt(j3);
     if (bCharCode === 32) {
       bSpacesCnt++;
     } else {
@@ -70639,8 +70639,8 @@ function spacesDiff(a3, aLength, b, bLength, result) {
   const spacesDiff2 = Math.abs(aSpacesCnt - bSpacesCnt);
   if (tabsDiff === 0) {
     result.spacesDiff = spacesDiff2;
-    if (spacesDiff2 > 0 && 0 <= bSpacesCnt - 1 && bSpacesCnt - 1 < a3.length && bSpacesCnt < b.length) {
-      if (b.charCodeAt(bSpacesCnt) !== 32 && a3.charCodeAt(bSpacesCnt - 1) === 32) {
+    if (spacesDiff2 > 0 && 0 <= bSpacesCnt - 1 && bSpacesCnt - 1 < a3.length && bSpacesCnt < b2.length) {
+      if (b2.charCodeAt(bSpacesCnt) !== 32 && a3.charCodeAt(bSpacesCnt - 1) === 32) {
         if (a3.charCodeAt(a3.length - 1) === 44) {
           result.looksLikeAlignment = true;
         }
@@ -73719,7 +73719,7 @@ var init_pieceTreeTextBuffer = __esm({
             };
           }
           if (!hasTouchingRanges) {
-            reverseOperations.sort((a3, b) => a3.sortIndex - b.sortIndex);
+            reverseOperations.sort((a3, b2) => a3.sortIndex - b2.sortIndex);
           }
         }
         this._mightContainRTL = mightContainRTL;
@@ -73728,7 +73728,7 @@ var init_pieceTreeTextBuffer = __esm({
         const contentChanges = this._doApplyEdits(operations);
         let trimAutoWhitespaceLineNumbers = null;
         if (recordTrimAutoWhitespace && newTrimAutoWhitespaceCandidates.length > 0) {
-          newTrimAutoWhitespaceCandidates.sort((a3, b) => b.lineNumber - a3.lineNumber);
+          newTrimAutoWhitespaceCandidates.sort((a3, b2) => b2.lineNumber - a3.lineNumber);
           trimAutoWhitespaceLineNumbers = [];
           for (let i4 = 0, len = newTrimAutoWhitespaceCandidates.length; i4 < len; i4++) {
             const lineNumber = newTrimAutoWhitespaceCandidates[i4].lineNumber;
@@ -73869,17 +73869,17 @@ var init_pieceTreeTextBuffer = __esm({
         }
         return result;
       }
-      static _sortOpsAscending(a3, b) {
-        const r3 = Range.compareRangesUsingEnds(a3.range, b.range);
+      static _sortOpsAscending(a3, b2) {
+        const r3 = Range.compareRangesUsingEnds(a3.range, b2.range);
         if (r3 === 0) {
-          return a3.sortIndex - b.sortIndex;
+          return a3.sortIndex - b2.sortIndex;
         }
         return r3;
       }
-      static _sortOpsDescending(a3, b) {
-        const r3 = Range.compareRangesUsingEnds(a3.range, b.range);
+      static _sortOpsDescending(a3, b2) {
+        const r3 = Range.compareRangesUsingEnds(a3.range, b2.range);
         if (r3 === 0) {
-          return b.sortIndex - a3.sortIndex;
+          return b2.sortIndex - a3.sortIndex;
         }
         return -r3;
       }
@@ -74251,7 +74251,7 @@ var init_abstractSyntaxTokenBackend = __esm({
         if (this === other) {
           return true;
         }
-        if (!equals(this.visibleLineRanges, other.visibleLineRanges, (a3, b) => a3.equals(b))) {
+        if (!equals(this.visibleLineRanges, other.visibleLineRanges, (a3, b2) => a3.equals(b2))) {
           return false;
         }
         if (this.stabilized !== other.stabilized) {
@@ -74266,7 +74266,7 @@ var init_abstractSyntaxTokenBackend = __esm({
       }
       constructor(handleStateChange) {
         this.handleStateChange = handleStateChange;
-        this._state = observableValueOpts({ owner: this, equalsFn: equalsIfDefined((a3, b) => a3.equals(b)) }, void 0);
+        this._state = observableValueOpts({ owner: this, equalsFn: equalsIfDefined((a3, b2) => a3.equals(b2)) }, void 0);
       }
       setVisibleLines(visibleLines, stabilized) {
         const visibleLineRanges = visibleLines.map((line) => new LineRange(line.startLineNumber, line.endLineNumber + 1));
@@ -74287,7 +74287,7 @@ var init_abstractSyntaxTokenBackend = __esm({
         this._lineRanges = [];
       }
       update() {
-        if (equals(this._computedLineRanges, this._lineRanges, (a3, b) => a3.equals(b))) {
+        if (equals(this._computedLineRanges, this._lineRanges, (a3, b2) => a3.equals(b2))) {
           return;
         }
         this._computedLineRanges = this._lineRanges;
@@ -74409,11 +74409,11 @@ function newTimeOutProgressCallback() {
     return false;
   };
 }
-function rangesEqual(a3, b) {
-  return a3.startPosition.row === b.startPosition.row && a3.startPosition.column === b.startPosition.column && a3.endPosition.row === b.endPosition.row && a3.endPosition.column === b.endPosition.column && a3.startIndex === b.startIndex && a3.endIndex === b.endIndex;
+function rangesEqual(a3, b2) {
+  return a3.startPosition.row === b2.startPosition.row && a3.startPosition.column === b2.startPosition.column && a3.endPosition.row === b2.endPosition.row && a3.endPosition.column === b2.endPosition.column && a3.startIndex === b2.startIndex && a3.endIndex === b2.endIndex;
 }
-function rangesIntersect(a3, b) {
-  return a3.startIndex <= b.startIndex && a3.endIndex >= b.startIndex || b.startIndex <= a3.startIndex && b.endIndex >= a3.startIndex;
+function rangesIntersect(a3, b2) {
+  return a3.startIndex <= b2.startIndex && a3.endIndex >= b2.startIndex || b2.startIndex <= a3.startIndex && b2.endIndex >= a3.startIndex;
 }
 var __decorate23, __param21, TreeSitterTree;
 var init_treeSitterTree = __esm({
@@ -76680,15 +76680,15 @@ var init_sparseTokensStore = __esm({
             insertPosition = insertPosition || { index: i4 };
             continue;
           }
-          const [a3, b] = piece.split(range2);
+          const [a3, b2] = piece.split(range2);
           if (a3.isEmpty()) {
             insertPosition = insertPosition || { index: i4 };
             continue;
           }
-          if (b.isEmpty()) {
+          if (b2.isEmpty()) {
             continue;
           }
-          this._pieces.splice(i4, 1, a3, b);
+          this._pieces.splice(i4, 1, a3, b2);
           i4++;
           len++;
           insertPosition = insertPosition || { index: i4 };
@@ -77018,12 +77018,12 @@ var init_contiguousTokensStore = __esm({
           return !_a3 && !_b2;
         }
         const a3 = toUint32Array(_a3);
-        const b = toUint32Array(_b2);
-        if (a3.length !== b.length) {
+        const b2 = toUint32Array(_b2);
+        if (a3.length !== b2.length) {
           return false;
         }
         for (let i4 = 0, len = a3.length; i4 < len; i4++) {
-          if (a3[i4] !== b[i4]) {
+          if (a3[i4] !== b2[i4]) {
             return false;
           }
         }
@@ -77197,7 +77197,7 @@ var init_tokenizerSyntaxTokenBackend = __esm({
         this._backgroundTokenizer.clear();
         this._defaultBackgroundTokenizer = null;
         if (this._tokenizer) {
-          const b = {
+          const b2 = {
             setTokens: (tokens) => {
               this.setTokens(tokens);
             },
@@ -77220,10 +77220,10 @@ var init_tokenizerSyntaxTokenBackend = __esm({
             }
           };
           if (tokenizationSupport && tokenizationSupport.createBackgroundTokenizer && !tokenizationSupport.backgroundTokenizerShouldOnlyVerifyTokens) {
-            this._backgroundTokenizer.value = tokenizationSupport.createBackgroundTokenizer(this._textModel, b);
+            this._backgroundTokenizer.value = tokenizationSupport.createBackgroundTokenizer(this._textModel, b2);
           }
           if (!this._backgroundTokenizer.value && !this._textModel.isTooLargeForTokenization()) {
-            this._backgroundTokenizer.value = this._defaultBackgroundTokenizer = new DefaultBackgroundTokenizer(this._tokenizer, b);
+            this._backgroundTokenizer.value = this._defaultBackgroundTokenizer = new DefaultBackgroundTokenizer(this._tokenizer, b2);
             this._defaultBackgroundTokenizer.handleChanges();
           }
           if (tokenizationSupport?.backgroundTokenizerShouldOnlyVerifyTokens && tokenizationSupport.createBackgroundTokenizer) {
@@ -80919,20 +80919,20 @@ var init_viewModelEventDispatcher = __esm({
         this.reason = reason;
         this.reachedMaxCursorCount = reachedMaxCursorCount;
       }
-      static _selectionsAreEqual(a3, b) {
-        if (!a3 && !b) {
+      static _selectionsAreEqual(a3, b2) {
+        if (!a3 && !b2) {
           return true;
         }
-        if (!a3 || !b) {
+        if (!a3 || !b2) {
           return false;
         }
         const aLen = a3.length;
-        const bLen = b.length;
+        const bLen = b2.length;
         if (aLen !== bLen) {
           return false;
         }
         for (let i4 = 0; i4 < aLen; i4++) {
-          if (!a3[i4].equalsSelection(b[i4])) {
+          if (!a3[i4].equalsSelection(b2[i4])) {
             return false;
           }
         }
@@ -81715,8 +81715,8 @@ var init_cursor = __esm({
             }
             groupedInverseEditOperations[op.identifier.major].push(op);
           }
-          const minorBasedSorter = (a3, b) => {
-            return a3.identifier.minor - b.identifier.minor;
+          const minorBasedSorter = (a3, b2) => {
+            return a3.identifier.minor - b2.identifier.minor;
           };
           const cursorSelections = [];
           for (let i4 = 0; i4 < ctx.selectionsBefore.length; i4++) {
@@ -81750,8 +81750,8 @@ var init_cursor = __esm({
             losingCursors.push(parseInt(losingCursorIndex, 10));
           }
         }
-        losingCursors.sort((a3, b) => {
-          return b - a3;
+        losingCursors.sort((a3, b2) => {
+          return b2 - a3;
         });
         for (const losingCursor of losingCursors) {
           selectionsAfter.splice(losingCursor, 1);
@@ -81853,8 +81853,8 @@ var init_cursor = __esm({
       }
       static _getLoserCursorMap(operations) {
         operations = operations.slice(0);
-        operations.sort((a3, b) => {
-          return -Range.compareRangesUsingEnds(a3.range, b.range);
+        operations.sort((a3, b2) => {
+          return -Range.compareRangesUsingEnds(a3.range, b2.range);
         });
         const loserCursorsMap = {};
         for (let i4 = 1; i4 < operations.length; i4++) {
@@ -82603,11 +82603,11 @@ var init_linesLayout = __esm({
           return result2;
         };
         const result = applyRemoveAndChange(this._arr).concat(applyRemoveAndChange(inserts));
-        result.sort((a3, b) => {
-          if (a3.afterLineNumber === b.afterLineNumber) {
-            return a3.ordinal - b.ordinal;
+        result.sort((a3, b2) => {
+          if (a3.afterLineNumber === b2.afterLineNumber) {
+            return a3.ordinal - b2.ordinal;
           }
-          return a3.afterLineNumber - b.afterLineNumber;
+          return a3.afterLineNumber - b2.afterLineNumber;
         });
         this._arr = result;
         this._prefixSumValidIndex = -1;
@@ -84783,13 +84783,13 @@ var init_viewModelLines = __esm({
           result = result.concat(this.model.getDecorationsInRange(new Range(reqStart.lineNumber, reqStart.column, modelEnd.lineNumber, modelEnd.column), ownerId2, filterOutValidation, filterFontDecorations2, onlyMinimapDecorations));
           reqStart = null;
         }
-        result.sort((a3, b) => {
-          const res = Range.compareRangesUsingStarts(a3.range, b.range);
+        result.sort((a3, b2) => {
+          const res = Range.compareRangesUsingStarts(a3.range, b2.range);
           if (res === 0) {
-            if (a3.id < b.id) {
+            if (a3.id < b2.id) {
               return -1;
             }
-            if (a3.id > b.id) {
+            if (a3.id > b2.id) {
               return 1;
             }
             return 0;
@@ -89898,8 +89898,8 @@ var init_sparseMultilineTokens = __esm({
       split(range2) {
         const startLineIndex = range2.startLineNumber - this._startLineNumber;
         const endLineIndex = range2.endLineNumber - this._startLineNumber;
-        const [a3, b, bDeltaLine] = this._tokens.split(startLineIndex, range2.startColumn - 1, endLineIndex, range2.endColumn - 1);
-        return [new _SparseMultilineTokens(this._startLineNumber, a3), new _SparseMultilineTokens(this._startLineNumber + bDeltaLine, b)];
+        const [a3, b2, bDeltaLine] = this._tokens.split(startLineIndex, range2.startColumn - 1, endLineIndex, range2.endColumn - 1);
+        return [new _SparseMultilineTokens(this._startLineNumber, a3), new _SparseMultilineTokens(this._startLineNumber + bDeltaLine, b2)];
       }
       applyEdit(range2, text2) {
         const [eolCount, firstLineLength, lastLineLength] = countEOL(text2);
@@ -90725,7 +90725,7 @@ function parsePattern(arg1, options) {
   const ignoreCase = options.ignoreCase ?? false;
   const internalOptions = {
     ...options,
-    equals: ignoreCase ? equalsIgnoreCase : (a3, b) => a3 === b,
+    equals: ignoreCase ? equalsIgnoreCase : (a3, b2) => a3 === b2,
     endsWith: ignoreCase ? endsWithIgnoreCase : (str4, candidate) => str4.endsWith(candidate),
     // TODO: the '!isLinux' part below is to keep current behavior unchanged, but it should probably be removed
     // in favor of passing correct options from the caller.
@@ -91306,20 +91306,20 @@ var init_languageFeatureRegistry = __esm({
         }
         this._entries.sort(_LanguageFeatureRegistry._compareByScoreAndTime);
       }
-      static _compareByScoreAndTime(a3, b) {
-        if (a3._score < b._score) {
+      static _compareByScoreAndTime(a3, b2) {
+        if (a3._score < b2._score) {
           return 1;
-        } else if (a3._score > b._score) {
+        } else if (a3._score > b2._score) {
           return -1;
         }
-        if (isBuiltinSelector(a3.selector) && !isBuiltinSelector(b.selector)) {
+        if (isBuiltinSelector(a3.selector) && !isBuiltinSelector(b2.selector)) {
           return 1;
-        } else if (!isBuiltinSelector(a3.selector) && isBuiltinSelector(b.selector)) {
+        } else if (!isBuiltinSelector(a3.selector) && isBuiltinSelector(b2.selector)) {
           return -1;
         }
-        if (a3._time < b._time) {
+        if (a3._time < b2._time) {
           return 1;
-        } else if (a3._time > b._time) {
+        } else if (a3._time > b2._time) {
           return -1;
         } else {
           return 0;
@@ -92708,20 +92708,20 @@ function isMarkdownString(thing) {
   }
   return false;
 }
-function markdownStringEqual(a3, b) {
-  if (a3 === b) {
+function markdownStringEqual(a3, b2) {
+  if (a3 === b2) {
     return true;
-  } else if (!a3 || !b) {
+  } else if (!a3 || !b2) {
     return false;
   } else {
-    return a3.value === b.value && a3.isTrusted === b.isTrusted && a3.supportThemeIcons === b.supportThemeIcons && a3.supportHtml === b.supportHtml && a3.supportAlertSyntax === b.supportAlertSyntax && (a3.baseUri === b.baseUri || !!a3.baseUri && !!b.baseUri && isEqual(URI2.from(a3.baseUri), URI2.from(b.baseUri)));
+    return a3.value === b2.value && a3.isTrusted === b2.isTrusted && a3.supportThemeIcons === b2.supportThemeIcons && a3.supportHtml === b2.supportHtml && a3.supportAlertSyntax === b2.supportAlertSyntax && (a3.baseUri === b2.baseUri || !!a3.baseUri && !!b2.baseUri && isEqual(URI2.from(a3.baseUri), URI2.from(b2.baseUri)));
   }
 }
 function escapeMarkdownSyntaxTokens(text2) {
   return text2.replace(/[\\`*_{}[\]()#+\-!~]/g, "\\$&");
 }
 function appendEscapedMarkdownCodeBlockFence(code, langId) {
-  const longestFenceLength = code.match(/^`+/gm)?.reduce((a3, b) => a3.length > b.length ? a3 : b).length ?? 0;
+  const longestFenceLength = code.match(/^`+/gm)?.reduce((a3, b2) => a3.length > b2.length ? a3 : b2).length ?? 0;
   const desiredFenceLength = longestFenceLength >= 3 ? longestFenceLength + 1 : 3;
   return [
     `${"`".repeat(desiredFenceLength)}${langId}`,
@@ -92951,17 +92951,17 @@ function rtrim2(str4, c3, invert) {
   }
   return str4.slice(0, l3 - suffLen);
 }
-function findClosingBracket(str4, b) {
-  if (str4.indexOf(b[1]) === -1) {
+function findClosingBracket(str4, b2) {
+  if (str4.indexOf(b2[1]) === -1) {
     return -1;
   }
   let level = 0;
   for (let i4 = 0; i4 < str4.length; i4++) {
     if (str4[i4] === "\\") {
       i4++;
-    } else if (str4[i4] === b[0]) {
+    } else if (str4[i4] === b2[0]) {
       level++;
-    } else if (str4[i4] === b[1]) {
+    } else if (str4[i4] === b2[1]) {
       level--;
       if (level < 0) {
         return i4;
@@ -95068,7 +95068,7 @@ function createDOMPurify() {
     NodeFilter,
     NamedNodeMap = window2.NamedNodeMap || window2.MozNamedAttrMap,
     HTMLFormElement,
-    DOMParser,
+    DOMParser: DOMParser2,
     trustedTypes
   } = window2;
   const ElementPrototype = Element2.prototype;
@@ -95409,7 +95409,7 @@ function createDOMPurify() {
     const dirtyPayload = trustedTypesPolicy ? trustedTypesPolicy.createHTML(dirty) : dirty;
     if (NAMESPACE === HTML_NAMESPACE) {
       try {
-        doc = new DOMParser().parseFromString(dirtyPayload, PARSER_MEDIA_TYPE);
+        doc = new DOMParser2().parseFromString(dirtyPayload, PARSER_MEDIA_TYPE);
       } catch (_2) {
       }
     }
@@ -100646,14 +100646,14 @@ var init_keybindingResolver = __esm({
       /**
        * Returns true if it is provable `a` implies `b`.
        */
-      static whenIsEntirelyIncluded(a3, b) {
-        if (!b || b.type === 1) {
+      static whenIsEntirelyIncluded(a3, b2) {
+        if (!b2 || b2.type === 1) {
           return true;
         }
         if (!a3 || a3.type === 1) {
           return false;
         }
-        return implies(a3, b);
+        return implies(a3, b2);
       }
       getKeybindings() {
         return this._keybindings;
@@ -104042,7 +104042,7 @@ var init_listView = __esm({
             feedback = [event.index];
           }
         }
-        feedback = distinct(feedback).filter((i4) => i4 >= -1 && i4 < this.length).sort((a3, b) => a3 - b);
+        feedback = distinct(feedback).filter((i4) => i4 >= -1 && i4 < this.length).sort((a3, b2) => a3 - b2);
         feedback = feedback[0] === -1 ? [-1] : feedback;
         let dragOverEffectPosition = typeof result !== "boolean" && result.effect && result.effect.position ? result.effect.position : "drop-target";
         if (equalsDragFeedback(this.currentDragFeedback, feedback) && this.currentDragFeedbackPosition === dragOverEffectPosition) {
@@ -105268,7 +105268,7 @@ var init_listWidget = __esm({
         }
       }
     };
-    numericSort = (a3, b) => a3 - b;
+    numericSort = (a3, b2) => a3 - b2;
     PipelineRenderer = class {
       constructor(_templateId, renderers) {
         this._templateId = _templateId;
@@ -110286,8 +110286,8 @@ var init_markers = __esm({
       MarkerSeverity4[MarkerSeverity4["Error"] = 8] = "Error";
     })(MarkerSeverity2 || (MarkerSeverity2 = {}));
     (function(MarkerSeverity4) {
-      function compare2(a3, b) {
-        return b - a3;
+      function compare2(a3, b2) {
+        return b2 - a3;
       }
       MarkerSeverity4.compare = compare2;
       const _displayStrings = /* @__PURE__ */ Object.create(null);
@@ -110882,7 +110882,7 @@ var init_modelService = __esm({
               disposedModels.push(entry);
             }
           });
-          disposedModels.sort((a3, b) => a3.time - b.time);
+          disposedModels.sort((a3, b2) => a3.time - b2.time);
           while (disposedModels.length > 0 && this._disposedModelsHeapSize > maxModelsHeapSize) {
             const disposedModel = disposedModels.shift();
             this._removeDisposedModel(disposedModel.uri);
@@ -111825,9 +111825,9 @@ var init_quickInput3 = __esm({
         ];
       }
       set buttons(buttons) {
-        this._leftButtons = buttons.filter((b) => b === backButton);
-        this._rightButtons = buttons.filter((b) => b !== backButton && b.location !== QuickInputButtonLocation.Inline);
-        this._inlineButtons = buttons.filter((b) => b.location === QuickInputButtonLocation.Inline);
+        this._leftButtons = buttons.filter((b2) => b2 === backButton);
+        this._rightButtons = buttons.filter((b2) => b2 !== backButton && b2.location !== QuickInputButtonLocation.Inline);
+        this._inlineButtons = buttons.filter((b2) => b2.location === QuickInputButtonLocation.Inline);
         this.buttonsUpdated = true;
         this.update();
       }
@@ -112297,7 +112297,7 @@ var init_quickInput3 = __esm({
             if (this.activeItemsUpdated) {
               return;
             }
-            if (this.activeItemsToConfirm !== this._activeItems && equals(focusedItems, this._activeItems, (a3, b) => a3 === b)) {
+            if (this.activeItemsToConfirm !== this._activeItems && equals(focusedItems, this._activeItems, (a3, b2) => a3 === b2)) {
               return;
             }
             this._activeItems = focusedItems;
@@ -112310,7 +112310,7 @@ var init_quickInput3 = __esm({
               }
               return;
             }
-            if (this.selectedItemsToConfirm !== this._selectedItems && equals(selectedItems, this._selectedItems, (a3, b) => a3 === b)) {
+            if (this.selectedItemsToConfirm !== this._selectedItems && equals(selectedItems, this._selectedItems, (a3, b2) => a3 === b2)) {
               return;
             }
             this._selectedItems = selectedItems;
@@ -112326,7 +112326,7 @@ var init_quickInput3 = __esm({
             if (!this.canSelectMany || !this.visible) {
               return;
             }
-            if (this.selectedItemsToConfirm !== this._selectedItems && equals(checkedItems, this._selectedItems, (a3, b) => a3 === b)) {
+            if (this.selectedItemsToConfirm !== this._selectedItems && equals(checkedItems, this._selectedItems, (a3, b2) => a3 === b2)) {
               return;
             }
             this._selectedItems = checkedItems;
@@ -114816,11 +114816,11 @@ var init_keybindingLabel2 = __esm({
         }
         return keyElement;
       }
-      static areSame(a3, b) {
-        if (a3 === b || !a3 && !b) {
+      static areSame(a3, b2) {
+        if (a3 === b2 || !a3 && !b2) {
           return true;
         }
-        return !!a3 && !!b && equals2(a3.firstPart, b.firstPart) && equals2(a3.chordPart, b.chordPart);
+        return !!a3 && !!b2 && equals2(a3.firstPart, b2.firstPart) && equals2(a3.chordPart, b2.chordPart);
       }
     };
   }
@@ -114964,7 +114964,7 @@ var init_indexTreeModel = __esm({
         };
         let lastStartO = Math.min(parentNode.children.length, index + deleteCount);
         let lastStartM = toInsert.length;
-        for (const change of diff.changes.sort((a3, b) => b.originalStart - a3.originalStart)) {
+        for (const change of diff.changes.sort((a3, b2) => b2.originalStart - a3.originalStart)) {
           recurseSplice(lastStartO, lastStartM, lastStartO - (change.originalStart + change.originalLength));
           lastStartO = change.originalStart;
           lastStartM = change.modifiedStart - index;
@@ -117391,10 +117391,10 @@ var init_abstractTree = __esm({
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/base/common/comparers.js
 function compareFileNames(one, other, caseSensitive = false) {
   const a3 = one || "";
-  const b = other || "";
-  const result = intlFileNameCollatorBaseNumeric.value.collator.compare(a3, b);
-  if (intlFileNameCollatorBaseNumeric.value.collatorIsNumeric && result === 0 && a3 !== b) {
-    return a3 < b ? -1 : 1;
+  const b2 = other || "";
+  const result = intlFileNameCollatorBaseNumeric.value.collator.compare(a3, b2);
+  if (intlFileNameCollatorBaseNumeric.value.collatorIsNumeric && result === 0 && a3 !== b2) {
+    return a3 < b2 ? -1 : 1;
   }
   return result;
 }
@@ -119000,7 +119000,7 @@ var init_tableWidget = __esm({
         this.domNode = append(container, $2(`.monaco-table.${this.domId}`));
         const headers = columns.map((c3, i4) => this.disposables.add(new ColumnHeader(c3, i4)));
         const descriptor = {
-          size: headers.reduce((a3, b) => a3 + b.column.weight, 0),
+          size: headers.reduce((a3, b2) => a3 + b2.column.weight, 0),
           views: headers.map((view) => ({ size: view.column.weight, view }))
         };
         this.splitview = this.disposables.add(new SplitView(this.domNode, {
@@ -119076,8 +119076,8 @@ var init_objectTreeModel = __esm({
         this.onDidChangeRenderNodeCount = this.model.onDidChangeRenderNodeCount;
         if (options.sorter) {
           this.sorter = {
-            compare(a3, b) {
-              return options.sorter.compare(a3.element, b.element);
+            compare(a3, b2) {
+              return options.sorter.compare(a3.element, b2.element);
             }
           };
         }
@@ -119327,7 +119327,7 @@ function _decompress(element, index = 0) {
     collapsed: element.collapsed
   };
 }
-function decompress(element) {
+function decompress2(element) {
   return _decompress(element, 0);
 }
 function splice2(treeElement, element, children) {
@@ -119410,10 +119410,10 @@ var init_compressedObjectTreeModel = __esm({
         const node = this.model.getNode(compressedNode);
         const compressedParentNode = this.model.getParentNodeLocation(compressedNode);
         const parent = this.model.getNode(compressedParentNode);
-        const decompressedElement = decompress(node);
+        const decompressedElement = decompress2(node);
         const splicedElement = splice2(decompressedElement, element, children);
         const recompressedElement = (this.enabled ? compress : noCompress)(splicedElement);
-        const elementComparator = options.diffIdentityProvider ? ((a3, b) => options.diffIdentityProvider.getId(a3) === options.diffIdentityProvider.getId(b)) : void 0;
+        const elementComparator = options.diffIdentityProvider ? ((a3, b2) => options.diffIdentityProvider.getId(a3) === options.diffIdentityProvider.getId(b2)) : void 0;
         if (equals(recompressedElement.element.elements, node.element.elements, elementComparator)) {
           this._setChildren(compressedNode, recompressedElement.children || Iterable.empty(), { diffIdentityProvider, diffDepth: 1 });
           return;
@@ -119434,7 +119434,7 @@ var init_compressedObjectTreeModel = __esm({
         this.enabled = enabled;
         const root = this.model.getNode();
         const rootChildren = root.children;
-        const decompressedRootChildren = Iterable.map(rootChildren, decompress);
+        const decompressedRootChildren = Iterable.map(rootChildren, decompress2);
         const recompressedRootChildren = Iterable.map(decompressedRootChildren, enabled ? compress : noCompress);
         this._setChildren(null, recompressedRootChildren, {
           diffIdentityProvider: this.identityProvider,
@@ -123586,24 +123586,24 @@ var init_quickInputTreeSorter = __esm({
       set sortByLabel(value) {
         this._sortByLabel = value;
       }
-      compare(a3, b) {
+      compare(a3, b2) {
         if (!this._sortByLabel) {
           return 0;
         }
-        if (a3.label < b.label) {
+        if (a3.label < b2.label) {
           return -1;
-        } else if (a3.label > b.label) {
+        } else if (a3.label > b2.label) {
           return 1;
         }
-        if (a3.description && b.description) {
-          if (a3.description < b.description) {
+        if (a3.description && b2.description) {
+          if (a3.description < b2.description) {
             return -1;
-          } else if (a3.description > b.description) {
+          } else if (a3.description > b2.description) {
             return 1;
           }
         } else if (a3.description) {
           return -1;
-        } else if (b.description) {
+        } else if (b2.description) {
           return 1;
         }
         return 0;
@@ -124544,9 +124544,9 @@ var init_quickInputController = __esm({
         const dragAreaRect = this._quickInputContainer.getBoundingClientRect();
         if (state?.top && state?.left) {
           const a3 = Math.round(state.left * 100) / 100;
-          const b = dimension.width;
+          const b2 = dimension.width;
           const c3 = dragAreaRect.width;
-          const d3 = a3 * b - c3 / 2;
+          const d3 = a3 * b2 - c3 / 2;
           this._layout(state.top * dimension.height, d3);
         }
       }
@@ -124613,10 +124613,10 @@ var init_quickInputController = __esm({
         leftCoordinate = Math.max(0, Math.min(leftCoordinate, this._container.clientWidth - this._quickInputContainer.clientWidth));
         const snappingToCenterX = Math.abs(leftCoordinate - snapCoordinateX) < this._snapThreshold;
         leftCoordinate = snappingToCenterX ? snapCoordinateX : leftCoordinate;
-        const b = this._container.clientWidth;
+        const b2 = this._container.clientWidth;
         const c3 = this._quickInputContainer.clientWidth;
         const d3 = leftCoordinate;
-        const left3 = (d3 + c3 / 2) / b;
+        const left3 = (d3 + c3 / 2) / b2;
         this.dndViewState.set({ top, left: left3, done: false }, void 0);
         if (snappingToCenterX) {
           if (snappingToTop) {
@@ -125079,12 +125079,12 @@ function parseTokenTheme(source) {
   return result;
 }
 function resolveParsedTokenThemeRules(parsedThemeRules, customTokenColors) {
-  parsedThemeRules.sort((a3, b) => {
-    const r3 = strcmp(a3.token, b.token);
+  parsedThemeRules.sort((a3, b2) => {
+    const r3 = strcmp(a3.token, b2.token);
     if (r3 !== 0) {
       return r3;
     }
-    return a3.index - b.index;
+    return a3.index - b2.index;
   });
   let defaultFontStyle = 0;
   let defaultForeground = "000000";
@@ -125132,11 +125132,11 @@ function toStandardTokenType(tokenType) {
   }
   throw new Error("Unexpected match for standard token type!");
 }
-function strcmp(a3, b) {
-  if (a3 < b) {
+function strcmp(a3, b2) {
+  if (a3 < b2) {
     return -1;
   }
-  if (a3 > b) {
+  if (a3 > b2) {
     return 1;
   }
   return 0;
@@ -126585,9 +126585,9 @@ var init_menuService = __esm({
       _sort(menuItems) {
         return menuItems.sort(MenuInfo_1._compareMenuItems);
       }
-      static _compareMenuItems(a3, b) {
+      static _compareMenuItems(a3, b2) {
         const aGroup = a3.group;
-        const bGroup = b.group;
+        const bGroup = b2.group;
         if (aGroup !== bGroup) {
           if (!aGroup) {
             return 1;
@@ -126605,17 +126605,17 @@ var init_menuService = __esm({
           }
         }
         const aPrio = a3.order || 0;
-        const bPrio = b.order || 0;
+        const bPrio = b2.order || 0;
         if (aPrio < bPrio) {
           return -1;
         } else if (aPrio > bPrio) {
           return 1;
         }
-        return MenuInfo_1._compareTitles(isIMenuItem(a3) ? a3.command.title : a3.title, isIMenuItem(b) ? b.command.title : b.title);
+        return MenuInfo_1._compareTitles(isIMenuItem(a3) ? a3.command.title : a3.title, isIMenuItem(b2) ? b2.command.title : b2.title);
       }
-      static _compareTitles(a3, b) {
+      static _compareTitles(a3, b2) {
         const aStr = typeof a3 === "string" ? a3 : a3.original;
-        const bStr = typeof b === "string" ? b : b.original;
+        const bStr = typeof b2 === "string" ? b2 : b2.original;
         return aStr.localeCompare(bStr);
       }
     };
@@ -127311,7 +127311,7 @@ var init_contextKeyService = __esm({
     CommandsRegistry.registerCommand({
       id: "getContextKeyInfo",
       handler() {
-        return [...RawContextKey.all()].sort((a3, b) => a3.key.localeCompare(b.key));
+        return [...RawContextKey.all()].sort((a3, b2) => a3.key.localeCompare(b2.key));
       },
       metadata: {
         description: localize(1674, "A command that returns information about context keys"),
@@ -127327,7 +127327,7 @@ var init_contextKeyService = __esm({
           result.push(info);
         }
       }
-      result.sort((a3, b) => a3.key.localeCompare(b.key));
+      result.sort((a3, b2) => a3.key.localeCompare(b2.key));
       console.log(JSON.stringify(result, void 0, 2));
     });
   }
@@ -127536,7 +127536,7 @@ ${graph.toString()}`;
         return result;
       }
       _createInstance(ctor, args = [], _trace) {
-        const serviceDependencies = _util.getServiceDependencies(ctor).sort((a3, b) => a3.index - b.index);
+        const serviceDependencies = _util.getServiceDependencies(ctor).sort((a3, b2) => a3.index - b2.index);
         const serviceArgs = [];
         for (const dependency of serviceDependencies) {
           const service = this._getOrCreateServiceInstance(dependency.id, _trace);
@@ -129889,8 +129889,8 @@ function animatedObservable(targetWindow, base, store) {
   }
   return result;
 }
-function easeOutExpo(t3, b, c3, d3) {
-  return t3 === d3 ? b + c3 : c3 * (-Math.pow(2, -10 * t3 / d3) + 1) + b;
+function easeOutExpo(t3, b2, c3, d3) {
+  return t3 === d3 ? b2 + c3 : c3 * (-Math.pow(2, -10 * t3 / d3) + 1) + b2;
 }
 function applyStyle(domNode, style) {
   return autorun((reader) => {
@@ -130217,23 +130217,23 @@ var init_accessibleDiffViewer = __esm({
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/editor/browser/widget/diffEditor/components/accessibleDiffViewer.js
 function computeViewElementGroups(diffs, originalLineCount, modifiedLineCount) {
   const result = [];
-  for (const g2 of groupAdjacentBy(diffs, (a3, b) => b.modified.startLineNumber - a3.modified.endLineNumberExclusive < 2 * viewElementGroupLineMargin)) {
+  for (const g2 of groupAdjacentBy(diffs, (a3, b2) => b2.modified.startLineNumber - a3.modified.endLineNumberExclusive < 2 * viewElementGroupLineMargin)) {
     const viewElements = [];
     viewElements.push(new HeaderViewElement());
     const origFullRange = new LineRange(Math.max(1, g2[0].original.startLineNumber - viewElementGroupLineMargin), Math.min(g2[g2.length - 1].original.endLineNumberExclusive + viewElementGroupLineMargin, originalLineCount + 1));
     const modifiedFullRange = new LineRange(Math.max(1, g2[0].modified.startLineNumber - viewElementGroupLineMargin), Math.min(g2[g2.length - 1].modified.endLineNumberExclusive + viewElementGroupLineMargin, modifiedLineCount + 1));
-    forEachAdjacent(g2, (a3, b) => {
-      const origRange = new LineRange(a3 ? a3.original.endLineNumberExclusive : origFullRange.startLineNumber, b ? b.original.startLineNumber : origFullRange.endLineNumberExclusive);
-      const modifiedRange2 = new LineRange(a3 ? a3.modified.endLineNumberExclusive : modifiedFullRange.startLineNumber, b ? b.modified.startLineNumber : modifiedFullRange.endLineNumberExclusive);
+    forEachAdjacent(g2, (a3, b2) => {
+      const origRange = new LineRange(a3 ? a3.original.endLineNumberExclusive : origFullRange.startLineNumber, b2 ? b2.original.startLineNumber : origFullRange.endLineNumberExclusive);
+      const modifiedRange2 = new LineRange(a3 ? a3.modified.endLineNumberExclusive : modifiedFullRange.startLineNumber, b2 ? b2.modified.startLineNumber : modifiedFullRange.endLineNumberExclusive);
       origRange.forEach((origLineNumber) => {
         viewElements.push(new UnchangedLineViewElement(origLineNumber, modifiedRange2.startLineNumber + (origLineNumber - origRange.startLineNumber)));
       });
-      if (b) {
-        b.original.forEach((origLineNumber) => {
-          viewElements.push(new DeletedLineViewElement(b, origLineNumber));
+      if (b2) {
+        b2.original.forEach((origLineNumber) => {
+          viewElements.push(new DeletedLineViewElement(b2, origLineNumber));
         });
-        b.modified.forEach((modifiedLineNumber) => {
-          viewElements.push(new AddedLineViewElement(b, modifiedLineNumber));
+        b2.modified.forEach((modifiedLineNumber) => {
+          viewElements.push(new AddedLineViewElement(b2, modifiedLineNumber));
         });
       }
     });
@@ -131291,7 +131291,7 @@ var init_diffEditorViewModel = __esm({
           const updatedLastUnchangedRegions = lastUnchangedRegions.regions.map((r3, idx) => !lastUnchangedRegionsOrigRanges[idx] || !lastUnchangedRegionsModRanges[idx] ? void 0 : new UnchangedRegion(lastUnchangedRegionsOrigRanges[idx].startLineNumber, lastUnchangedRegionsModRanges[idx].startLineNumber, lastUnchangedRegionsOrigRanges[idx].length, r3.visibleLineCountTop.read(reader), r3.visibleLineCountBottom.read(reader))).filter(isDefined);
           const newRanges = [];
           let didChange = false;
-          for (const touching of groupAdjacentBy(updatedLastUnchangedRegions, (a3, b) => a3.getHiddenModifiedRange(reader).endLineNumberExclusive === b.getHiddenModifiedRange(reader).startLineNumber)) {
+          for (const touching of groupAdjacentBy(updatedLastUnchangedRegions, (a3, b2) => a3.getHiddenModifiedRange(reader).endLineNumberExclusive === b2.getHiddenModifiedRange(reader).startLineNumber)) {
             if (touching.length > 1) {
               didChange = true;
               const sumLineCount = touching.reduce((sum2, r4) => sum2 + r4.lineCount, 0);
@@ -131762,9 +131762,9 @@ var init_inlineDiffDeletedCodeMargin = __esm({
             return;
           }
           const { top, height } = getDomNodePagePosition(this._diffActions);
-          const pad = Math.floor(lineHeight / 3);
+          const pad2 = Math.floor(lineHeight / 3);
           e3.preventDefault();
-          showContextMenu({ x: e3.posx, y: top + height + pad });
+          showContextMenu({ x: e3.posx, y: top + height + pad2 });
         }));
         this._register(_modifiedEditor.onMouseMove((e3) => {
           if ((e3.target.type === 8 || e3.target.type === 5) && e3.target.detail.viewZoneId === this._getViewZoneId()) {
@@ -132716,9 +132716,9 @@ var init_movedBlocksLinesFeature = __esm({
         ))));
         this._register(autorunWithStore((reader, store) => {
           const blocks = movedBlockViewZones.read(reader);
-          for (const b of blocks) {
-            store.add(new MovedBlockOverlayWidget(this._editors.original, b.original, b.move, "original", this._diffModel.get()));
-            store.add(new MovedBlockOverlayWidget(this._editors.modified, b.modified, b.move, "modified", this._diffModel.get()));
+          for (const b2 of blocks) {
+            store.add(new MovedBlockOverlayWidget(this._editors.original, b2.original, b2.move, "original", this._diffModel.get()));
+            store.add(new MovedBlockOverlayWidget(this._editors.modified, b2.modified, b2.move, "modified", this._diffModel.get()));
           }
         }));
         const originalHasFocus = observableSignalFromEvent("original.onDidFocusEditorWidget", (e3) => this._editors.original.onDidFocusEditorWidget(() => setTimeout(() => e3(void 0), 0)));
@@ -132958,8 +132958,8 @@ var Point;
 var init_point = __esm({
   "../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/editor/common/core/2d/point.js"() {
     Point = class _Point {
-      static equals(a3, b) {
-        return a3.x === b.x && a3.y === b.y;
+      static equals(a3, b2) {
+        return a3.x === b2.x && a3.y === b2.y;
       }
       constructor(x2, y3) {
         this.x = x2;
@@ -139168,20 +139168,20 @@ async function formatDocumentRangesWithProvider(accessor, provider, editorOrMode
     logService.trace(`[format][provideDocumentRangeFormattingEdits] (response)`, provider.extensionId?.value, result);
     return result;
   };
-  const hasIntersectingEdit = (a3, b) => {
-    if (!a3.length || !b.length) {
+  const hasIntersectingEdit = (a3, b2) => {
+    if (!a3.length || !b2.length) {
       return false;
     }
     const mergedA = a3.reduce((acc, val) => {
       return Range.plusRange(acc, val.range);
     }, a3[0].range);
-    if (!b.some((x2) => {
+    if (!b2.some((x2) => {
       return Range.intersectRanges(mergedA, x2.range);
     })) {
       return false;
     }
     for (const edit2 of a3) {
-      for (const otherEdit of b) {
+      for (const otherEdit of b2) {
         if (Range.intersectRanges(edit2.range, otherEdit.range)) {
           return true;
         }
@@ -141673,16 +141673,16 @@ var init_snippetParser = __esm({
     TransformableMarker = class extends Marker {
     };
     Placeholder = class _Placeholder extends TransformableMarker {
-      static compareByIndex(a3, b) {
-        if (a3.index === b.index) {
+      static compareByIndex(a3, b2) {
+        if (a3.index === b2.index) {
           return 0;
         } else if (a3.isFinalTabstop) {
           return 1;
-        } else if (b.isFinalTabstop) {
+        } else if (b2.isFinalTabstop) {
           return -1;
-        } else if (a3.index < b.index) {
+        } else if (a3.index < b2.index) {
           return -1;
-        } else if (a3.index > b.index) {
+        } else if (a3.index > b2.index) {
           return 1;
         } else {
           return 0;
@@ -144603,27 +144603,27 @@ var init_codeAction = __esm({
     fixAllCommandId = "editor.action.fixAll";
     CODE_ACTION_SOUND_APPLIED_DURATION = 1e3;
     ManagedCodeActionSet = class _ManagedCodeActionSet extends Disposable {
-      static codeActionsPreferredComparator(a3, b) {
-        if (a3.isPreferred && !b.isPreferred) {
+      static codeActionsPreferredComparator(a3, b2) {
+        if (a3.isPreferred && !b2.isPreferred) {
           return -1;
-        } else if (!a3.isPreferred && b.isPreferred) {
+        } else if (!a3.isPreferred && b2.isPreferred) {
           return 1;
         } else {
           return 0;
         }
       }
-      static codeActionsComparator({ action: a3 }, { action: b }) {
-        if (a3.isAI && !b.isAI) {
+      static codeActionsComparator({ action: a3 }, { action: b2 }) {
+        if (a3.isAI && !b2.isAI) {
           return 1;
-        } else if (!a3.isAI && b.isAI) {
+        } else if (!a3.isAI && b2.isAI) {
           return -1;
         }
         if (isNonEmptyArray(a3.diagnostics)) {
-          return isNonEmptyArray(b.diagnostics) ? _ManagedCodeActionSet.codeActionsPreferredComparator(a3, b) : -1;
-        } else if (isNonEmptyArray(b.diagnostics)) {
+          return isNonEmptyArray(b2.diagnostics) ? _ManagedCodeActionSet.codeActionsPreferredComparator(a3, b2) : -1;
+        } else if (isNonEmptyArray(b2.diagnostics)) {
           return 1;
         } else {
-          return _ManagedCodeActionSet.codeActionsPreferredComparator(a3, b);
+          return _ManagedCodeActionSet.codeActionsPreferredComparator(a3, b2);
         }
       }
       constructor(actions, documentation, disposables) {
@@ -145200,14 +145200,14 @@ var init_codeActionModel = __esm({
                       }
                     }
                     const filteredActions = currentActions.filter((action, index, self2) => self2.findIndex((a3) => a3.action.title === action.action.title) === index);
-                    filteredActions.sort((a3, b) => {
-                      if (a3.action.isPreferred && !b.action.isPreferred) {
+                    filteredActions.sort((a3, b2) => {
+                      if (a3.action.isPreferred && !b2.action.isPreferred) {
                         return -1;
-                      } else if (!a3.action.isPreferred && b.action.isPreferred) {
+                      } else if (!a3.action.isPreferred && b2.action.isPreferred) {
                         return 1;
-                      } else if (a3.action.isAI && !b.action.isAI) {
+                      } else if (a3.action.isAI && !b2.action.isAI) {
                         return 1;
-                      } else if (!a3.action.isAI && b.action.isAI) {
+                      } else if (!a3.action.isAI && b2.action.isAI) {
                         return -1;
                       } else {
                         return 0;
@@ -145388,13 +145388,13 @@ var init_lightBulbWidget2 = __esm({
             75
             /* EditorOption.lineHeight */
           );
-          let pad = Math.floor(lineHeight / 3);
+          let pad2 = Math.floor(lineHeight / 3);
           if (this.state.widgetPosition.position !== null && this.state.widgetPosition.position.lineNumber < this.state.editorPosition.lineNumber) {
-            pad += lineHeight;
+            pad2 += lineHeight;
           }
           this._onClick.fire({
             x: e3.posx,
-            y: top + height + pad,
+            y: top + height + pad2,
             actions: this.state.actions,
             trigger: this.state.trigger
           });
@@ -145423,13 +145423,13 @@ var init_lightBulbWidget2 = __esm({
             75
             /* EditorOption.lineHeight */
           );
-          let pad = Math.floor(lineHeight / 3);
+          let pad2 = Math.floor(lineHeight / 3);
           if (this.gutterState.widgetPosition.position !== null && this.gutterState.widgetPosition.position.lineNumber < this.gutterState.editorPosition.lineNumber) {
-            pad += lineHeight;
+            pad2 += lineHeight;
           }
           this._onClick.fire({
             x: e3.event.posx,
-            y: top + height + pad,
+            y: top + height + pad2,
             actions: this.gutterState.actions,
             trigger: this.gutterState.trigger
           });
@@ -146383,18 +146383,18 @@ async function getCodeLensModel(registry, model, token) {
     result.dispose();
     return CodeLensModel.Empty;
   }
-  result.lenses = result.lenses.sort((a3, b) => {
-    if (a3.symbol.range.startLineNumber < b.symbol.range.startLineNumber) {
+  result.lenses = result.lenses.sort((a3, b2) => {
+    if (a3.symbol.range.startLineNumber < b2.symbol.range.startLineNumber) {
       return -1;
-    } else if (a3.symbol.range.startLineNumber > b.symbol.range.startLineNumber) {
+    } else if (a3.symbol.range.startLineNumber > b2.symbol.range.startLineNumber) {
       return 1;
-    } else if (providerRanks.get(a3.provider) < providerRanks.get(b.provider)) {
+    } else if (providerRanks.get(a3.provider) < providerRanks.get(b2.provider)) {
       return -1;
-    } else if (providerRanks.get(a3.provider) > providerRanks.get(b.provider)) {
+    } else if (providerRanks.get(a3.provider) > providerRanks.get(b2.provider)) {
       return 1;
-    } else if (a3.symbol.range.startColumn < b.symbol.range.startColumn) {
+    } else if (a3.symbol.range.startColumn < b2.symbol.range.startColumn) {
       return -1;
-    } else if (a3.symbol.range.startColumn > b.symbol.range.startColumn) {
+    } else if (a3.symbol.range.startColumn > b2.symbol.range.startColumn) {
       return 1;
     } else {
       return 0;
@@ -148184,14 +148184,14 @@ var init_inlineCompletionsHintsWidget2 = __esm({
         this.setActions(primary, secondary);
       }
       setPrependedPrimaryActions(actions) {
-        if (equals(this.prependedPrimaryActions, actions, (a3, b) => a3 === b)) {
+        if (equals(this.prependedPrimaryActions, actions, (a3, b2) => a3 === b2)) {
           return;
         }
         this.prependedPrimaryActions = actions;
         this.updateToolbar();
       }
       setAdditionalSecondaryActions(actions) {
-        if (equals(this.additionalActions, actions, (a3, b) => a3 === b)) {
+        if (equals(this.additionalActions, actions, (a3, b2) => a3 === b2)) {
           return;
         }
         this.additionalActions = actions;
@@ -152641,9 +152641,9 @@ var init_colorPickerStrip = __esm({
       }
       onDidChangeColor(color) {
         super.onDidChangeColor(color);
-        const { r: r3, g: g2, b } = color.rgba;
-        const opaque = new Color2(new RGBA(r3, g2, b, 1));
-        const transparent2 = new Color2(new RGBA(r3, g2, b, 0));
+        const { r: r3, g: g2, b: b2 } = color.rgba;
+        const opaque = new Color2(new RGBA(r3, g2, b2, 1));
+        const transparent2 = new Color2(new RGBA(r3, g2, b2, 0));
         this.overlay.style.background = `linear-gradient(to bottom, ${opaque} 0%, ${transparent2} 100%)`;
       }
       getValue(color) {
@@ -153438,7 +153438,7 @@ var init_inlayHints = __esm({
             items.push(new InlayHintItem(hint, new InlayHintAnchor(range2, direction), provider));
           }
         }
-        this.items = items.sort((a3, b) => Position.compare(a3.hint.position, b.hint.position));
+        this.items = items.sort((a3, b2) => Position.compare(a3.hint.position, b2.hint.position));
       }
       dispose() {
         this._disposables.dispose();
@@ -154423,14 +154423,14 @@ var init_referencesModel = __esm({
             prefixLen: commonPrefixLength(ref.uri.toString(), resource.toString()),
             offsetDist: Math.abs(ref.range.startLineNumber - position.lineNumber) * 100 + Math.abs(ref.range.startColumn - position.column)
           };
-        }).sort((a3, b) => {
-          if (a3.prefixLen > b.prefixLen) {
+        }).sort((a3, b2) => {
+          if (a3.prefixLen > b2.prefixLen) {
             return -1;
-          } else if (a3.prefixLen < b.prefixLen) {
+          } else if (a3.prefixLen < b2.prefixLen) {
             return 1;
-          } else if (a3.offsetDist < b.offsetDist) {
+          } else if (a3.offsetDist < b2.offsetDist) {
             return -1;
-          } else if (a3.offsetDist > b.offsetDist) {
+          } else if (a3.offsetDist > b2.offsetDist) {
             return 1;
           } else {
             return 0;
@@ -154459,8 +154459,8 @@ var init_referencesModel = __esm({
         }
         return this.references[0];
       }
-      static _compareReferences(a3, b) {
-        return extUri.compare(a3.uri, b.uri) || Range.compareRangesUsingStarts(a3.range, b.range);
+      static _compareReferences(a3, b2) {
+        return extUri.compare(a3.uri, b2.uri) || Range.compareRangesUsingStarts(a3.range, b2.range);
       }
     };
   }
@@ -157254,8 +157254,8 @@ var init_inlayHintsController = __esm({
             }
           }
           if (itemFixedLength !== void 0 && itemActualLength < itemFixedLength) {
-            const pad = itemFixedLength - itemActualLength;
-            addInjectedText(item, this._ruleFactory.createClassNameRef({}), "\u200A".repeat(pad), InjectedTextCursorStops2.None);
+            const pad2 = itemFixedLength - itemActualLength;
+            addInjectedText(item, this._ruleFactory.createClassNameRef({}), "\u200A".repeat(pad2), InjectedTextCursorStops2.None);
           }
           if (item.hint.paddingRight) {
             addInjectedWhitespace(item, true);
@@ -157551,13 +157551,13 @@ var init_markerNavigationService = __esm({
           this._resourceFilter = resourceFilter;
         }
         const compareOrder = this._configService.getValue("problems.sortOrder");
-        const compareMarker = (a3, b) => {
-          let res = compare(a3.resource.toString(), b.resource.toString());
+        const compareMarker = (a3, b2) => {
+          let res = compare(a3.resource.toString(), b2.resource.toString());
           if (res === 0) {
             if (compareOrder === "position") {
-              res = Range.compareRangesUsingStarts(a3, b) || MarkerSeverity2.compare(a3.severity, b.severity);
+              res = Range.compareRangesUsingStarts(a3, b2) || MarkerSeverity2.compare(a3.severity, b2.severity);
             } else {
-              res = MarkerSeverity2.compare(a3.severity, b.severity) || Range.compareRangesUsingStarts(a3, b);
+              res = MarkerSeverity2.compare(a3.severity, b2.severity) || Range.compareRangesUsingStarts(a3, b2);
             }
           }
           return res;
@@ -157571,7 +157571,7 @@ var init_markerNavigationService = __esm({
             newMarkers = newMarkers.filter((m3) => this._resourceFilter(m3.resource));
           }
           newMarkers.sort(compareMarker);
-          if (equals(newMarkers, this._markers, (a3, b) => a3.resource.toString() === b.resource.toString() && a3.startLineNumber === b.startLineNumber && a3.startColumn === b.startColumn && a3.endLineNumber === b.endLineNumber && a3.endColumn === b.endColumn && a3.severity === b.severity && a3.message === b.message)) {
+          if (equals(newMarkers, this._markers, (a3, b2) => a3.resource.toString() === b2.resource.toString() && a3.startLineNumber === b2.startLineNumber && a3.startColumn === b2.startColumn && a3.endLineNumber === b2.endLineNumber && a3.endColumn === b2.endColumn && a3.severity === b2.severity && a3.message === b2.message)) {
             return false;
           }
           this._markers = newMarkers;
@@ -158494,7 +158494,7 @@ var init_markerHoverParticipant = __esm({
           context.fragment.appendChild(renderedMarkerHover.hoverElement);
           renderedHoverParts.push(renderedMarkerHover);
         });
-        const markerHoverForStatusbar = hoverParts.length === 1 ? hoverParts[0] : hoverParts.sort((a3, b) => MarkerSeverity2.compare(a3.marker.severity, b.marker.severity))[0];
+        const markerHoverForStatusbar = hoverParts.length === 1 ? hoverParts[0] : hoverParts.sort((a3, b2) => MarkerSeverity2.compare(a3.marker.severity, b2.marker.severity))[0];
         const disposables = this._renderMarkerStatusbar(context, markerHoverForStatusbar);
         return new RenderedHoverParts(renderedHoverParts, disposables);
       }
@@ -159263,7 +159263,7 @@ var init_contentHoverWidgetWrapper = __esm({
             break;
           }
         }
-        anchorCandidates.sort((a3, b) => b.priority - a3.priority);
+        anchorCandidates.sort((a3, b2) => b2.priority - a3.priority);
         return anchorCandidates;
       }
       _onMouseLeave(e3) {
@@ -160773,7 +160773,7 @@ var init_comment = __esm({
           /* EditorOption.comments */
         );
         const selections = editor2.getSelections().map((selection, index) => ({ selection, index, ignoreFirstLine: false }));
-        selections.sort((a3, b) => Range.compareRangesUsingStarts(a3.selection, b.selection));
+        selections.sort((a3, b2) => Range.compareRangesUsingStarts(a3.selection, b2.selection));
         let prev = selections[0];
         for (let i4 = 1; i4 < selections.length; i4++) {
           const curr = selections[i4];
@@ -166295,8 +166295,8 @@ var init_folding2 = __esm({
             }
           }
           if (collapseRanges.length > 0) {
-            collapseRanges.sort((a3, b) => {
-              return a3.startLineNumber - b.startLineNumber;
+            collapseRanges.sort((a3, b2) => {
+              return a3.startLineNumber - b2.startLineNumber;
             });
             const newRanges = FoldingRegions.sanitizeAndMerge(foldingModel.regions, collapseRanges, editor2.getModel()?.getLineCount());
             foldingModel.updatePost(FoldingRegions.fromFoldRanges(newRanges));
@@ -166935,13 +166935,13 @@ var init_outlineModel = __esm({
             roots.push(...Iterable.map(child.children.values(), (child2) => child2.symbol));
           }
         }
-        return roots.sort((a3, b) => Range.compareRangesUsingStarts(a3.range, b.range));
+        return roots.sort((a3, b2) => Range.compareRangesUsingStarts(a3.range, b2.range));
       }
       asListOfDocumentSymbols() {
         const roots = this.getTopLevelSymbols();
         const bucket = [];
         _OutlineModel._flattenDocumentSymbols(bucket, roots, "");
-        return bucket.sort((a3, b) => Position.compare(Range.getStartPosition(a3.range), Range.getStartPosition(b.range)) || Position.compare(Range.getEndPosition(b.range), Range.getEndPosition(a3.range)));
+        return bucket.sort((a3, b2) => Position.compare(Range.getStartPosition(a3.range), Range.getStartPosition(b2.range)) || Position.compare(Range.getEndPosition(b2.range), Range.getEndPosition(a3.range)));
       }
       static _flattenDocumentSymbols(bucket, entries2, overrideContainerLabel) {
         for (const entry of entries2) {
@@ -167369,40 +167369,40 @@ async function provideSuggestionItems(registry, model, position, options = Compl
   }
   return new CompletionItemModel(result.sort(getSuggestionComparator(options.snippetSortOrder)), needsClipboard, { entries: durations, elapsed: sw.elapsed() }, disposables);
 }
-function defaultComparator(a3, b) {
-  if (a3.sortTextLow && b.sortTextLow) {
-    if (a3.sortTextLow < b.sortTextLow) {
+function defaultComparator(a3, b2) {
+  if (a3.sortTextLow && b2.sortTextLow) {
+    if (a3.sortTextLow < b2.sortTextLow) {
       return -1;
-    } else if (a3.sortTextLow > b.sortTextLow) {
+    } else if (a3.sortTextLow > b2.sortTextLow) {
       return 1;
     }
   }
-  if (a3.textLabel < b.textLabel) {
+  if (a3.textLabel < b2.textLabel) {
     return -1;
-  } else if (a3.textLabel > b.textLabel) {
+  } else if (a3.textLabel > b2.textLabel) {
     return 1;
   }
-  return a3.completion.kind - b.completion.kind;
+  return a3.completion.kind - b2.completion.kind;
 }
-function snippetUpComparator(a3, b) {
-  if (a3.completion.kind !== b.completion.kind) {
+function snippetUpComparator(a3, b2) {
+  if (a3.completion.kind !== b2.completion.kind) {
     if (a3.completion.kind === 28) {
       return -1;
-    } else if (b.completion.kind === 28) {
+    } else if (b2.completion.kind === 28) {
       return 1;
     }
   }
-  return defaultComparator(a3, b);
+  return defaultComparator(a3, b2);
 }
-function snippetDownComparator(a3, b) {
-  if (a3.completion.kind !== b.completion.kind) {
+function snippetDownComparator(a3, b2) {
+  if (a3.completion.kind !== b2.completion.kind) {
     if (a3.completion.kind === 28) {
       return 1;
-    } else if (b.completion.kind === 28) {
+    } else if (b2.completion.kind === 28) {
       return -1;
     }
   }
-  return defaultComparator(a3, b);
+  return defaultComparator(a3, b2);
 }
 function getSuggestionComparator(snippetConfig) {
   return _snippetComparators.get(snippetConfig);
@@ -167633,11 +167633,11 @@ var init_inlineCompletionContextKeys = __esm({
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/editor/common/commands/trimTrailingWhitespaceCommand.js
 function trimTrailingWhitespace(model, cursors, trimInRegexesAndStrings) {
-  cursors.sort((a3, b) => {
-    if (a3.lineNumber === b.lineNumber) {
-      return a3.column - b.column;
+  cursors.sort((a3, b2) => {
+    if (a3.lineNumber === b2.lineNumber) {
+      return a3.column - b2.column;
     }
-    return a3.lineNumber - b.lineNumber;
+    return a3.lineNumber - b2.lineNumber;
   });
   for (let i4 = cursors.length - 2; i4 >= 0; i4--) {
     if (cursors[i4].lineNumber === cursors[i4 + 1].lineNumber) {
@@ -168276,7 +168276,7 @@ var init_linesOperations = __esm({
           return;
         }
         const selections = editor2.getSelections().map((selection, index) => ({ selection, index, ignore: false }));
-        selections.sort((a3, b) => Range.compareRangesUsingStarts(a3.selection, b.selection));
+        selections.sort((a3, b2) => Range.compareRangesUsingStarts(a3.selection, b2.selection));
         let prev = selections[0];
         for (let i4 = 1; i4 < selections.length; i4++) {
           const curr = selections[i4];
@@ -168714,11 +168714,11 @@ var init_linesOperations = __esm({
             positionColumn: s3.positionColumn
           };
         });
-        operations.sort((a3, b) => {
-          if (a3.startLineNumber === b.startLineNumber) {
-            return a3.endLineNumber - b.endLineNumber;
+        operations.sort((a3, b2) => {
+          if (a3.startLineNumber === b2.startLineNumber) {
+            return a3.endLineNumber - b2.endLineNumber;
           }
-          return a3.startLineNumber - b.startLineNumber;
+          return a3.startLineNumber - b2.startLineNumber;
         });
         const mergedOperations = [];
         let previousOperation = operations[0];
@@ -169267,7 +169267,7 @@ var init_linesOperations = __esm({
         if (!titleBoundary) {
           return text2;
         }
-        return text2.toLocaleLowerCase().replace(titleBoundary, (b) => b.toLocaleUpperCase());
+        return text2.toLocaleLowerCase().replace(titleBoundary, (b2) => b2.toLocaleUpperCase());
       }
     };
     SnakeCaseAction = class _SnakeCaseAction extends AbstractCaseAction {
@@ -170203,7 +170203,7 @@ var init_snippetSession2 = __esm({
         const firstBeforeText = model.getValueInRange(SnippetSession_1.adjustSelection(model, editor2.getSelection(), overwriteBefore, 0));
         const firstAfterText = model.getValueInRange(SnippetSession_1.adjustSelection(model, editor2.getSelection(), 0, overwriteAfter));
         const firstLineFirstNonWhitespace = model.getLineFirstNonWhitespaceColumn(editor2.getSelection().positionLineNumber);
-        const indexedSelections = editor2.getSelections().map((selection, idx) => ({ selection, idx })).sort((a3, b) => Range.compareRangesUsingStarts(a3.selection, b.selection));
+        const indexedSelections = editor2.getSelections().map((selection, idx) => ({ selection, idx })).sort((a3, b2) => Range.compareRangesUsingStarts(a3.selection, b2.selection));
         for (const { selection, idx } of indexedSelections) {
           let extensionBefore = SnippetSession_1.adjustSelection(model, selection, overwriteBefore, 0);
           let extensionAfter = SnippetSession_1.adjustSelection(model, selection, 0, overwriteAfter);
@@ -170256,7 +170256,7 @@ var init_snippetSession2 = __esm({
           new WorkspaceBasedVariableResolver(editor2.invokeWithinContext((accessor) => accessor.get(IWorkspaceContextService))),
           new RandomBasedVariableResolver()
         ]);
-        snippetEdits = snippetEdits.sort((a3, b) => Range.compareRangesUsingStarts(a3.range, b.range));
+        snippetEdits = snippetEdits.sort((a3, b2) => Range.compareRangesUsingStarts(a3.range, b2.range));
         let offset = 0;
         for (let i4 = 0; i4 < snippetEdits.length; i4++) {
           const { range: range2, template, keepWhitespace } = snippetEdits[i4];
@@ -170911,21 +170911,21 @@ var init_animation = __esm({
 });
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/editor/contrib/inlineCompletions/browser/model/ghostText.js
-function ghostTextsOrReplacementsEqual(a3, b) {
-  return equals(a3, b, ghostTextOrReplacementEquals);
+function ghostTextsOrReplacementsEqual(a3, b2) {
+  return equals(a3, b2, ghostTextOrReplacementEquals);
 }
-function ghostTextOrReplacementEquals(a3, b) {
-  if (a3 === b) {
+function ghostTextOrReplacementEquals(a3, b2) {
+  if (a3 === b2) {
     return true;
   }
-  if (!a3 || !b) {
+  if (!a3 || !b2) {
     return false;
   }
-  if (a3 instanceof GhostText && b instanceof GhostText) {
-    return a3.equals(b);
+  if (a3 instanceof GhostText && b2 instanceof GhostText) {
+    return a3.equals(b2);
   }
-  if (a3 instanceof GhostTextReplacement && b instanceof GhostTextReplacement) {
-    return a3.equals(b);
+  if (a3 instanceof GhostTextReplacement && b2 instanceof GhostTextReplacement) {
+    return a3.equals(b2);
   }
   return false;
 }
@@ -172997,7 +172997,7 @@ var init_typingSpeed = __esm({
         if (sessions.length === 0) {
           return { averageInterval: 0, characterCount: 0 };
         }
-        const sortedSessions = [...sessions].sort((a3, b) => b.endTime - a3.endTime);
+        const sortedSessions = [...sessions].sort((a3, b2) => b2.endTime - a3.endTime);
         const cutoffTime = Date.now() - _TypingInterval.TYPING_SPEED_WINDOW_MS;
         const recentSessions = sortedSessions.filter((session) => session.endTime > cutoffTime);
         const olderSessions = sortedSessions.splice(recentSessions.length);
@@ -173367,14 +173367,14 @@ var init_inlineCompletionsModel = __esm({
         });
         this.state = derivedOpts({
           owner: this,
-          equalsFn: (a3, b) => {
-            if (!a3 || !b) {
-              return a3 === b;
+          equalsFn: (a3, b2) => {
+            if (!a3 || !b2) {
+              return a3 === b2;
             }
-            if (a3.kind === "ghostText" && b.kind === "ghostText") {
-              return ghostTextsOrReplacementsEqual(a3.ghostTexts, b.ghostTexts) && a3.inlineCompletion === b.inlineCompletion && a3.suggestItem === b.suggestItem;
-            } else if (a3.kind === "inlineEdit" && b.kind === "inlineEdit") {
-              return a3.inlineEdit.equals(b.inlineEdit);
+            if (a3.kind === "ghostText" && b2.kind === "ghostText") {
+              return ghostTextsOrReplacementsEqual(a3.ghostTexts, b2.ghostTexts) && a3.inlineCompletion === b2.inlineCompletion && a3.suggestItem === b2.suggestItem;
+            } else if (a3.kind === "inlineEdit" && b2.kind === "inlineEdit") {
+              return a3.inlineEdit.equals(b2.inlineEdit);
             }
             return false;
           }
@@ -174200,7 +174200,7 @@ var init_suggestMemory = __esm({
       toJSON() {
         const entries2 = [];
         this._trie.forEach((value, key) => entries2.push([key, value]));
-        entries2.sort((a3, b) => -(a3[1].touch - b[1].touch)).forEach((value, i4) => value[1].touch = i4);
+        entries2.sort((a3, b2) => -(a3[1].touch - b2[1].touch)).forEach((value, i4) => value[1].touch = i4);
         return entries2.slice(0, 200);
       }
       fromJSON(data) {
@@ -174877,45 +174877,45 @@ var init_completionModel = __esm({
         this._filteredItems = target.sort(this._snippetCompareFn);
         this._refilterKind = 0;
         this._stats = {
-          pLabelLen: labelLengths.length ? quickSelect(labelLengths.length - 0.85, labelLengths, (a3, b) => a3 - b) : 0
+          pLabelLen: labelLengths.length ? quickSelect(labelLengths.length - 0.85, labelLengths, (a3, b2) => a3 - b2) : 0
         };
       }
-      static _compareCompletionItems(a3, b) {
-        if (a3.score[0] > b.score[0]) {
+      static _compareCompletionItems(a3, b2) {
+        if (a3.score[0] > b2.score[0]) {
           return -1;
-        } else if (a3.score[0] < b.score[0]) {
+        } else if (a3.score[0] < b2.score[0]) {
           return 1;
-        } else if (a3.distance < b.distance) {
+        } else if (a3.distance < b2.distance) {
           return -1;
-        } else if (a3.distance > b.distance) {
+        } else if (a3.distance > b2.distance) {
           return 1;
-        } else if (a3.idx < b.idx) {
+        } else if (a3.idx < b2.idx) {
           return -1;
-        } else if (a3.idx > b.idx) {
+        } else if (a3.idx > b2.idx) {
           return 1;
         } else {
           return 0;
         }
       }
-      static _compareCompletionItemsSnippetsDown(a3, b) {
-        if (a3.completion.kind !== b.completion.kind) {
+      static _compareCompletionItemsSnippetsDown(a3, b2) {
+        if (a3.completion.kind !== b2.completion.kind) {
           if (a3.completion.kind === 28) {
             return 1;
-          } else if (b.completion.kind === 28) {
+          } else if (b2.completion.kind === 28) {
             return -1;
           }
         }
-        return _CompletionModel._compareCompletionItems(a3, b);
+        return _CompletionModel._compareCompletionItems(a3, b2);
       }
-      static _compareCompletionItemsSnippetsUp(a3, b) {
-        if (a3.completion.kind !== b.completion.kind) {
+      static _compareCompletionItemsSnippetsUp(a3, b2) {
+        if (a3.completion.kind !== b2.completion.kind) {
           if (a3.completion.kind === 28) {
             return -1;
-          } else if (b.completion.kind === 28) {
+          } else if (b2.completion.kind === 28) {
             return 1;
           }
         }
-        return _CompletionModel._compareCompletionItems(a3, b);
+        return _CompletionModel._compareCompletionItems(a3, b2);
       }
     };
   }
@@ -176148,7 +176148,7 @@ var init_suggestWidgetDetails = __esm({
           return { top: top2, left: left4, fit: maxSizeBottom.height - size2.height, maxSizeBottom, maxSizeTop: maxSizeBottom, minSize: defaultMinSize.with(maxSizeBottom.width) };
         })();
         const placements = [eastPlacement, westPlacement, southPacement];
-        const placement = placements.find((p3) => p3.fit >= 0) ?? placements.sort((a3, b) => b.fit - a3.fit)[0];
+        const placement = placements.find((p3) => p3.fit >= 0) ?? placements.sort((a3, b2) => b2.fit - a3.fit)[0];
         const bottom = anchorBox.top + anchorBox.height - info.borderHeight;
         let alignAtTop;
         let height = size2.height;
@@ -178445,14 +178445,14 @@ var init_suggestController = __esm({
 });
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/editor/contrib/inlineCompletions/browser/model/suggestWidgetAdapter.js
-function suggestItemInfoEquals(a3, b) {
-  if (a3 === b) {
+function suggestItemInfoEquals(a3, b2) {
+  if (a3 === b2) {
     return true;
   }
-  if (!a3 || !b) {
+  if (!a3 || !b2) {
     return false;
   }
-  return a3.equals(b);
+  return a3.equals(b2);
 }
 var SuggestWidgetAdaptor, SuggestItemInfo, ObservableSuggestWidgetAdapter;
 var init_suggestWidgetAdapter = __esm({
@@ -180577,11 +180577,11 @@ var init_stickyScrollProvider = __esm({
             childrenStartLines.push(child.range.startLineNumber);
           }
         }
-        const lowerBound = this.updateIndex(binarySearch(childrenStartLines, range2.startLineNumber, (a3, b) => {
-          return a3 - b;
+        const lowerBound = this.updateIndex(binarySearch(childrenStartLines, range2.startLineNumber, (a3, b2) => {
+          return a3 - b2;
         }));
-        const upperBound = this.updateIndex(binarySearch(childrenStartLines, range2.endLineNumber, (a3, b) => {
-          return a3 - b;
+        const upperBound = this.updateIndex(binarySearch(childrenStartLines, range2.endLineNumber, (a3, b2) => {
+          return a3 - b2;
         }));
         for (let i4 = lowerBound; i4 <= upperBound; i4++) {
           const child = outlineModel.children[i4];
@@ -181227,7 +181227,7 @@ function getEditorBlendedColor(colorIdentifier, themeService) {
 function observeColor(colorIdentifier, themeService) {
   return observableFromEventOpts({
     owner: { observeColor: colorIdentifier },
-    equalsFn: (a3, b) => a3.equals(b),
+    equalsFn: (a3, b2) => a3.equals(b2),
     debugName: () => `observeColor(${colorIdentifier})`
   }, themeService.onDidColorThemeChange, () => {
     const color = themeService.getColorTheme().getColor(colorIdentifier);
@@ -183347,7 +183347,7 @@ var init_inlineEditsLineReplacementView = __esm({
               tokens = LineTokens.createEmpty(modLine, this._languageService.languageIdCodec);
             }
             const decorations = [];
-            for (const modified of modifiedBubbles.filter((b) => b.startLineNumber === lineNumber)) {
+            for (const modified of modifiedBubbles.filter((b2) => b2.startLineNumber === lineNumber)) {
               const validatedEndColumn = Math.min(modified.endColumn, modLine.length + 1);
               decorations.push(new InlineDecoration(
                 new Range(1, modified.startColumn, 1, validatedEndColumn),
@@ -184628,7 +184628,7 @@ function growEditsUntilWhitespace(replacements, originalText) {
 }
 function _growEdits(replacements, originalText, fn) {
   const result = [];
-  replacements.sort((a3, b) => Range.compareRangesUsingStarts(a3.range, b.range));
+  replacements.sort((a3, b2) => Range.compareRangesUsingStarts(a3.range, b2.range));
   for (const edit2 of replacements) {
     let startIndex = edit2.range.startColumn - 1;
     let endIndex = edit2.range.endColumn - 2;
@@ -194140,14 +194140,14 @@ async function provideSelectionRanges(registry, model, positions, options, token
     if (oneRawRanges.length === 0) {
       return [];
     }
-    oneRawRanges.sort((a3, b) => {
-      if (Position.isBefore(a3.getStartPosition(), b.getStartPosition())) {
+    oneRawRanges.sort((a3, b2) => {
+      if (Position.isBefore(a3.getStartPosition(), b2.getStartPosition())) {
         return 1;
-      } else if (Position.isBefore(b.getStartPosition(), a3.getStartPosition())) {
+      } else if (Position.isBefore(b2.getStartPosition(), a3.getStartPosition())) {
         return -1;
-      } else if (Position.isBefore(a3.getEndPosition(), b.getEndPosition())) {
+      } else if (Position.isBefore(a3.getEndPosition(), b2.getEndPosition())) {
         return -1;
-      } else if (Position.isBefore(b.getEndPosition(), a3.getEndPosition())) {
+      } else if (Position.isBefore(b2.getEndPosition(), a3.getEndPosition())) {
         return 1;
       } else {
         return 0;
@@ -194263,7 +194263,7 @@ var init_smartSelect = __esm({
             if (!isNonEmptyArray(ranges) || ranges.length !== selections.length) {
               return;
             }
-            if (!this._editor.hasModel() || !equals(this._editor.getSelections(), selections, (a3, b) => a3.equalsSelection(b))) {
+            if (!this._editor.hasModel() || !equals(this._editor.getSelections(), selections, (a3, b2) => a3.equalsSelection(b2))) {
               return;
             }
             for (let i4 = 0; i4 < ranges.length; i4++) {
@@ -199101,7 +199101,7 @@ function countMapFrom(values) {
 }
 function normalizeTfIdfScores(scores) {
   const result = scores.slice(0);
-  result.sort((a3, b) => b.score - a3.score);
+  result.sort((a3, b2) => b2.score - a3.score);
   const max = result[0]?.score ?? 0;
   if (max > 0) {
     for (const score3 of result) {
@@ -199837,7 +199837,7 @@ var init_commandsQuickAccess = __esm({
           if (serializedCache.usesLRU) {
             entries2 = serializedCache.entries;
           } else {
-            entries2 = serializedCache.entries.sort((a3, b) => a3.value - b.value);
+            entries2 = serializedCache.entries.sort((a3, b2) => a3.value - b2.value);
           }
           entries2.forEach((entry) => cache.set(entry.key, entry.value));
         }
@@ -202090,7 +202090,7 @@ var init_monaco_contribution = __esm({
   }
 });
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/preact@10.28.1/node_modules/preact/dist/preact.module.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/preact@10.29.1/node_modules/preact/dist/preact.module.js
 var n;
 var l;
 var u;
@@ -202104,79 +202104,86 @@ var c;
 var s;
 var a;
 var h;
-var p = {};
-var v = [];
-var y = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
-var w = Array.isArray;
-function d(n3, l3) {
+var p;
+var v;
+var y;
+var d = {};
+var w = [];
+var _ = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
+var g = Array.isArray;
+function m(n3, l3) {
   for (var u4 in l3) n3[u4] = l3[u4];
   return n3;
 }
-function g(n3) {
+function b(n3) {
   n3 && n3.parentNode && n3.parentNode.removeChild(n3);
 }
-function _(l3, u4, t3) {
+function k(l3, u4, t3) {
   var i4, r3, o3, e3 = {};
   for (o3 in u4) "key" == o3 ? i4 = u4[o3] : "ref" == o3 ? r3 = u4[o3] : e3[o3] = u4[o3];
   if (arguments.length > 2 && (e3.children = arguments.length > 3 ? n.call(arguments, 2) : t3), "function" == typeof l3 && null != l3.defaultProps) for (o3 in l3.defaultProps) void 0 === e3[o3] && (e3[o3] = l3.defaultProps[o3]);
-  return m(l3, e3, i4, r3, null);
+  return x(l3, e3, i4, r3, null);
 }
-function m(n3, t3, i4, r3, o3) {
+function x(n3, t3, i4, r3, o3) {
   var e3 = { type: n3, props: t3, key: i4, ref: r3, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: null == o3 ? ++u : o3, __i: -1, __u: 0 };
   return null == o3 && null != l.vnode && l.vnode(e3), e3;
 }
-function k(n3) {
+function S(n3) {
   return n3.children;
 }
-function x(n3, l3) {
+function C(n3, l3) {
   this.props = n3, this.context = l3;
 }
-function S(n3, l3) {
-  if (null == l3) return n3.__ ? S(n3.__, n3.__i + 1) : null;
+function $(n3, l3) {
+  if (null == l3) return n3.__ ? $(n3.__, n3.__i + 1) : null;
   for (var u4; l3 < n3.__k.length; l3++) if (null != (u4 = n3.__k[l3]) && null != u4.__e) return u4.__e;
-  return "function" == typeof n3.type ? S(n3) : null;
+  return "function" == typeof n3.type ? $(n3) : null;
 }
-function C(n3) {
-  var l3, u4;
-  if (null != (n3 = n3.__) && null != n3.__c) {
-    for (n3.__e = n3.__c.base = null, l3 = 0; l3 < n3.__k.length; l3++) if (null != (u4 = n3.__k[l3]) && null != u4.__e) {
-      n3.__e = n3.__c.base = u4.__e;
-      break;
-    }
-    return C(n3);
+function I(n3) {
+  if (n3.__P && n3.__d) {
+    var u4 = n3.__v, t3 = u4.__e, i4 = [], r3 = [], o3 = m({}, u4);
+    o3.__v = u4.__v + 1, l.vnode && l.vnode(o3), q(n3.__P, o3, u4, n3.__n, n3.__P.namespaceURI, 32 & u4.__u ? [t3] : null, i4, null == t3 ? $(u4) : t3, !!(32 & u4.__u), r3), o3.__v = u4.__v, o3.__.__k[o3.__i] = o3, D(i4, o3, r3), u4.__e = u4.__ = null, o3.__e != t3 && P(o3);
   }
 }
-function M(n3) {
-  (!n3.__d && (n3.__d = true) && i.push(n3) && !$.__r++ || r != l.debounceRendering) && ((r = l.debounceRendering) || o)($);
+function P(n3) {
+  if (null != (n3 = n3.__) && null != n3.__c) return n3.__e = n3.__c.base = null, n3.__k.some(function(l3) {
+    if (null != l3 && null != l3.__e) return n3.__e = n3.__c.base = l3.__e;
+  }), P(n3);
 }
-function $() {
-  for (var n3, u4, t3, r3, o3, f4, c3, s3 = 1; i.length; ) i.length > s3 && i.sort(e), n3 = i.shift(), s3 = i.length, n3.__d && (t3 = void 0, r3 = void 0, o3 = (r3 = (u4 = n3).__v).__e, f4 = [], c3 = [], u4.__P && ((t3 = d({}, r3)).__v = r3.__v + 1, l.vnode && l.vnode(t3), O(u4.__P, t3, r3, u4.__n, u4.__P.namespaceURI, 32 & r3.__u ? [o3] : null, f4, null == o3 ? S(r3) : o3, !!(32 & r3.__u), c3), t3.__v = r3.__v, t3.__.__k[t3.__i] = t3, N(f4, t3, c3), r3.__e = r3.__ = null, t3.__e != o3 && C(t3)));
-  $.__r = 0;
+function A(n3) {
+  (!n3.__d && (n3.__d = true) && i.push(n3) && !H.__r++ || r != l.debounceRendering) && ((r = l.debounceRendering) || o)(H);
 }
-function I(n3, l3, u4, t3, i4, r3, o3, e3, f4, c3, s3) {
-  var a3, h4, y3, w3, d3, g2, _2, m3 = t3 && t3.__k || v, b = l3.length;
-  for (f4 = P(u4, l3, m3, f4, b), a3 = 0; a3 < b; a3++) null != (y3 = u4.__k[a3]) && (h4 = -1 == y3.__i ? p : m3[y3.__i] || p, y3.__i = a3, g2 = O(n3, y3, h4, i4, r3, o3, e3, f4, c3, s3), w3 = y3.__e, y3.ref && h4.ref != y3.ref && (h4.ref && B(h4.ref, null, y3), s3.push(y3.ref, y3.__c || w3, y3)), null == d3 && null != w3 && (d3 = w3), (_2 = !!(4 & y3.__u)) || h4.__k === y3.__k ? f4 = A(y3, f4, n3, _2) : "function" == typeof y3.type && void 0 !== g2 ? f4 = g2 : w3 && (f4 = w3.nextSibling), y3.__u &= -7);
-  return u4.__e = d3, f4;
+function H() {
+  try {
+    for (var n3, l3 = 1; i.length; ) i.length > l3 && i.sort(e), n3 = i.shift(), l3 = i.length, I(n3);
+  } finally {
+    i.length = H.__r = 0;
+  }
 }
-function P(n3, l3, u4, t3, i4) {
+function L(n3, l3, u4, t3, i4, r3, o3, e3, f4, c3, s3) {
+  var a3, h4, p3, v3, y3, _2, g2, m3 = t3 && t3.__k || w, b2 = l3.length;
+  for (f4 = T(u4, l3, m3, f4, b2), a3 = 0; a3 < b2; a3++) null != (p3 = u4.__k[a3]) && (h4 = -1 != p3.__i && m3[p3.__i] || d, p3.__i = a3, _2 = q(n3, p3, h4, i4, r3, o3, e3, f4, c3, s3), v3 = p3.__e, p3.ref && h4.ref != p3.ref && (h4.ref && J(h4.ref, null, p3), s3.push(p3.ref, p3.__c || v3, p3)), null == y3 && null != v3 && (y3 = v3), (g2 = !!(4 & p3.__u)) || h4.__k === p3.__k ? (f4 = j(p3, f4, n3, g2), g2 && h4.__e && (h4.__e = null)) : "function" == typeof p3.type && void 0 !== _2 ? f4 = _2 : v3 && (f4 = v3.nextSibling), p3.__u &= -7);
+  return u4.__e = y3, f4;
+}
+function T(n3, l3, u4, t3, i4) {
   var r3, o3, e3, f4, c3, s3 = u4.length, a3 = s3, h4 = 0;
-  for (n3.__k = new Array(i4), r3 = 0; r3 < i4; r3++) null != (o3 = l3[r3]) && "boolean" != typeof o3 && "function" != typeof o3 ? ("string" == typeof o3 || "number" == typeof o3 || "bigint" == typeof o3 || o3.constructor == String ? o3 = n3.__k[r3] = m(null, o3, null, null, null) : w(o3) ? o3 = n3.__k[r3] = m(k, { children: o3 }, null, null, null) : null == o3.constructor && o3.__b > 0 ? o3 = n3.__k[r3] = m(o3.type, o3.props, o3.key, o3.ref ? o3.ref : null, o3.__v) : n3.__k[r3] = o3, f4 = r3 + h4, o3.__ = n3, o3.__b = n3.__b + 1, e3 = null, -1 != (c3 = o3.__i = L(o3, u4, f4, a3)) && (a3--, (e3 = u4[c3]) && (e3.__u |= 2)), null == e3 || null == e3.__v ? (-1 == c3 && (i4 > s3 ? h4-- : i4 < s3 && h4++), "function" != typeof o3.type && (o3.__u |= 4)) : c3 != f4 && (c3 == f4 - 1 ? h4-- : c3 == f4 + 1 ? h4++ : (c3 > f4 ? h4-- : h4++, o3.__u |= 4))) : n3.__k[r3] = null;
-  if (a3) for (r3 = 0; r3 < s3; r3++) null != (e3 = u4[r3]) && 0 == (2 & e3.__u) && (e3.__e == t3 && (t3 = S(e3)), D(e3, e3));
+  for (n3.__k = new Array(i4), r3 = 0; r3 < i4; r3++) null != (o3 = l3[r3]) && "boolean" != typeof o3 && "function" != typeof o3 ? ("string" == typeof o3 || "number" == typeof o3 || "bigint" == typeof o3 || o3.constructor == String ? o3 = n3.__k[r3] = x(null, o3, null, null, null) : g(o3) ? o3 = n3.__k[r3] = x(S, { children: o3 }, null, null, null) : void 0 === o3.constructor && o3.__b > 0 ? o3 = n3.__k[r3] = x(o3.type, o3.props, o3.key, o3.ref ? o3.ref : null, o3.__v) : n3.__k[r3] = o3, f4 = r3 + h4, o3.__ = n3, o3.__b = n3.__b + 1, e3 = null, -1 != (c3 = o3.__i = O(o3, u4, f4, a3)) && (a3--, (e3 = u4[c3]) && (e3.__u |= 2)), null == e3 || null == e3.__v ? (-1 == c3 && (i4 > s3 ? h4-- : i4 < s3 && h4++), "function" != typeof o3.type && (o3.__u |= 4)) : c3 != f4 && (c3 == f4 - 1 ? h4-- : c3 == f4 + 1 ? h4++ : (c3 > f4 ? h4-- : h4++, o3.__u |= 4))) : n3.__k[r3] = null;
+  if (a3) for (r3 = 0; r3 < s3; r3++) null != (e3 = u4[r3]) && 0 == (2 & e3.__u) && (e3.__e == t3 && (t3 = $(e3)), K(e3, e3));
   return t3;
 }
-function A(n3, l3, u4, t3) {
+function j(n3, l3, u4, t3) {
   var i4, r3;
   if ("function" == typeof n3.type) {
-    for (i4 = n3.__k, r3 = 0; i4 && r3 < i4.length; r3++) i4[r3] && (i4[r3].__ = n3, l3 = A(i4[r3], l3, u4, t3));
+    for (i4 = n3.__k, r3 = 0; i4 && r3 < i4.length; r3++) i4[r3] && (i4[r3].__ = n3, l3 = j(i4[r3], l3, u4, t3));
     return l3;
   }
-  n3.__e != l3 && (t3 && (l3 && n3.type && !l3.parentNode && (l3 = S(n3)), u4.insertBefore(n3.__e, l3 || null)), l3 = n3.__e);
+  n3.__e != l3 && (t3 && (l3 && n3.type && !l3.parentNode && (l3 = $(n3)), u4.insertBefore(n3.__e, l3 || null)), l3 = n3.__e);
   do {
     l3 = l3 && l3.nextSibling;
   } while (null != l3 && 8 == l3.nodeType);
   return l3;
 }
-function L(n3, l3, u4, t3) {
+function O(n3, l3, u4, t3) {
   var i4, r3, o3, e3 = n3.key, f4 = n3.type, c3 = l3[u4], s3 = null != c3 && 0 == (2 & c3.__u);
   if (null === c3 && null == e3 || s3 && e3 == c3.key && f4 == c3.type) return u4;
   if (t3 > (s3 ? 1 : 0)) {
@@ -202184,17 +202191,17 @@ function L(n3, l3, u4, t3) {
   }
   return -1;
 }
-function T(n3, l3, u4) {
-  "-" == l3[0] ? n3.setProperty(l3, null == u4 ? "" : u4) : n3[l3] = null == u4 ? "" : "number" != typeof u4 || y.test(l3) ? u4 : u4 + "px";
+function z(n3, l3, u4) {
+  "-" == l3[0] ? n3.setProperty(l3, null == u4 ? "" : u4) : n3[l3] = null == u4 ? "" : "number" != typeof u4 || _.test(l3) ? u4 : u4 + "px";
 }
-function j(n3, l3, u4, t3, i4) {
+function N(n3, l3, u4, t3, i4) {
   var r3, o3;
   n: if ("style" == l3) if ("string" == typeof u4) n3.style.cssText = u4;
   else {
-    if ("string" == typeof t3 && (n3.style.cssText = t3 = ""), t3) for (l3 in t3) u4 && l3 in u4 || T(n3.style, l3, "");
-    if (u4) for (l3 in u4) t3 && u4[l3] == t3[l3] || T(n3.style, l3, u4[l3]);
+    if ("string" == typeof t3 && (n3.style.cssText = t3 = ""), t3) for (l3 in t3) u4 && l3 in u4 || z(n3.style, l3, "");
+    if (u4) for (l3 in u4) t3 && u4[l3] == t3[l3] || z(n3.style, l3, u4[l3]);
   }
-  else if ("o" == l3[0] && "n" == l3[1]) r3 = l3 != (l3 = l3.replace(f, "$1")), o3 = l3.toLowerCase(), l3 = o3 in n3 || "onFocusOut" == l3 || "onFocusIn" == l3 ? o3.slice(2) : l3.slice(2), n3.l || (n3.l = {}), n3.l[l3 + r3] = u4, u4 ? t3 ? u4.u = t3.u : (u4.u = c, n3.addEventListener(l3, r3 ? a : s, r3)) : n3.removeEventListener(l3, r3 ? a : s, r3);
+  else if ("o" == l3[0] && "n" == l3[1]) r3 = l3 != (l3 = l3.replace(a, "$1")), o3 = l3.toLowerCase(), l3 = o3 in n3 || "onFocusOut" == l3 || "onFocusIn" == l3 ? o3.slice(2) : l3.slice(2), n3.l || (n3.l = {}), n3.l[l3 + r3] = u4, u4 ? t3 ? u4[s] = t3[s] : (u4[s] = h, n3.addEventListener(l3, r3 ? v : p, r3)) : n3.removeEventListener(l3, r3 ? v : p, r3);
   else {
     if ("http://www.w3.org/2000/svg" == i4) l3 = l3.replace(/xlink(H|:h)/, "h").replace(/sName$/, "s");
     else if ("width" != l3 && "height" != l3 && "href" != l3 && "list" != l3 && "form" != l3 && "tabIndex" != l3 && "download" != l3 && "rowSpan" != l3 && "colSpan" != l3 && "role" != l3 && "popover" != l3 && l3 in n3) try {
@@ -202205,60 +202212,57 @@ function j(n3, l3, u4, t3, i4) {
     "function" == typeof u4 || (null == u4 || false === u4 && "-" != l3[4] ? n3.removeAttribute(l3) : n3.setAttribute(l3, "popover" == l3 && 1 == u4 ? "" : u4));
   }
 }
-function F(n3) {
+function V(n3) {
   return function(u4) {
     if (this.l) {
       var t3 = this.l[u4.type + n3];
-      if (null == u4.t) u4.t = c++;
-      else if (u4.t < t3.u) return;
+      if (null == u4[c]) u4[c] = h++;
+      else if (u4[c] < t3[s]) return;
       return t3(l.event ? l.event(u4) : u4);
     }
   };
 }
-function O(n3, u4, t3, i4, r3, o3, e3, f4, c3, s3) {
-  var a3, h4, p3, v3, y3, _2, m3, b, S2, C3, M2, $24, P2, A3, H, L2, T6, j3 = u4.type;
-  if (null != u4.constructor) return null;
+function q(n3, u4, t3, i4, r3, o3, e3, f4, c3, s3) {
+  var a3, h4, p3, v3, y3, d3, _2, k3, x2, M, $24, I2, P2, A3, H2, T6 = u4.type;
+  if (void 0 !== u4.constructor) return null;
   128 & t3.__u && (c3 = !!(32 & t3.__u), o3 = [f4 = u4.__e = t3.__e]), (a3 = l.__b) && a3(u4);
-  n: if ("function" == typeof j3) try {
-    if (b = u4.props, S2 = "prototype" in j3 && j3.prototype.render, C3 = (a3 = j3.contextType) && i4[a3.__c], M2 = a3 ? C3 ? C3.props.value : a3.__ : i4, t3.__c ? m3 = (h4 = u4.__c = t3.__c).__ = h4.__E : (S2 ? u4.__c = h4 = new j3(b, M2) : (u4.__c = h4 = new x(b, M2), h4.constructor = j3, h4.render = E), C3 && C3.sub(h4), h4.state || (h4.state = {}), h4.__n = i4, p3 = h4.__d = true, h4.__h = [], h4._sb = []), S2 && null == h4.__s && (h4.__s = h4.state), S2 && null != j3.getDerivedStateFromProps && (h4.__s == h4.state && (h4.__s = d({}, h4.__s)), d(h4.__s, j3.getDerivedStateFromProps(b, h4.__s))), v3 = h4.props, y3 = h4.state, h4.__v = u4, p3) S2 && null == j3.getDerivedStateFromProps && null != h4.componentWillMount && h4.componentWillMount(), S2 && null != h4.componentDidMount && h4.__h.push(h4.componentDidMount);
+  n: if ("function" == typeof T6) try {
+    if (k3 = u4.props, x2 = T6.prototype && T6.prototype.render, M = (a3 = T6.contextType) && i4[a3.__c], $24 = a3 ? M ? M.props.value : a3.__ : i4, t3.__c ? _2 = (h4 = u4.__c = t3.__c).__ = h4.__E : (x2 ? u4.__c = h4 = new T6(k3, $24) : (u4.__c = h4 = new C(k3, $24), h4.constructor = T6, h4.render = Q), M && M.sub(h4), h4.state || (h4.state = {}), h4.__n = i4, p3 = h4.__d = true, h4.__h = [], h4._sb = []), x2 && null == h4.__s && (h4.__s = h4.state), x2 && null != T6.getDerivedStateFromProps && (h4.__s == h4.state && (h4.__s = m({}, h4.__s)), m(h4.__s, T6.getDerivedStateFromProps(k3, h4.__s))), v3 = h4.props, y3 = h4.state, h4.__v = u4, p3) x2 && null == T6.getDerivedStateFromProps && null != h4.componentWillMount && h4.componentWillMount(), x2 && null != h4.componentDidMount && h4.__h.push(h4.componentDidMount);
     else {
-      if (S2 && null == j3.getDerivedStateFromProps && b !== v3 && null != h4.componentWillReceiveProps && h4.componentWillReceiveProps(b, M2), u4.__v == t3.__v || !h4.__e && null != h4.shouldComponentUpdate && false === h4.shouldComponentUpdate(b, h4.__s, M2)) {
-        for (u4.__v != t3.__v && (h4.props = b, h4.state = h4.__s, h4.__d = false), u4.__e = t3.__e, u4.__k = t3.__k, u4.__k.some(function(n4) {
+      if (x2 && null == T6.getDerivedStateFromProps && k3 !== v3 && null != h4.componentWillReceiveProps && h4.componentWillReceiveProps(k3, $24), u4.__v == t3.__v || !h4.__e && null != h4.shouldComponentUpdate && false === h4.shouldComponentUpdate(k3, h4.__s, $24)) {
+        u4.__v != t3.__v && (h4.props = k3, h4.state = h4.__s, h4.__d = false), u4.__e = t3.__e, u4.__k = t3.__k, u4.__k.some(function(n4) {
           n4 && (n4.__ = u4);
-        }), $24 = 0; $24 < h4._sb.length; $24++) h4.__h.push(h4._sb[$24]);
-        h4._sb = [], h4.__h.length && e3.push(h4);
+        }), w.push.apply(h4.__h, h4._sb), h4._sb = [], h4.__h.length && e3.push(h4);
         break n;
       }
-      null != h4.componentWillUpdate && h4.componentWillUpdate(b, h4.__s, M2), S2 && null != h4.componentDidUpdate && h4.__h.push(function() {
-        h4.componentDidUpdate(v3, y3, _2);
+      null != h4.componentWillUpdate && h4.componentWillUpdate(k3, h4.__s, $24), x2 && null != h4.componentDidUpdate && h4.__h.push(function() {
+        h4.componentDidUpdate(v3, y3, d3);
       });
     }
-    if (h4.context = M2, h4.props = b, h4.__P = n3, h4.__e = false, P2 = l.__r, A3 = 0, S2) {
-      for (h4.state = h4.__s, h4.__d = false, P2 && P2(u4), a3 = h4.render(h4.props, h4.state, h4.context), H = 0; H < h4._sb.length; H++) h4.__h.push(h4._sb[H]);
-      h4._sb = [];
-    } else do {
-      h4.__d = false, P2 && P2(u4), a3 = h4.render(h4.props, h4.state, h4.context), h4.state = h4.__s;
-    } while (h4.__d && ++A3 < 25);
-    h4.state = h4.__s, null != h4.getChildContext && (i4 = d(d({}, i4), h4.getChildContext())), S2 && !p3 && null != h4.getSnapshotBeforeUpdate && (_2 = h4.getSnapshotBeforeUpdate(v3, y3)), L2 = a3, null != a3 && a3.type === k && null == a3.key && (L2 = V(a3.props.children)), f4 = I(n3, w(L2) ? L2 : [L2], u4, t3, i4, r3, o3, e3, f4, c3, s3), h4.base = u4.__e, u4.__u &= -161, h4.__h.length && e3.push(h4), m3 && (h4.__E = h4.__ = null);
+    if (h4.context = $24, h4.props = k3, h4.__P = n3, h4.__e = false, I2 = l.__r, P2 = 0, x2) h4.state = h4.__s, h4.__d = false, I2 && I2(u4), a3 = h4.render(h4.props, h4.state, h4.context), w.push.apply(h4.__h, h4._sb), h4._sb = [];
+    else do {
+      h4.__d = false, I2 && I2(u4), a3 = h4.render(h4.props, h4.state, h4.context), h4.state = h4.__s;
+    } while (h4.__d && ++P2 < 25);
+    h4.state = h4.__s, null != h4.getChildContext && (i4 = m(m({}, i4), h4.getChildContext())), x2 && !p3 && null != h4.getSnapshotBeforeUpdate && (d3 = h4.getSnapshotBeforeUpdate(v3, y3)), A3 = null != a3 && a3.type === S && null == a3.key ? E(a3.props.children) : a3, f4 = L(n3, g(A3) ? A3 : [A3], u4, t3, i4, r3, o3, e3, f4, c3, s3), h4.base = u4.__e, u4.__u &= -161, h4.__h.length && e3.push(h4), _2 && (h4.__E = h4.__ = null);
   } catch (n4) {
     if (u4.__v = null, c3 || null != o3) if (n4.then) {
       for (u4.__u |= c3 ? 160 : 128; f4 && 8 == f4.nodeType && f4.nextSibling; ) f4 = f4.nextSibling;
       o3[o3.indexOf(f4)] = null, u4.__e = f4;
     } else {
-      for (T6 = o3.length; T6--; ) g(o3[T6]);
-      z(u4);
+      for (H2 = o3.length; H2--; ) b(o3[H2]);
+      B(u4);
     }
-    else u4.__e = t3.__e, u4.__k = t3.__k, n4.then || z(u4);
+    else u4.__e = t3.__e, u4.__k = t3.__k, n4.then || B(u4);
     l.__e(n4, u4, t3);
   }
-  else null == o3 && u4.__v == t3.__v ? (u4.__k = t3.__k, u4.__e = t3.__e) : f4 = u4.__e = q(t3.__e, u4, t3, i4, r3, o3, e3, c3, s3);
+  else null == o3 && u4.__v == t3.__v ? (u4.__k = t3.__k, u4.__e = t3.__e) : f4 = u4.__e = G(t3.__e, u4, t3, i4, r3, o3, e3, c3, s3);
   return (a3 = l.diffed) && a3(u4), 128 & u4.__u ? void 0 : f4;
 }
-function z(n3) {
-  n3 && n3.__c && (n3.__c.__e = true), n3 && n3.__k && n3.__k.forEach(z);
+function B(n3) {
+  n3 && (n3.__c && (n3.__c.__e = true), n3.__k && n3.__k.some(B));
 }
-function N(n3, u4, t3) {
-  for (var i4 = 0; i4 < t3.length; i4++) B(t3[i4], t3[++i4], t3[++i4]);
+function D(n3, u4, t3) {
+  for (var i4 = 0; i4 < t3.length; i4++) J(t3[i4], t3[++i4], t3[++i4]);
   l.__c && l.__c(u4, n3), n3.some(function(u5) {
     try {
       n3 = u5.__h, u5.__h = [], n3.some(function(n4) {
@@ -202269,14 +202273,14 @@ function N(n3, u4, t3) {
     }
   });
 }
-function V(n3) {
-  return "object" != typeof n3 || null == n3 || n3.__b && n3.__b > 0 ? n3 : w(n3) ? n3.map(V) : d({}, n3);
+function E(n3) {
+  return "object" != typeof n3 || null == n3 || n3.__b > 0 ? n3 : g(n3) ? n3.map(E) : m({}, n3);
 }
-function q(u4, t3, i4, r3, o3, e3, f4, c3, s3) {
-  var a3, h4, v3, y3, d3, _2, m3, b = i4.props || p, k3 = t3.props, x2 = t3.type;
+function G(u4, t3, i4, r3, o3, e3, f4, c3, s3) {
+  var a3, h4, p3, v3, y3, w3, _2, m3 = i4.props || d, k3 = t3.props, x2 = t3.type;
   if ("svg" == x2 ? o3 = "http://www.w3.org/2000/svg" : "math" == x2 ? o3 = "http://www.w3.org/1998/Math/MathML" : o3 || (o3 = "http://www.w3.org/1999/xhtml"), null != e3) {
-    for (a3 = 0; a3 < e3.length; a3++) if ((d3 = e3[a3]) && "setAttribute" in d3 == !!x2 && (x2 ? d3.localName == x2 : 3 == d3.nodeType)) {
-      u4 = d3, e3[a3] = null;
+    for (a3 = 0; a3 < e3.length; a3++) if ((y3 = e3[a3]) && "setAttribute" in y3 == !!x2 && (x2 ? y3.localName == x2 : 3 == y3.nodeType)) {
+      u4 = y3, e3[a3] = null;
       break;
     }
   }
@@ -202284,23 +202288,18 @@ function q(u4, t3, i4, r3, o3, e3, f4, c3, s3) {
     if (null == x2) return document.createTextNode(k3);
     u4 = document.createElementNS(o3, x2, k3.is && k3), c3 && (l.__m && l.__m(t3, e3), c3 = false), e3 = null;
   }
-  if (null == x2) b === k3 || c3 && u4.data == k3 || (u4.data = k3);
+  if (null == x2) m3 === k3 || c3 && u4.data == k3 || (u4.data = k3);
   else {
-    if (e3 = e3 && n.call(u4.childNodes), !c3 && null != e3) for (b = {}, a3 = 0; a3 < u4.attributes.length; a3++) b[(d3 = u4.attributes[a3]).name] = d3.value;
-    for (a3 in b) if (d3 = b[a3], "children" == a3) ;
-    else if ("dangerouslySetInnerHTML" == a3) v3 = d3;
-    else if (!(a3 in k3)) {
-      if ("value" == a3 && "defaultValue" in k3 || "checked" == a3 && "defaultChecked" in k3) continue;
-      j(u4, a3, null, d3, o3);
-    }
-    for (a3 in k3) d3 = k3[a3], "children" == a3 ? y3 = d3 : "dangerouslySetInnerHTML" == a3 ? h4 = d3 : "value" == a3 ? _2 = d3 : "checked" == a3 ? m3 = d3 : c3 && "function" != typeof d3 || b[a3] === d3 || j(u4, a3, d3, b[a3], o3);
-    if (h4) c3 || v3 && (h4.__html == v3.__html || h4.__html == u4.innerHTML) || (u4.innerHTML = h4.__html), t3.__k = [];
-    else if (v3 && (u4.innerHTML = ""), I("template" == t3.type ? u4.content : u4, w(y3) ? y3 : [y3], t3, i4, r3, "foreignObject" == x2 ? "http://www.w3.org/1999/xhtml" : o3, e3, f4, e3 ? e3[0] : i4.__k && S(i4, 0), c3, s3), null != e3) for (a3 = e3.length; a3--; ) g(e3[a3]);
-    c3 || (a3 = "value", "progress" == x2 && null == _2 ? u4.removeAttribute("value") : null != _2 && (_2 !== u4[a3] || "progress" == x2 && !_2 || "option" == x2 && _2 != b[a3]) && j(u4, a3, _2, b[a3], o3), a3 = "checked", null != m3 && m3 != u4[a3] && j(u4, a3, m3, b[a3], o3));
+    if (e3 = e3 && n.call(u4.childNodes), !c3 && null != e3) for (m3 = {}, a3 = 0; a3 < u4.attributes.length; a3++) m3[(y3 = u4.attributes[a3]).name] = y3.value;
+    for (a3 in m3) y3 = m3[a3], "dangerouslySetInnerHTML" == a3 ? p3 = y3 : "children" == a3 || a3 in k3 || "value" == a3 && "defaultValue" in k3 || "checked" == a3 && "defaultChecked" in k3 || N(u4, a3, null, y3, o3);
+    for (a3 in k3) y3 = k3[a3], "children" == a3 ? v3 = y3 : "dangerouslySetInnerHTML" == a3 ? h4 = y3 : "value" == a3 ? w3 = y3 : "checked" == a3 ? _2 = y3 : c3 && "function" != typeof y3 || m3[a3] === y3 || N(u4, a3, y3, m3[a3], o3);
+    if (h4) c3 || p3 && (h4.__html == p3.__html || h4.__html == u4.innerHTML) || (u4.innerHTML = h4.__html), t3.__k = [];
+    else if (p3 && (u4.innerHTML = ""), L("template" == t3.type ? u4.content : u4, g(v3) ? v3 : [v3], t3, i4, r3, "foreignObject" == x2 ? "http://www.w3.org/1999/xhtml" : o3, e3, f4, e3 ? e3[0] : i4.__k && $(i4, 0), c3, s3), null != e3) for (a3 = e3.length; a3--; ) b(e3[a3]);
+    c3 || (a3 = "value", "progress" == x2 && null == w3 ? u4.removeAttribute("value") : null != w3 && (w3 !== u4[a3] || "progress" == x2 && !w3 || "option" == x2 && w3 != m3[a3]) && N(u4, a3, w3, m3[a3], o3), a3 = "checked", null != _2 && _2 != u4[a3] && N(u4, a3, _2, m3[a3], o3));
   }
   return u4;
 }
-function B(n3, u4, t3) {
+function J(n3, u4, t3) {
   try {
     if ("function" == typeof n3) {
       var i4 = "function" == typeof n3.__u;
@@ -202310,9 +202309,9 @@ function B(n3, u4, t3) {
     l.__e(n4, t3);
   }
 }
-function D(n3, u4, t3) {
+function K(n3, u4, t3) {
   var i4, r3;
-  if (l.unmount && l.unmount(n3), (i4 = n3.ref) && (i4.current && i4.current != n3.__e || B(i4, null, u4)), null != (i4 = n3.__c)) {
+  if (l.unmount && l.unmount(n3), (i4 = n3.ref) && (i4.current && i4.current != n3.__e || J(i4, null, u4)), null != (i4 = n3.__c)) {
     if (i4.componentWillUnmount) try {
       i4.componentWillUnmount();
     } catch (n4) {
@@ -202320,17 +202319,17 @@ function D(n3, u4, t3) {
     }
     i4.base = i4.__P = null;
   }
-  if (i4 = n3.__k) for (r3 = 0; r3 < i4.length; r3++) i4[r3] && D(i4[r3], u4, t3 || "function" != typeof n3.type);
-  t3 || g(n3.__e), n3.__c = n3.__ = n3.__e = void 0;
+  if (i4 = n3.__k) for (r3 = 0; r3 < i4.length; r3++) i4[r3] && K(i4[r3], u4, t3 || "function" != typeof n3.type);
+  t3 || b(n3.__e), n3.__c = n3.__ = n3.__e = void 0;
 }
-function E(n3, l3, u4) {
+function Q(n3, l3, u4) {
   return this.constructor(n3, u4);
 }
-function G(u4, t3, i4) {
+function R(u4, t3, i4) {
   var r3, o3, e3, f4;
-  t3 == document && (t3 = document.documentElement), l.__ && l.__(u4, t3), o3 = (r3 = "function" == typeof i4) ? null : i4 && i4.__k || t3.__k, e3 = [], f4 = [], O(t3, u4 = (!r3 && i4 || t3).__k = _(k, null, [u4]), o3 || p, p, t3.namespaceURI, !r3 && i4 ? [i4] : o3 ? null : t3.firstChild ? n.call(t3.childNodes) : null, e3, !r3 && i4 ? i4 : o3 ? o3.__e : t3.firstChild, r3, f4), N(e3, u4, f4);
+  t3 == document && (t3 = document.documentElement), l.__ && l.__(u4, t3), o3 = (r3 = "function" == typeof i4) ? null : i4 && i4.__k || t3.__k, e3 = [], f4 = [], q(t3, u4 = (!r3 && i4 || t3).__k = k(S, null, [u4]), o3 || d, d, t3.namespaceURI, !r3 && i4 ? [i4] : o3 ? null : t3.firstChild ? n.call(t3.childNodes) : null, e3, !r3 && i4 ? i4 : o3 ? o3.__e : t3.firstChild, r3, f4), D(e3, u4, f4);
 }
-n = v.slice, l = { __e: function(n3, l3, u4, t3) {
+n = w.slice, l = { __e: function(n3, l3, u4, t3) {
   for (var i4, r3, o3; l3 = l3.__; ) if ((i4 = l3.__c) && !i4.__) try {
     if ((r3 = i4.constructor) && null != r3.getDerivedStateFromError && (i4.setState(r3.getDerivedStateFromError(n3)), o3 = i4.__d), null != i4.componentDidCatch && (i4.componentDidCatch(n3, t3 || {}), o3 = i4.__d), o3) return i4.__E = i4;
   } catch (l4) {
@@ -202338,17 +202337,17 @@ n = v.slice, l = { __e: function(n3, l3, u4, t3) {
   }
   throw n3;
 } }, u = 0, t = function(n3) {
-  return null != n3 && null == n3.constructor;
-}, x.prototype.setState = function(n3, l3) {
+  return null != n3 && void 0 === n3.constructor;
+}, C.prototype.setState = function(n3, l3) {
   var u4;
-  u4 = null != this.__s && this.__s != this.state ? this.__s : this.__s = d({}, this.state), "function" == typeof n3 && (n3 = n3(d({}, u4), this.props)), n3 && d(u4, n3), null != n3 && this.__v && (l3 && this._sb.push(l3), M(this));
-}, x.prototype.forceUpdate = function(n3) {
-  this.__v && (this.__e = true, n3 && this.__h.push(n3), M(this));
-}, x.prototype.render = k, i = [], o = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, e = function(n3, l3) {
+  u4 = null != this.__s && this.__s != this.state ? this.__s : this.__s = m({}, this.state), "function" == typeof n3 && (n3 = n3(m({}, u4), this.props)), n3 && m(u4, n3), null != n3 && this.__v && (l3 && this._sb.push(l3), A(this));
+}, C.prototype.forceUpdate = function(n3) {
+  this.__v && (this.__e = true, n3 && this.__h.push(n3), A(this));
+}, C.prototype.render = S, i = [], o = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, e = function(n3, l3) {
   return n3.__v.__b - l3.__v.__b;
-}, $.__r = 0, f = /(PointerCapture)$|Capture$/i, c = 0, s = F(false), a = F(true), h = 0;
+}, H.__r = 0, f = Math.random().toString(8), c = "__d" + f, s = "__a" + f, a = /(PointerCapture)$|Capture$/i, h = 0, p = V(false), v = V(true), y = 0;
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/preact@10.28.1/node_modules/preact/hooks/dist/hooks.module.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/preact@10.29.1/node_modules/preact/hooks/dist/hooks.module.js
 var t2;
 var r2;
 var u2;
@@ -202379,13 +202378,13 @@ function h2(n3, u4, i4) {
     var f4 = function(n4, t3, r3) {
       if (!o3.__c.__H) return true;
       var u5 = o3.__c.__H.__.filter(function(n5) {
-        return !!n5.__c;
+        return n5.__c;
       });
       if (u5.every(function(n5) {
         return !n5.__N;
       })) return !c3 || c3.call(this, n4, t3, r3);
       var i5 = o3.__c.props !== n4;
-      return u5.forEach(function(n5) {
+      return u5.some(function(n5) {
         if (n5.__N) {
           var t4 = n5.__[0];
           n5.__ = n5.__N, n5.__N = void 0, t4 !== n5.__[0] && (i5 = true);
@@ -202423,10 +202422,13 @@ function q2(n3, t3) {
   }, t3);
 }
 function j2() {
-  for (var n3; n3 = f2.shift(); ) if (n3.__P && n3.__H) try {
-    n3.__H.__h.forEach(z2), n3.__H.__h.forEach(B2), n3.__H.__h = [];
-  } catch (t3) {
-    n3.__H.__h = [], c2.__e(t3, n3.__v);
+  for (var n3; n3 = f2.shift(); ) {
+    var t3 = n3.__H;
+    if (n3.__P && t3) try {
+      t3.__h.some(z2), t3.__h.some(B2), t3.__h = [];
+    } catch (r3) {
+      t3.__h = [], c2.__e(r3, n3.__v);
+    }
   }
 }
 c2.__b = function(n3) {
@@ -202436,19 +202438,19 @@ c2.__b = function(n3) {
 }, c2.__r = function(n3) {
   a2 && a2(n3), t2 = 0;
   var i4 = (r2 = n3.__c).__H;
-  i4 && (u2 === r2 ? (i4.__h = [], r2.__h = [], i4.__.forEach(function(n4) {
+  i4 && (u2 === r2 ? (i4.__h = [], r2.__h = [], i4.__.some(function(n4) {
     n4.__N && (n4.__ = n4.__N), n4.u = n4.__N = void 0;
-  })) : (i4.__h.forEach(z2), i4.__h.forEach(B2), i4.__h = [], t2 = 0)), u2 = r2;
+  })) : (i4.__h.some(z2), i4.__h.some(B2), i4.__h = [], t2 = 0)), u2 = r2;
 }, c2.diffed = function(n3) {
   v2 && v2(n3);
   var t3 = n3.__c;
-  t3 && t3.__H && (t3.__H.__h.length && (1 !== f2.push(t3) && i2 === c2.requestAnimationFrame || ((i2 = c2.requestAnimationFrame) || w2)(j2)), t3.__H.__.forEach(function(n4) {
+  t3 && t3.__H && (t3.__H.__h.length && (1 !== f2.push(t3) && i2 === c2.requestAnimationFrame || ((i2 = c2.requestAnimationFrame) || w2)(j2)), t3.__H.__.some(function(n4) {
     n4.u && (n4.__H = n4.u), n4.u = void 0;
   })), u2 = r2 = null;
 }, c2.__c = function(n3, t3) {
   t3.some(function(n4) {
     try {
-      n4.__h.forEach(z2), n4.__h = n4.__h.filter(function(n5) {
+      n4.__h.some(z2), n4.__h = n4.__h.filter(function(n5) {
         return !n5.__ || B2(n5);
       });
     } catch (r3) {
@@ -202460,7 +202462,7 @@ c2.__b = function(n3) {
 }, c2.unmount = function(n3) {
   m2 && m2(n3);
   var t3, r3 = n3.__c;
-  r3 && r3.__H && (r3.__H.__.forEach(function(n4) {
+  r3 && r3.__H && (r3.__H.__.some(function(n4) {
     try {
       z2(n4);
     } catch (n5) {
@@ -202492,7 +202494,7 @@ function D2(n3, t3) {
   return "function" == typeof t3 ? t3(n3) : t3;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/preact@10.28.1/node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/preact@10.29.1/node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js
 var f3 = 0;
 function u3(e3, t3, n3, o3, i4, u4) {
   t3 || (t3 = {});
@@ -202503,7 +202505,7 @@ function u3(e3, t3, n3, o3, i4, u4) {
   return l.vnode && l.vnode(l3), l3;
 }
 
-// https://jsr.io/@molstar/molstar-components/0.5.0/src/MolstarViewer.tsx
+// https://jsr.io/@molstar/molstar-components/0.5.2/src/MolstarViewer.tsx
 var defaultConfig = {
   layoutIsExpanded: false,
   layoutShowControls: false
@@ -202637,7 +202639,7 @@ function MolstarViewer({
   ] });
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/now.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/now.js
 var now = (function() {
   if (typeof window !== "undefined" && window.performance) {
     const perf = window.performance;
@@ -202654,7 +202656,7 @@ var now = (function() {
   }
 })();
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/uuid.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/uuid.js
 var UUID;
 (function(UUID2) {
   const _btoa = typeof btoa !== "undefined" ? btoa : (s3) => Buffer.from(s3).toString("base64");
@@ -202684,7 +202686,7 @@ var UUID;
   UUID2.is = is;
 })(UUID || (UUID = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-task/util/scheduler.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-task/util/scheduler.js
 function createImmediateActions() {
   const thisGlobal = (function() {
     const _window = typeof window !== "undefined" && window;
@@ -202840,7 +202842,7 @@ var Scheduler = {
   }
 };
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/debug.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/debug.js
 var isProductionMode = (function() {
   try {
     return false;
@@ -202858,7 +202860,7 @@ var isDebugMode = (function getIsDebug() {
 })();
 var isTimingMode = false;
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-task/util/user-timing.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-task/util/user-timing.js
 var hasPerformance = typeof performance !== "undefined" && !!performance.mark && performance.measure;
 var timingEnabled = hasPerformance && isTimingMode;
 var UserTiming;
@@ -202886,7 +202888,7 @@ var UserTiming;
   UserTiming2.measure = measure;
 })(UserTiming || (UserTiming = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-task/execution/observable.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-task/execution/observable.js
 function ExecuteObservable(task, observer, updateRateMs = 250) {
   const info = ProgressInfo(task, observer, updateRateMs);
   const ctx = new ObservableRuntimeContext(info, info.root);
@@ -203062,7 +203064,7 @@ var ObservableRuntimeContext = class _ObservableRuntimeContext {
   }
 };
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-task/execution/synchronous.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-task/execution/synchronous.js
 var SynchronousRuntimeContext = class {
   constructor() {
     this.shouldUpdate = false;
@@ -203073,7 +203075,7 @@ var SynchronousRuntimeContext = class {
 };
 var SyncRuntimeContext = new SynchronousRuntimeContext();
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/id-factory.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/id-factory.js
 function idFactory(firstId = 0, maxId = Number.MAX_SAFE_INTEGER) {
   let _nextId = firstId;
   return () => {
@@ -203083,7 +203085,7 @@ function idFactory(firstId = 0, maxId = Number.MAX_SAFE_INTEGER) {
   };
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-task/task.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-task/task.js
 var Task;
 (function(Task2) {
   class Impl {
@@ -203152,13 +203154,13 @@ var Task;
   const getNextId = idFactory(0, 1073741823);
 })(Task || (Task = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-task/execution/runtime-context.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-task/execution/runtime-context.js
 var RuntimeContext;
 (function(RuntimeContext2) {
   RuntimeContext2.Synchronous = SyncRuntimeContext;
 })(RuntimeContext || (RuntimeContext = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-task/execution/progress.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-task/execution/progress.js
 var Progress;
 (function(Progress3) {
   function _format4(root, prefix = "") {
@@ -203182,7 +203184,168 @@ ${subTree.join("\n")}`;
   Progress3.format = format2;
 })(Progress || (Progress = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-io/common/utf8.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-io/common/string-like.js
+var MAX_STRING_LENGTH = 536870888;
+var DEFAULT_LOG_STRING_CHUNK_SIZE = 28;
+var ChunkedBigString = class _ChunkedBigString {
+  get length() {
+    return this._length;
+  }
+  constructor(logStringChunkSize = DEFAULT_LOG_STRING_CHUNK_SIZE) {
+    this._chunks = [];
+    this._length = 0;
+    this._tmpArray = [];
+    this.STRING_CHUNK_SIZE = 2 ** logStringChunkSize;
+    this.STRING_CHUNK_SHIFT = logStringChunkSize;
+    this.STRING_CHUNK_MASK = 2 ** logStringChunkSize - 1;
+  }
+  static fromString(content, logStringChunkSize = DEFAULT_LOG_STRING_CHUNK_SIZE) {
+    const out = new _ChunkedBigString(logStringChunkSize);
+    out._append(content);
+    return out;
+  }
+  static fromStrings(content, logStringChunkSize = DEFAULT_LOG_STRING_CHUNK_SIZE) {
+    const out = new _ChunkedBigString(logStringChunkSize);
+    for (const inputChunk of content) {
+      out._append(inputChunk);
+    }
+    return out;
+  }
+  /** Create instance from UTF8 data. (Do not call directly, prefer `utf8ReadLong` in utf8.ts.) */
+  static fromUtf8Data(data, start = 0, end = data.length, logStringChunkSize = DEFAULT_LOG_STRING_CHUNK_SIZE) {
+    const bufferChunkSize = 2 ** logStringChunkSize;
+    const stringChunks = [];
+    let readStart = start;
+    while (readStart < end) {
+      let readEnd = Math.min(readStart + bufferChunkSize, end);
+      if (readEnd < end) {
+        while ((data[readEnd] & 192) === 128) {
+          readEnd--;
+          if (readEnd === readStart)
+            throw new Error("Input is rubbish, no UTF-8 character start found in a chunk");
+        }
+      }
+      const stringChunk = utf8Read(data, readStart, readEnd - readStart);
+      stringChunks.push(stringChunk);
+      readStart = readEnd;
+    }
+    return _ChunkedBigString.fromStrings(stringChunks, logStringChunkSize);
+  }
+  _append(inputChunk) {
+    const chunkSize = this.STRING_CHUNK_SIZE;
+    const tail2 = this._chunks.length === 0 || this._chunks[this._chunks.length - 1].length === chunkSize ? "" : this._chunks.pop();
+    let inputPtr = chunkSize - tail2.length;
+    this._chunks.push(tail2 + inputChunk.substring(0, inputPtr));
+    while (inputPtr < inputChunk.length) {
+      this._chunks.push(inputChunk.substring(inputPtr, inputPtr + chunkSize));
+      inputPtr += chunkSize;
+    }
+    this._length += inputChunk.length;
+  }
+  _getChunkIndex(index) {
+    return index >>> this.STRING_CHUNK_SHIFT;
+  }
+  _getIndexInChunk(index) {
+    return index & this.STRING_CHUNK_MASK;
+  }
+  _isOutOfRange(index) {
+    return index < 0 || index >= this.length;
+  }
+  at(index) {
+    if (-this.length <= index && index < 0) {
+      return this.at(index + this.length);
+    }
+    return this.charAt(index) || void 0;
+  }
+  charAt(index) {
+    if (this._isOutOfRange(index))
+      return "";
+    const iChunk = this._getChunkIndex(index);
+    const indexInChunk = this._getIndexInChunk(index);
+    return this._chunks[iChunk][indexInChunk];
+  }
+  charCodeAt(index) {
+    if (this._isOutOfRange(index))
+      return NaN;
+    const iChunk = this._getChunkIndex(index);
+    const indexInChunk = this._getIndexInChunk(index);
+    return this._chunks[iChunk].charCodeAt(indexInChunk);
+  }
+  substring(start, end) {
+    const start_ = Math.min(Math.max(start !== null && start !== void 0 ? start : 0, 0), this.length);
+    const end_ = Math.min(Math.max(end !== null && end !== void 0 ? end : this.length, 0), this.length);
+    if (start_ > end_) {
+      return this.substring(end_, start_);
+    }
+    if (start_ === end_) {
+      return "";
+    }
+    if (end_ - start_ > MAX_STRING_LENGTH) {
+      throw new Error(`Trying to create get a substring longer (${end_ - start_}) than maximum allowed string length (${MAX_STRING_LENGTH}).`);
+    }
+    const iFirstChunk = this._getChunkIndex(start_);
+    const indexInChunkFrom = this._getIndexInChunk(start_);
+    const iLastChunk = this._getChunkIndex(end_);
+    const indexInChunkTo = this._getIndexInChunk(end_);
+    if (iFirstChunk === iLastChunk) {
+      return this._chunks[iFirstChunk].substring(indexInChunkFrom, indexInChunkTo);
+    } else {
+      const out = this._getTmpArray();
+      out.push(this._chunks[iFirstChunk].substring(indexInChunkFrom, this.STRING_CHUNK_SIZE));
+      for (let iChunk = iFirstChunk + 1; iChunk < iLastChunk; iChunk++) {
+        out.push(this._chunks[iChunk]);
+      }
+      out.push(this._chunks[iLastChunk].substring(0, indexInChunkTo));
+      return out.join("");
+    }
+  }
+  _getTmpArray() {
+    while (this._tmpArray.length)
+      this._tmpArray.pop();
+    return this._tmpArray;
+  }
+  indexOf(searchString, position = 0) {
+    if (searchString.length > this.STRING_CHUNK_SIZE) {
+      throw new Error("NotImplementedError: indexOf is only implemented for searchString shorter than STRING_CHUNK_SIZE");
+    }
+    if (position < 0)
+      position = 0;
+    const iFirstChunk = this._getChunkIndex(position);
+    for (let iChunk = iFirstChunk; iChunk < this._chunks.length; iChunk++) {
+      const chunk = this._chunks[iChunk];
+      const positionInChunk = iChunk === iFirstChunk ? this._getIndexInChunk(position) : 0;
+      const found = chunk.indexOf(searchString, positionInChunk);
+      if (found >= 0)
+        return iChunk * this.STRING_CHUNK_SIZE + found;
+      if (iChunk !== this._chunks.length - 1) {
+        const start = Math.max(this.STRING_CHUNK_SIZE - searchString.length + 1, positionInChunk);
+        const aroundBoundary = chunk.substring(start, void 0) + this._chunks[iChunk + 1].substring(0, searchString.length - 1);
+        const found2 = aroundBoundary.indexOf(searchString);
+        if (found2 >= 0)
+          return iChunk * this.STRING_CHUNK_SIZE + start + found2;
+      }
+    }
+    return -1;
+  }
+  includes(searchString, position = 0) {
+    return this.indexOf(searchString, position) >= 0;
+  }
+  startsWith(searchString, position = 0) {
+    if (searchString.length > this.STRING_CHUNK_SIZE) {
+      throw new Error("NotImplementedError: startsWith is only implemented for searchString shorter than STRING_CHUNK_SIZE");
+    }
+    return this.substring(position, position + searchString.length) === searchString;
+  }
+  toString() {
+    try {
+      return this._chunks.join("");
+    } catch (err) {
+      throw new Error(`Failed to convert StringLike object into string. This might be because the length ${this.length} exceeds maximum allowed string length ${MAX_STRING_LENGTH}. (${err})`);
+    }
+  }
+};
+
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-io/common/utf8.js
 function utf8Write(data, offset, str4) {
   for (let i4 = 0, l3 = str4.length; i4 < l3; i4++) {
     const codePoint = str4.charCodeAt(i4);
@@ -203258,6 +203421,13 @@ function utf8Read(data, offset = 0, length = data.length) {
     return _utf8Read(data, offset, length);
   }
 }
+function utf8ReadLong(data, offset = 0, length = data.length) {
+  if (length <= MAX_STRING_LENGTH) {
+    return utf8Read(data, offset, length);
+  }
+  const out = ChunkedBigString.fromUtf8Data(data, offset, offset + length);
+  return out.length <= MAX_STRING_LENGTH ? out.toString() : out;
+}
 function utf8ByteCount(str4) {
   let count = 0;
   for (let i4 = 0, l3 = str4.length; i4 < l3; i4++) {
@@ -203283,7 +203453,7 @@ function utf8ByteCount(str4) {
   return count;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-io/common/msgpack/encode.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-io/common/msgpack/encode.js
 function encodeMsgPack(value) {
   const buffer = new ArrayBuffer(encodedSize(value));
   const view = new DataView(buffer);
@@ -203522,7 +203692,7 @@ function encodeInternal(value, view, bytes, offset) {
   throw new Error("Unknown type " + type4);
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-io/common/msgpack/decode.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-io/common/msgpack/decode.js
 function decodeMsgPack(buffer) {
   return parse({ buffer, offset: 0, dataView: new DataView(buffer.buffer) });
 }
@@ -203688,16 +203858,45 @@ function parse(state) {
   throw new Error("Unknown type 0x" + type4.toString(16));
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/zip/bin.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/zip/bin.js
+function toInt32(x2) {
+  return x2 >> 0;
+}
+function readUshort(buff, p3) {
+  return buff[p3] | buff[p3 + 1] << 8;
+}
 function writeUshort(buff, p3, n3) {
   buff[p3] = n3 & 255;
   buff[p3 + 1] = n3 >> 8 & 255;
+}
+function readUint(buff, p3) {
+  return buff[p3 + 3] * (256 * 256 * 256) + (buff[p3 + 2] << 16 | buff[p3 + 1] << 8 | buff[p3]);
 }
 function writeUint(buff, p3, n3) {
   buff[p3] = n3 & 255;
   buff[p3 + 1] = n3 >> 8 & 255;
   buff[p3 + 2] = n3 >> 16 & 255;
   buff[p3 + 3] = n3 >> 24 & 255;
+}
+function readASCII(buff, p3, l3) {
+  let s3 = "";
+  for (let i4 = 0; i4 < l3; i4++)
+    s3 += String.fromCharCode(buff[p3 + i4]);
+  return s3;
+}
+function pad(n3) {
+  return n3.length < 2 ? "0" + n3 : n3;
+}
+function readUTF8(buff, p3, l3) {
+  let s3 = "", ns;
+  for (let i4 = 0; i4 < l3; i4++)
+    s3 += "%" + pad(buff[p3 + i4].toString(16));
+  try {
+    ns = decodeURIComponent(s3);
+  } catch (e3) {
+    return readASCII(buff, p3, l3);
+  }
+  return ns;
 }
 function writeUTF8(buff, p3, str4) {
   const strl = str4.length;
@@ -203747,7 +203946,7 @@ function sizeUTF8(str4) {
   return i4;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/zip/checksum.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/zip/checksum.js
 var CrcTable = (function() {
   const tab = new Uint32Array(256);
   for (let n3 = 0; n3 < 256; n3++) {
@@ -203768,26 +203967,26 @@ function _crc(c3, buf, off, len) {
   }
   return c3;
 }
-function crc(b, o3, l3) {
-  return _crc(4294967295, b, o3, l3) ^ 4294967295;
+function crc(b2, o3, l3) {
+  return _crc(4294967295, b2, o3, l3) ^ 4294967295;
 }
 function adler(data, o3, len) {
-  let a3 = 1, b = 0;
+  let a3 = 1, b2 = 0;
   let off = o3;
   const end = o3 + len;
   while (off < end) {
     const eend = Math.min(off + 5552, end);
     while (off < eend) {
       a3 += data[off++];
-      b += a3;
+      b2 += a3;
     }
     a3 = a3 % 65521;
-    b = b % 65521;
+    b2 = b2 % 65521;
   }
-  return b << 16 | a3;
+  return b2 << 16 | a3;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/zip/util.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/zip/util.js
 var hasCompressionStreamSupport = {
   deflate: void 0,
   "deflate-raw": void 0,
@@ -203919,7 +204118,7 @@ function revCodes(tree, MAX_BITS) {
   }
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/zip/inflate.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/zip/inflate.js
 function InflateContext(data, buf) {
   const noBuf = buf === void 0;
   if (buf === void 0)
@@ -204145,12 +204344,12 @@ function _get17(dt, pos) {
   return (dt[pos >>> 3] | dt[(pos >>> 3) + 1] << 8 | dt[(pos >>> 3) + 2] << 16) >>> (pos & 7);
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/type-helpers.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/type-helpers.js
 function assertUnreachable(x2) {
   throw new Error("unreachable");
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/zip/huffman.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/zip/huffman.js
 function _hufTree(hst, tree, MAXL) {
   const list4 = [];
   const hl = hst.length, tl = tree.length;
@@ -204170,15 +204369,15 @@ function _hufTree(hst, tree, MAXL) {
     tree[(l23 << 1) + 1] = 1;
     return 1;
   }
-  list4.sort(function(a4, b2) {
-    return a4.f - b2.f;
+  list4.sort(function(a4, b3) {
+    return a4.f - b3.f;
   });
-  let a3 = list4[0], b = list4[1], i0 = 0, i1 = 1, i22 = 2;
+  let a3 = list4[0], b2 = list4[1], i0 = 0, i1 = 1, i22 = 2;
   list4[0] = {
     lit: -1,
-    f: a3.f + b.f,
+    f: a3.f + b2.f,
     l: a3,
-    r: b,
+    r: b2,
     d: 0
   };
   while (i1 !== end - 1) {
@@ -204188,15 +204387,15 @@ function _hufTree(hst, tree, MAXL) {
       a3 = list4[i22++];
     }
     if (i0 !== i1 && (i22 === end || list4[i0].f < list4[i22].f)) {
-      b = list4[i0++];
+      b2 = list4[i0++];
     } else {
-      b = list4[i22++];
+      b2 = list4[i22++];
     }
     list4[i1++] = {
       lit: -1,
-      f: a3.f + b.f,
+      f: a3.f + b2.f,
       l: a3,
-      r: b,
+      r: b2,
       d: void 0
     };
   }
@@ -204219,8 +204418,8 @@ function setDepth(t3, d3) {
 function restrictDepth(dps, MD, maxl) {
   let i4 = 0, dbt = 0;
   const bCost = 1 << maxl - MD;
-  dps.sort(function(a3, b) {
-    return b.d === a3.d ? a3.f - b.f : b.d - a3.d;
+  dps.sort(function(a3, b2) {
+    return b2.d === a3.d ? a3.f - b2.f : b2.d - a3.d;
   });
   for (i4 = 0; i4 < dps.length; i4++) {
     if (dps[i4].d > MD) {
@@ -204251,7 +204450,7 @@ function restrictDepth(dps, MD, maxl) {
     console.log("debt left");
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/zip/deflate.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/zip/deflate.js
 function DeflateContext(data, out, opos, lvl) {
   const { lits, strt, prev } = U;
   return {
@@ -204634,12 +204833,119 @@ function _putsF(dt, pos, val) {
   dt[o3 + 2] |= val >>> 16;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/zip/zip.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/zip/zip.js
+async function unzip(runtime, buf, onlyNames = false) {
+  const out = /* @__PURE__ */ Object.create(null);
+  const data = new Uint8Array(buf);
+  if (readUshort(data, 0) !== 19280) {
+    throw new Error('Invalid ZIP file. A valid ZIP file must start with two magic bytes \\x50\\x4b ("PK" in ASCII).');
+  }
+  let eocd = data.length - 4;
+  while (readUint(data, eocd) !== 101010256)
+    eocd--;
+  let o3 = eocd;
+  o3 += 4;
+  o3 += 4;
+  const cnu = readUshort(data, o3);
+  o3 += 2;
+  o3 += 2;
+  o3 += 4;
+  const coffs = readUint(data, o3);
+  o3 += 4;
+  o3 = coffs;
+  for (let i4 = 0; i4 < cnu; i4++) {
+    o3 += 4;
+    o3 += 4;
+    o3 += 4;
+    o3 += 4;
+    o3 += 4;
+    o3 += 4;
+    o3 += 4;
+    const nl = readUshort(data, o3);
+    const el = readUshort(data, o3 + 2);
+    const cl = readUshort(data, o3 + 4);
+    o3 += 6;
+    o3 += 8;
+    const roff = readUint(data, o3);
+    o3 += 4;
+    o3 += nl + el + cl;
+    await _readLocal(runtime, data, roff, out, onlyNames);
+  }
+  return out;
+}
+async function _readLocal(runtime, data, o3, out, onlyNames) {
+  o3 += 4;
+  o3 += 2;
+  o3 += 2;
+  const cmpr = readUshort(data, o3);
+  o3 += 2;
+  o3 += 4;
+  o3 += 4;
+  const csize = readUint(data, o3);
+  o3 += 4;
+  const usize = readUint(data, o3);
+  o3 += 4;
+  const nlen = readUshort(data, o3);
+  o3 += 2;
+  const elen = readUshort(data, o3);
+  o3 += 2;
+  const name = readUTF8(data, o3, nlen);
+  o3 += nlen;
+  o3 += elen;
+  if (onlyNames) {
+    out[name] = { size: usize, csize };
+    return;
+  }
+  const file = new Uint8Array(data.buffer, o3, csize);
+  if (cmpr === 0) {
+    out[name] = file;
+  } else if (cmpr === 8) {
+    const buf = new Uint8Array(usize);
+    await inflateRaw(runtime, file, buf);
+    out[name] = buf;
+  } else {
+    throw new Error(`unknown compression method: ${cmpr}`);
+  }
+}
 async function inflateRaw(runtime, file, buf) {
   return _inflate(runtime, file, buf);
 }
 function inflate(runtime, file, buf) {
   return inflateRaw(runtime, new Uint8Array(file.buffer, file.byteOffset + 2, file.length - 6), buf);
+}
+async function ungzip(runtime, file, buf) {
+  const flg = file[3];
+  let o3 = 10;
+  if (flg & 4) {
+    const xlen = readUshort(file, o3);
+    o3 += xlen;
+  }
+  if (flg & 8) {
+    let zero = o3;
+    while (file[zero] !== 0)
+      ++zero;
+    o3 = zero + 1;
+  }
+  if (flg & 16) {
+    let zero = o3;
+    while (file[zero] !== 0)
+      ++zero;
+    o3 = zero + 1;
+  }
+  if (flg & 1) {
+    o3 += 2;
+  }
+  const crc32 = toInt32(readUint(file, file.length - 8));
+  const isize = readUint(file, file.length - 4);
+  if (buf === void 0)
+    buf = new Uint8Array(isize);
+  const blocks = new Uint8Array(file.buffer, file.byteOffset + o3, file.length - o3 - 8);
+  const inflated = await inflateRaw(runtime, blocks, buf);
+  const crcValue = crc(inflated, 0, inflated.length);
+  if (crc32 !== crcValue) {
+    console.error("ungzip: checksums don't match");
+  }
+  return inflated;
 }
 async function deflate(runtime, data, opts) {
   if (opts === void 0)
@@ -204757,10 +205063,10 @@ function _writeHeader(data, o3, p3, obj, t3, roff = 0) {
   return o3;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-plugin/version.js
-var PLUGIN_VERSION = "5.5.0";
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-plugin/version.js
+var PLUGIN_VERSION = "5.8.0";
 
-// https://jsr.io/@molstar/mol-view-stories/1.0.4/src/html-template.ts
+// https://jsr.io/@molstar/mol-view-stories/1.1.0/src/html-template.ts
 function generateStoriesHtml(data, options) {
   const js = options?.jsPath ?? `https://cdn.jsdelivr.net/npm/molstar@{{version}}/build/mvs-stories/mvs-stories.js`.replace(
     "{{version}}",
@@ -204911,7 +205217,326 @@ var ExtraLinks = `
         <a href="{{session-link}}" title="Download a session file which can be opened in the MolViewStories Builder">Download Story Session</a>&nbsp;<span class="sep">\u2022</span>
 `;
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/object.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/nodejs-shims.js
+var RUNNING_IN_NODEJS = typeof process !== "undefined" && process.versions != null && process.versions.node != null;
+var File_ = getFile();
+function getFile() {
+  if (typeof File === "undefined" || RUNNING_IN_NODEJS) {
+    class File_NodeJs {
+      arrayBuffer() {
+        return this.blob.arrayBuffer();
+      }
+      slice(start, end, contentType) {
+        return this.blob.slice(start, end, contentType);
+      }
+      stream() {
+        return this.blob.stream();
+      }
+      text() {
+        return this.blob.text();
+      }
+      bytes() {
+        return this.blob.bytes();
+      }
+      constructor(fileBits, fileName, options) {
+        var _a3;
+        this.blob = new Blob(fileBits, options);
+        this.size = this.blob.size;
+        this.type = this.blob.type;
+        this.name = fileName;
+        this.lastModified = (_a3 = options === null || options === void 0 ? void 0 : options.lastModified) !== null && _a3 !== void 0 ? _a3 : 0;
+        this.webkitRelativePath = "";
+      }
+    }
+    return File_NodeJs;
+  } else {
+    return File;
+  }
+}
+
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/assets.js
+var Asset;
+(function(Asset2) {
+  function Url(url, options) {
+    return { kind: "url", id: UUID.create22(), url, ...options };
+  }
+  Asset2.Url = Url;
+  function File2(file) {
+    return { kind: "file", id: UUID.create22(), name: file.name, file };
+  }
+  Asset2.File = File2;
+  function isUrl(x2) {
+    return (x2 === null || x2 === void 0 ? void 0 : x2.kind) === "url";
+  }
+  Asset2.isUrl = isUrl;
+  function isFile(x2) {
+    return (x2 === null || x2 === void 0 ? void 0 : x2.kind) === "file";
+  }
+  Asset2.isFile = isFile;
+  function Wrapper(data, asset, manager) {
+    return {
+      data,
+      dispose: () => {
+        manager.release(asset);
+      }
+    };
+  }
+  Asset2.Wrapper = Wrapper;
+  function getUrl(url) {
+    return typeof url === "string" ? url : url.url;
+  }
+  Asset2.getUrl = getUrl;
+  function getUrlAsset(manager, url, body) {
+    if (typeof url === "string") {
+      const asset = manager.tryFindUrl(url, body);
+      return asset || Url(url, { body });
+    }
+    return url;
+  }
+  Asset2.getUrlAsset = getUrlAsset;
+})(Asset || (Asset = {}));
+
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/data-source.js
+var DataCompressionMethod;
+(function(DataCompressionMethod2) {
+  DataCompressionMethod2[DataCompressionMethod2["None"] = 0] = "None";
+  DataCompressionMethod2[DataCompressionMethod2["Gzip"] = 1] = "Gzip";
+  DataCompressionMethod2[DataCompressionMethod2["Zip"] = 2] = "Zip";
+})(DataCompressionMethod || (DataCompressionMethod = {}));
+function ajaxGet(params) {
+  if (typeof params === "string")
+    return ajaxGetInternal(params, params, "string");
+  return ajaxGetInternal(params.title, params.url, params.type || "string", params.body, params.headers);
+}
+function isDone(data) {
+  if (RUNNING_IN_NODEJS)
+    throw new Error("`isDone` should not be used when running in Node.js");
+  if (data instanceof FileReader) {
+    return data.readyState === FileReader.DONE;
+  } else if (data instanceof XMLHttpRequest) {
+    return data.readyState === XMLHttpRequest.DONE;
+  }
+  throw new Error("unknown data type");
+}
+function genericError(isDownload) {
+  if (isDownload)
+    return "Failed to download data. Possible reasons: Resource is not available, or CORS is not allowed on the server.";
+  return "Failed to open file.";
+}
+function readData(ctx, action, data) {
+  if (RUNNING_IN_NODEJS)
+    throw new Error("`readData` should not be used when running in Node.js");
+  return new Promise((resolve3, reject) => {
+    if (isDone(data)) {
+      const { error } = data;
+      if (error !== null && error !== void 0) {
+        reject(error !== null && error !== void 0 ? error : genericError(data instanceof XMLHttpRequest));
+      } else {
+        resolve3(data);
+      }
+      return;
+    }
+    let hasError = false;
+    data.onerror = (e3) => {
+      if (hasError)
+        return;
+      const { error } = e3.target;
+      reject(error !== null && error !== void 0 ? error : genericError(data instanceof XMLHttpRequest));
+    };
+    data.onprogress = (e3) => {
+      if (!ctx.shouldUpdate || hasError)
+        return;
+      try {
+        if (e3.lengthComputable) {
+          ctx.update({ message: action, isIndeterminate: false, current: e3.loaded, max: e3.total });
+        } else {
+          ctx.update({ message: `${action} ${(e3.loaded / 1024 / 1024).toFixed(2)} MB`, isIndeterminate: true });
+        }
+      } catch (e4) {
+        hasError = true;
+        reject(e4);
+      }
+    };
+    data.onload = (e3) => {
+      resolve3(data);
+    };
+  });
+}
+var reFilterPath = /^(__MACOSX|.DS_Store)/;
+async function decompress(ctx, data, compression) {
+  switch (compression) {
+    case DataCompressionMethod.None:
+      return data;
+    case DataCompressionMethod.Gzip:
+      return ungzip(ctx, data);
+    case DataCompressionMethod.Zip:
+      const parsed = await unzip(ctx, data.buffer);
+      const names = Object.keys(parsed).filter((n3) => !reFilterPath.test(n3));
+      if (names.length !== 1)
+        throw new Error("can only decompress zip files with a single entry");
+      return parsed[names[0]];
+  }
+}
+async function processFile(ctx, fileContent, type4, compression) {
+  if (fileContent === null)
+    throw new Error("no data given");
+  let data = new Uint8Array(fileContent);
+  if (compression !== DataCompressionMethod.None && type4 !== "zip") {
+    data = await decompress(ctx, data, compression);
+  }
+  if (type4 === "binary") {
+    return data;
+  } else if (type4 === "zip") {
+    return await unzip(ctx, data.buffer);
+  } else if (type4 === "string") {
+    return utf8ReadLong(data);
+  } else if (type4 === "xml") {
+    const parser = new DOMParser();
+    return parser.parseFromString(utf8Read(data), "application/xml");
+  } else if (type4 === "json") {
+    return JSON.parse(utf8Read(data));
+  }
+  throw new Error(`could not get requested response data '${type4}'`);
+}
+var RequestPool = class _RequestPool {
+  static get() {
+    if (RUNNING_IN_NODEJS)
+      throw new Error("`RequestPool.get` should not be used when running in Node.js");
+    if (this.pool.length) {
+      return this.pool.pop();
+    }
+    return new XMLHttpRequest();
+  }
+  static emptyFunc() {
+  }
+  static deposit(req) {
+    if (this.pool.length < this.poolSize) {
+      req.onabort = _RequestPool.emptyFunc;
+      req.onerror = _RequestPool.emptyFunc;
+      req.onload = _RequestPool.emptyFunc;
+      req.onprogress = _RequestPool.emptyFunc;
+      this.pool.push(req);
+    }
+  }
+};
+RequestPool.pool = [];
+RequestPool.poolSize = 15;
+function processAjax(req, type4) {
+  if (req.status >= 200 && req.status < 400) {
+    const { response } = req;
+    RequestPool.deposit(req);
+    if ((type4 === "binary" || type4 === "zip") && response instanceof ArrayBuffer) {
+      return new Uint8Array(response);
+    } else if (type4 === "string" && typeof response === "string") {
+      return response;
+    } else if (type4 === "xml" && response instanceof XMLDocument) {
+      return response;
+    } else if (type4 === "json" && typeof response === "object") {
+      return response;
+    }
+    throw new Error(`could not get requested response data '${type4}'`);
+  } else {
+    RequestPool.deposit(req);
+    throw new Error(`Download failed with status code ${req.status}`);
+  }
+}
+function getRequestResponseType(type4) {
+  switch (type4) {
+    case "json":
+      return "json";
+    case "xml":
+      return "document";
+    case "string":
+      return "text";
+    case "binary":
+      return "arraybuffer";
+    case "zip":
+      return "arraybuffer";
+  }
+}
+function ajaxGetInternal(title, url, type4, body, headers) {
+  if (RUNNING_IN_NODEJS) {
+    if (url.startsWith("file://")) {
+      return ajaxGetInternal_file_NodeJS(title, url, type4, body, headers);
+    } else {
+      return ajaxGetInternal_http_NodeJS(title, url, type4, body, headers);
+    }
+  }
+  let xhttp = void 0;
+  return Task.create(title ? title : "Download", async (ctx) => {
+    xhttp = RequestPool.get();
+    xhttp.open(body ? "post" : "get", url, true);
+    if (headers) {
+      for (const [name, value] of headers) {
+        xhttp.setRequestHeader(name, value);
+      }
+    }
+    xhttp.responseType = getRequestResponseType(type4);
+    xhttp.send(body);
+    await ctx.update({ message: "Waiting for server...", canAbort: true });
+    const req = await readData(ctx, "Downloading...", xhttp);
+    xhttp = void 0;
+    await ctx.update({ message: "Parsing response...", canAbort: false });
+    const result = processAjax(req, type4);
+    return result;
+  }, () => {
+    if (xhttp) {
+      xhttp.abort();
+      xhttp = void 0;
+    }
+  });
+}
+var _fs = void 0;
+function getFS() {
+  if (!_fs) {
+    throw new Error("When running in Node.js and reading from files, call mol-util/data-source's setFSModule function first.");
+  }
+  return _fs;
+}
+function readFileAsync(filename) {
+  return new Promise((resolve3, reject) => {
+    getFS().readFile(filename, (err, data) => {
+      if (err)
+        reject(err);
+      else
+        resolve3(data);
+    });
+  });
+}
+function ajaxGetInternal_file_NodeJS(title, url, type4, body, headers) {
+  if (!RUNNING_IN_NODEJS)
+    throw new Error("This function should only be used when running in Node.js");
+  if (!url.startsWith("file://"))
+    throw new Error("This function is only for URLs with protocol file://");
+  return Task.create(title !== null && title !== void 0 ? title : "Download", async (ctx) => {
+    const filename = url.substring("file://".length);
+    await ctx.update({ message: "Loading file...", canAbort: false });
+    const data = await readFileAsync(filename);
+    await ctx.update({ message: "Parsing response...", canAbort: false });
+    const result = await processFile(ctx, data.buffer, type4, DataCompressionMethod.None);
+    return result;
+  });
+}
+function ajaxGetInternal_http_NodeJS(title, url, type4, body, headers) {
+  if (!RUNNING_IN_NODEJS)
+    throw new Error("This function should only be used when running in Node.js");
+  const aborter = new AbortController();
+  return Task.create(title !== null && title !== void 0 ? title : "Download", async (ctx) => {
+    await ctx.update({ message: "Downloading...", canAbort: true });
+    const response = await fetch(url, { signal: aborter.signal });
+    if (!(response.status >= 200 && response.status < 400)) {
+      throw new Error(`Download failed with status code ${response.status}`);
+    }
+    const fileContent = await response.bytes();
+    await ctx.update({ message: "Parsing response...", canAbort: false });
+    const result = await processFile(ctx, fileContent.buffer, type4, DataCompressionMethod.None);
+    return result;
+  }, () => {
+    aborter.abort();
+  });
+}
+
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/object.js
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 function deepClone(source) {
   if (null === source || "object" !== typeof source)
@@ -204960,9 +205585,17 @@ function isPlainObject(obj) {
   return typeof obj === "object" && obj !== null && !Array.isArray(obj);
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/json.js
-function onelinerJsonString(obj) {
-  return JSON.stringify(obj, void 0, "	").replace(/,\n\t*/g, ", ").replace(/\n\t*/g, "");
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/export.js
+async function createMVSX(data, assets) {
+  const encoder = new TextEncoder();
+  const files = {
+    "index.mvsj": encoder.encode(JSON.stringify(data))
+  };
+  for (const asset of assets) {
+    files[asset.name] = typeof asset.content === "string" ? encoder.encode(asset.content) : asset.content;
+  }
+  const zip2 = await Zip(files).run();
+  return new Uint8Array(zip2);
 }
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/fp-ts@2.16.11/node_modules/fp-ts/es6/function.js
@@ -205034,25 +205667,25 @@ var right = function(a3) {
 };
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/fp-ts@2.16.11/node_modules/fp-ts/es6/Functor.js
-function as(F2) {
-  return function(self2, b) {
-    return F2.map(self2, function() {
-      return b;
+function as(F) {
+  return function(self2, b2) {
+    return F.map(self2, function() {
+      return b2;
     });
   };
 }
-function asUnit(F2) {
-  var asM = as(F2);
+function asUnit(F) {
+  var asM = as(F);
   return function(self2) {
     return asM(self2, void 0);
   };
 }
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/fp-ts@2.16.11/node_modules/fp-ts/es6/Chain.js
-function tap(M2) {
+function tap(M) {
   return function(first2, f4) {
-    return M2.chain(first2, function(a3) {
-      return M2.map(f4(a3), function() {
+    return M.chain(first2, function(a3) {
+      return M.map(f4(a3), function() {
         return a3;
       });
     });
@@ -205107,22 +205740,22 @@ var _FromEither = {
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/io-ts@2.2.22_fp-ts@2.16.11/node_modules/io-ts/es6/index.js
 var __extends = /* @__PURE__ */ (function() {
-  var extendStatics = function(d3, b) {
-    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d4, b2) {
-      d4.__proto__ = b2;
-    } || function(d4, b2) {
-      for (var p3 in b2) if (Object.prototype.hasOwnProperty.call(b2, p3)) d4[p3] = b2[p3];
+  var extendStatics = function(d3, b2) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d4, b3) {
+      d4.__proto__ = b3;
+    } || function(d4, b3) {
+      for (var p3 in b3) if (Object.prototype.hasOwnProperty.call(b3, p3)) d4[p3] = b3[p3];
     };
-    return extendStatics(d3, b);
+    return extendStatics(d3, b2);
   };
-  return function(d3, b) {
-    if (typeof b !== "function" && b !== null)
-      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d3, b);
+  return function(d3, b2) {
+    if (typeof b2 !== "function" && b2 !== null)
+      throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
+    extendStatics(d3, b2);
     function __() {
       this.constructor = d3;
     }
-    d3.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    d3.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
   };
 })();
 var __assign = function() {
@@ -205171,8 +205804,8 @@ var Type = (
           return e3;
         }
         return ab.validate(e3.right, c3);
-      }, this.encode === identity2 && ab.encode === identity2 ? identity2 : function(b) {
-        return _this.encode(ab.encode(b));
+      }, this.encode === identity2 && ab.encode === identity2 ? identity2 : function(b2) {
+        return _this.encode(ab.encode(b2));
       });
     };
     Type3.prototype.asDecoder = function() {
@@ -205406,27 +206039,27 @@ function isNonEmpty2(as3) {
   return as3.length > 0;
 }
 var emptyTags = {};
-function intersect(a3, b) {
+function intersect(a3, b2) {
   var r3 = [];
   for (var _i = 0, a_1 = a3; _i < a_1.length; _i++) {
     var v3 = a_1[_i];
-    if (b.indexOf(v3) !== -1) {
+    if (b2.indexOf(v3) !== -1) {
       r3.push(v3);
     }
   }
   return r3;
 }
-function mergeTags(a3, b) {
+function mergeTags(a3, b2) {
   if (a3 === emptyTags) {
-    return b;
+    return b2;
   }
-  if (b === emptyTags) {
+  if (b2 === emptyTags) {
     return a3;
   }
   var r3 = Object.assign({}, a3);
-  for (var k3 in b) {
+  for (var k3 in b2) {
     if (hasOwnProperty2.call(a3, k3)) {
-      var intersection_1 = intersect(a3[k3], b[k3]);
+      var intersection_1 = intersect(a3[k3], b2[k3]);
       if (isNonEmpty2(intersection_1)) {
         r3[k3] = intersection_1;
       } else {
@@ -205434,24 +206067,24 @@ function mergeTags(a3, b) {
         break;
       }
     } else {
-      r3[k3] = b[k3];
+      r3[k3] = b2[k3];
     }
   }
   return r3;
 }
-function intersectTags(a3, b) {
-  if (a3 === emptyTags || b === emptyTags) {
+function intersectTags(a3, b2) {
+  if (a3 === emptyTags || b2 === emptyTags) {
     return emptyTags;
   }
   var r3 = emptyTags;
   for (var k3 in a3) {
-    if (hasOwnProperty2.call(b, k3)) {
-      var intersection_2 = intersect(a3[k3], b[k3]);
+    if (hasOwnProperty2.call(b2, k3)) {
+      var intersection_2 = intersect(a3[k3], b2[k3]);
       if (intersection_2.length === 0) {
         if (r3 === emptyTags) {
           r3 = {};
         }
-        r3[k3] = a3[k3].concat(b[k3]);
+        r3[k3] = a3[k3].concat(b2[k3]);
       }
     }
   }
@@ -206379,7 +207012,12 @@ var StrictType = (
   })(Type)
 );
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/generic/field-schema.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/json.js
+function onelinerJsonString(obj) {
+  return JSON.stringify(obj, void 0, "	").replace(/,\n\t*/g, ", ").replace(/\n\t*/g, "");
+}
+
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/generic/field-schema.js
 var str2 = string;
 var int = Integer;
 var float = number;
@@ -206442,6 +207080,8 @@ function OptionalField(type4, defaultValue, description) {
   return { type: type4, required: false, description, default: defaultValue };
 }
 function fieldValidationIssues(field, value) {
+  if (value === void 0 && !field.required)
+    return void 0;
   const validation = field.type.decode(value);
   if (validation._tag === "Right") {
     return void 0;
@@ -206476,7 +207116,7 @@ function stringifyError(v3) {
   return JSON.stringify(v3);
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/generic/params-schema.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/generic/params-schema.js
 function SimpleParamsSchema(fields) {
   return { type: "simple", fields };
 }
@@ -206551,7 +207191,7 @@ function unionParamsValidationIssues(schema, values, options) {
   return void 0;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/generic/tree-schema.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/generic/tree-schema.js
 function getParams(node) {
   var _a3;
   return (_a3 = node.params) !== null && _a3 !== void 0 ? _a3 : {};
@@ -206570,73 +207210,7 @@ function TreeSchemaWithAllRequired(schema) {
   };
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/generic/tree-utils.js
-function dfs(root, visit, postVisit) {
-  return _dfs(root, void 0, visit, postVisit);
-}
-function _dfs(root, parent, visit, postVisit) {
-  var _a3;
-  if (visit)
-    visit(root, parent);
-  for (const child of (_a3 = root.children) !== null && _a3 !== void 0 ? _a3 : []) {
-    _dfs(child, root, visit, postVisit);
-  }
-  if (postVisit)
-    postVisit(root, parent);
-}
-function treeToString(tree) {
-  let level = 0;
-  const lines = [];
-  dfs(tree, (node) => lines.push("  ".repeat(level++) + nodeToString(node)), (node) => level--);
-  return lines.join("\n");
-}
-function nodeToString(node) {
-  var _a3;
-  return `- ${node.kind} ${formatObject((_a3 = node.params) !== null && _a3 !== void 0 ? _a3 : {})}${formatCustomProps(node.custom)}${formatRef(node.ref)}`;
-}
-function formatObject(obj) {
-  if (!obj)
-    return "undefined";
-  return JSON.stringify(obj).replace(/,("\w+":)/g, ", $1").replace(/"(\w+)":/g, "$1: ");
-}
-function formatCustomProps(customProps) {
-  if (!customProps || Object.keys(customProps).length === 0)
-    return "";
-  return `, custom: ${formatObject(customProps)}`;
-}
-function formatRef(ref) {
-  if (ref === void 0)
-    return "";
-  return `, ref: "${ref}"`;
-}
-
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/generic/tree-validation.js
-function treeValidationIssues(schema, tree, options = {}) {
-  if (!isPlainObject(tree))
-    return [`Node must be an object, not ${tree}`];
-  if (!options.anyRoot && tree.kind !== schema.rootKind)
-    return [`Invalid root node kind "${tree.kind}", root must be of kind "${schema.rootKind}"`];
-  const nodeSchema = schema.nodes[tree.kind];
-  if (!nodeSchema)
-    return [`Unknown node kind "${tree.kind}"`];
-  if (nodeSchema.parent && options.parent !== void 0 && !nodeSchema.parent.includes(options.parent)) {
-    return [`Node of kind "${tree.kind}" cannot appear as a child of "${options.parent}". Allowed parents for "${tree.kind}" are: ${nodeSchema.parent.map((s3) => `"${s3}"`).join(", ")}`];
-  }
-  const issues = paramsValidationIssues(nodeSchema.params, getParams(tree), options);
-  if (issues)
-    return [`Invalid parameters for node of kind "${tree.kind}":`, ...issues.map((s3) => "  " + s3)];
-  if (tree.custom !== void 0 && (typeof tree.custom !== "object" || tree.custom === null)) {
-    return [`Invalid "custom" for node of kind "${tree.kind}": must be an object, not ${tree.custom}.`];
-  }
-  for (const child of getChildren(tree)) {
-    const issues2 = treeValidationIssues(schema, child, { ...options, anyRoot: true, parent: tree.kind });
-    if (issues2)
-      return issues2;
-  }
-  return void 0;
-}
-
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/misc.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/misc.js
 var halfPI = Math.PI / 2;
 var PiDiv180 = Math.PI / 180;
 function degToRad(deg) {
@@ -206646,7 +207220,7 @@ function radToDeg(rad) {
   return rad / PiDiv180;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/interpolate.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/interpolate.js
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
@@ -206662,7 +207236,7 @@ function quadraticBezier(p0, p1, p22, t3) {
   return k3 * k3 * p0 + 2 * k3 * t3 * p1 + t3 * t3 * p22;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/color/spaces/lab.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/color/spaces/lab.js
 function Lab() {
   return Lab.zero();
 }
@@ -206673,29 +207247,29 @@ function Lab() {
     return out;
   }
   Lab2.zero = zero;
-  function create3(l3, a3, b) {
+  function create3(l3, a3, b2) {
     const out = zero();
     out[0] = l3;
     out[1] = a3;
-    out[2] = b;
+    out[2] = b2;
     return out;
   }
   Lab2.create = create3;
-  function set2(out, l3, a3, b) {
+  function set2(out, l3, a3, b2) {
     out[0] = l3;
     out[1] = a3;
-    out[2] = b;
+    out[2] = b2;
     return out;
   }
   Lab2.set = set2;
-  function distance(a3, b) {
-    const x2 = b[0] - a3[0], y3 = b[1] - a3[1], z3 = b[2] - a3[2];
+  function distance(a3, b2) {
+    const x2 = b2[0] - a3[0], y3 = b2[1] - a3[1], z3 = b2[2] - a3[2];
     return Math.sqrt(x2 * x2 + y3 * y3 + z3 * z3);
   }
   Lab2.distance = distance;
   function fromColor(out, color) {
-    const [r3, g2, b] = Color.toRgb(color);
-    const [x2, y3, z3] = rgbToXyz(r3, g2, b);
+    const [r3, g2, b2] = Color.toRgb(color);
+    const [x2, y3, z3] = rgbToXyz(r3, g2, b2);
     const l3 = 116 * y3 - 16;
     out[0] = l3 < 0 ? 0 : l3;
     out[1] = 500 * (x2 - y3);
@@ -206716,14 +207290,14 @@ function Lab() {
     z3 = Zn * lab_xyz(z3);
     const r3 = xyz_rgb(3.2404542 * x2 - 1.5371385 * y3 - 0.4985314 * z3);
     const g2 = xyz_rgb(-0.969266 * x2 + 1.8760108 * y3 + 0.041556 * z3);
-    const b = xyz_rgb(0.0556434 * x2 - 0.2040259 * y3 + 1.0572252 * z3);
-    return Color.fromRgb(Math.round(clamp(r3, 0, 255)), Math.round(clamp(g2, 0, 255)), Math.round(clamp(b, 0, 255)));
+    const b2 = xyz_rgb(0.0556434 * x2 - 0.2040259 * y3 + 1.0572252 * z3);
+    return Color.fromRgb(Math.round(clamp(r3, 0, 255)), Math.round(clamp(g2, 0, 255)), Math.round(clamp(b2, 0, 255)));
   }
   Lab2.toColor = toColor;
   function toHcl(out, lab) {
-    const [l3, a3, b] = lab;
-    const c3 = Math.sqrt(a3 * a3 + b * b);
-    let h4 = (radToDeg(Math.atan2(b, a3)) + 360) % 360;
+    const [l3, a3, b2] = lab;
+    const c3 = Math.sqrt(a3 * a3 + b2 * b2);
+    let h4 = (radToDeg(Math.atan2(b2, a3)) + 360) % 360;
     if (Math.round(c3 * 1e4) === 0)
       h4 = Number.NaN;
     out[0] = h4;
@@ -206784,18 +207358,18 @@ function Lab() {
       return Math.pow(t3, 1 / 3);
     return t3 / T23 + T0;
   }
-  function rgbToXyz(r3, g2, b) {
+  function rgbToXyz(r3, g2, b2) {
     r3 = rgb_xyz(r3);
     g2 = rgb_xyz(g2);
-    b = rgb_xyz(b);
-    const x2 = xyz_lab((0.4124564 * r3 + 0.3575761 * g2 + 0.1804375 * b) / Xn);
-    const y3 = xyz_lab((0.2126729 * r3 + 0.7151522 * g2 + 0.072175 * b) / Yn);
-    const z3 = xyz_lab((0.0193339 * r3 + 0.119192 * g2 + 0.9503041 * b) / Zn);
+    b2 = rgb_xyz(b2);
+    const x2 = xyz_lab((0.4124564 * r3 + 0.3575761 * g2 + 0.1804375 * b2) / Xn);
+    const y3 = xyz_lab((0.2126729 * r3 + 0.7151522 * g2 + 0.072175 * b2) / Yn);
+    const z3 = xyz_lab((0.0193339 * r3 + 0.119192 * g2 + 0.9503041 * b2) / Zn);
     return [x2, y3, z3];
   }
 })(Lab || (Lab = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/color/spaces/hcl.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/color/spaces/hcl.js
 function Hcl() {
   return Hcl.zero();
 }
@@ -206881,7 +207455,7 @@ function Hcl() {
   const Kn = 18;
 })(Hcl || (Hcl = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/color/spaces/rgb.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/color/spaces/rgb.js
 function Rgb() {
   return Rgb.zero();
 }
@@ -206905,7 +207479,7 @@ function Rgb() {
   Rgb2.toColor = toColor;
 })(Rgb || (Rgb = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/color/spaces/hsl.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/color/spaces/hsl.js
 function Hsl() {
   return Hsl.zero();
 }
@@ -206928,9 +207502,9 @@ function Hsl() {
   }
   Hsl2.toColor = toColor;
   function fromRgb(out, rgb) {
-    const [r3, g2, b] = rgb;
-    const minRgb = Math.min(r3, g2, b);
-    const maxRgb = Math.max(r3, g2, b);
+    const [r3, g2, b2] = rgb;
+    const minRgb = Math.min(r3, g2, b2);
+    const maxRgb = Math.max(r3, g2, b2);
     const l3 = (maxRgb + minRgb) / 2;
     let s3 = 0, h4 = 0;
     if (maxRgb === minRgb) {
@@ -206940,10 +207514,10 @@ function Hsl() {
       s3 = l3 < 0.5 ? (maxRgb - minRgb) / (maxRgb + minRgb) : (maxRgb - minRgb) / (2 - maxRgb - minRgb);
     }
     if (r3 === maxRgb)
-      h4 = (g2 - b) / (maxRgb - minRgb);
+      h4 = (g2 - b2) / (maxRgb - minRgb);
     else if (g2 === maxRgb)
-      h4 = 2 + (b - r3) / (maxRgb - minRgb);
-    else if (b === maxRgb)
+      h4 = 2 + (b2 - r3) / (maxRgb - minRgb);
+    else if (b2 === maxRgb)
       h4 = 4 + (r3 - g2) / (maxRgb - minRgb);
     h4 *= 60;
     if (h4 < 0)
@@ -206958,9 +207532,9 @@ function Hsl() {
   const _c2 = [0, 0, 0];
   function toRgb(out, hsl) {
     const [h4, s3, l3] = hsl;
-    let r3, g2, b;
+    let r3, g2, b2;
     if (s3 === 0) {
-      r3 = g2 = b = l3;
+      r3 = g2 = b2 = l3;
     } else {
       const t3 = _t3;
       const c3 = _c2;
@@ -206986,11 +207560,11 @@ function Hsl() {
       }
       r3 = c3[0];
       g2 = c3[1];
-      b = c3[2];
+      b2 = c3[2];
     }
     out[0] = r3;
     out[1] = g2;
-    out[2] = b;
+    out[2] = b2;
     return out;
   }
   Hsl2.toRgb = toRgb;
@@ -207030,7 +207604,7 @@ function Hsl() {
   Hsl2.interpolate = interpolate;
 })(Hsl || (Hsl = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/color/color.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/color/color.js
 function Color(hex) {
   return hex;
 }
@@ -207067,12 +207641,12 @@ function Color(hex) {
     return parseInt(s3);
   }
   Color3.fromHexString = fromHexString;
-  function fromRgb(r3, g2, b) {
-    return r3 << 16 | g2 << 8 | b;
+  function fromRgb(r3, g2, b2) {
+    return r3 << 16 | g2 << 8 | b2;
   }
   Color3.fromRgb = fromRgb;
-  function fromNormalizedRgb(r3, g2, b) {
-    return r3 * 255 << 16 | g2 * 255 << 8 | b * 255;
+  function fromNormalizedRgb(r3, g2, b2) {
+    return r3 * 255 << 16 | g2 * 255 << 8 | b2 * 255;
   }
   Color3.fromNormalizedRgb = fromNormalizedRgb;
   function fromArray(array4, offset) {
@@ -207127,8 +207701,8 @@ function Color(hex) {
     const b2 = c22 & 255;
     const r3 = r1 + (r22 - r1) * t3;
     const g3 = g1 + (g2 - g1) * t3;
-    const b = b1 + (b2 - b1) * t3;
-    return r3 << 16 | g3 << 8 | b;
+    const b3 = b1 + (b2 - b1) * t3;
+    return r3 << 16 | g3 << 8 | b3;
   }
   Color3.interpolate = interpolate;
   const _interpolateHsl1 = Hsl.zero();
@@ -207143,8 +207717,8 @@ function Color(hex) {
   function hasHue(c3) {
     const r3 = c3 >> 16 & 255;
     const g2 = c3 >> 8 & 255;
-    const b = c3 & 255;
-    return r3 !== g2 || r3 !== b;
+    const b2 = c3 & 255;
+    return r3 !== g2 || r3 !== b2;
   }
   Color3.hasHue = hasHue;
   const tmpSaturateHcl = [0, 0, 0];
@@ -207175,13 +207749,13 @@ function Color(hex) {
   function luminance(c3) {
     const r3 = _luminance((c3 >> 16 & 255) / 255);
     const g2 = _luminance((c3 >> 8 & 255) / 255);
-    const b = _luminance((c3 & 255) / 255);
-    return 0.2126 * r3 + 0.7152 * g2 + 0.0722 * b;
+    const b2 = _luminance((c3 & 255) / 255);
+    return 0.2126 * r3 + 0.7152 * g2 + 0.0722 * b2;
   }
   Color3.luminance = luminance;
-  function contrast(a3, b) {
+  function contrast(a3, b2) {
     const l1 = luminance(a3);
-    const l22 = luminance(b);
+    const l22 = luminance(b2);
     return l1 > l22 ? (l1 + 0.05) / (l22 + 0.05) : (l22 + 0.05) / (l1 + 0.05);
   }
   Color3.contrast = contrast;
@@ -207205,7 +207779,7 @@ function ColorMap(o3) {
   return o3;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/color/names.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/color/names.js
 var ColorNames = ColorMap({
   aliceblue: 15792383,
   antiquewhite: 16444375,
@@ -207371,7 +207945,7 @@ var ColorNamesValueMap = (function() {
   return map3;
 })();
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/mvs/param-types.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/mvs/param-types.js
 var ParseFormatT = literal(
   // trajectory
   "mmcif",
@@ -207606,7 +208180,7 @@ var _ContinuousPalette = object2(
 var ContinuousPalette = _ContinuousPalette;
 var Palette = union2(CategoricalPalette, DiscretePalette, ContinuousPalette);
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/animation/animation-tree.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/animation/animation-tree.js
 var Easing = literal("linear", "bounce-in", "bounce-out", "bounce-in-out", "circle-in", "circle-out", "circle-in-out", "cubic-in", "cubic-out", "cubic-in-out", "exp-in", "exp-out", "exp-in-out", "quad-in", "quad-out", "quad-in-out", "sin-in", "sin-out", "sin-in-out");
 var _Noise = {
   /** Magnitude of the noise to apply to the interpolated value. */
@@ -207754,7 +208328,122 @@ var MVSAnimationSchema = TreeSchema({
   }
 });
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/mvs/mvs-builder.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/generic/tree-utils.js
+function dfs(root, visit, postVisit) {
+  return _dfs(root, void 0, visit, postVisit);
+}
+function _dfs(root, parent, visit, postVisit) {
+  var _a3;
+  if (visit)
+    visit(root, parent);
+  for (const child of (_a3 = root.children) !== null && _a3 !== void 0 ? _a3 : []) {
+    _dfs(child, root, visit, postVisit);
+  }
+  if (postVisit)
+    postVisit(root, parent);
+}
+function treeToString(tree) {
+  let level = 0;
+  const lines = [];
+  dfs(tree, (node) => lines.push("  ".repeat(level++) + nodeToString(node)), (node) => level--);
+  return lines.join("\n");
+}
+function nodeToString(node) {
+  var _a3;
+  return `- ${node.kind} ${formatObject((_a3 = node.params) !== null && _a3 !== void 0 ? _a3 : {})}${formatCustomProps(node.custom)}${formatRef(node.ref)}`;
+}
+function formatObject(obj) {
+  if (!obj)
+    return "undefined";
+  return JSON.stringify(obj).replace(/,("\w+":)/g, ", $1").replace(/"(\w+)":/g, "$1: ");
+}
+function formatCustomProps(customProps) {
+  if (!customProps || Object.keys(customProps).length === 0)
+    return "";
+  return `, custom: ${formatObject(customProps)}`;
+}
+function formatRef(ref) {
+  if (ref === void 0)
+    return "";
+  return `, ref: "${ref}"`;
+}
+function resolveUri(...refs) {
+  let result = void 0;
+  for (const ref of refs.reverse()) {
+    if (ref !== void 0) {
+      if (result === void 0)
+        result = ref;
+      else
+        result = new URL(ref, result).href;
+    }
+  }
+  return result;
+}
+function findUris(tree, uriParamNames, out = /* @__PURE__ */ new Set()) {
+  dfs(tree, (node) => {
+    const params = node.params;
+    if (!params)
+      return;
+    for (const name of uriParamNames) {
+      const uri = params[name];
+      if (typeof uri === "string") {
+        out.add(uri);
+      }
+    }
+  });
+  return out;
+}
+function replaceUris(tree, uriMapping, uriParamNames) {
+  dfs(tree, (node) => {
+    const params = node.params;
+    if (!params)
+      return;
+    for (const name of uriParamNames) {
+      const oldUri = params[name];
+      if (typeof oldUri === "string" && typeof uriMapping[oldUri] === "string") {
+        params[name] = uriMapping[oldUri];
+      }
+    }
+  });
+}
+function windowUrl() {
+  if (typeof window !== "undefined") {
+    return window.location.href;
+  }
+  if (typeof process !== "undefined") {
+    const cwd2 = process.cwd().replace(/\/?$/, "/");
+    return `file://${cwd2}`;
+  }
+  return void 0;
+}
+
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/generic/tree-validation.js
+function treeValidationIssues(schema, tree, options = {}) {
+  if (!isPlainObject(tree))
+    return [`Node must be an object, not ${tree}`];
+  if (!options.anyRoot && tree.kind !== schema.rootKind)
+    return [`Invalid root node kind "${tree.kind}", root must be of kind "${schema.rootKind}"`];
+  const nodeSchema = schema.nodes[tree.kind];
+  if (!nodeSchema)
+    return [`Unknown node kind "${tree.kind}"`];
+  if (nodeSchema.parent && options.parent !== void 0 && !nodeSchema.parent.includes(options.parent)) {
+    return [`Node of kind "${tree.kind}" cannot appear as a child of "${options.parent}". Allowed parents for "${tree.kind}" are: ${nodeSchema.parent.map((s3) => `"${s3}"`).join(", ")}`];
+  }
+  const issues = paramsValidationIssues(nodeSchema.params, getParams(tree), options);
+  if (issues)
+    return [`Invalid parameters for node of kind "${tree.kind}":`, ...issues.map((s3) => "  " + s3)];
+  if (tree.custom !== void 0 && (typeof tree.custom !== "object" || tree.custom === null)) {
+    return [`Invalid "custom" for node of kind "${tree.kind}": must be an object, not ${tree.custom}.`];
+  }
+  for (const child of getChildren(tree)) {
+    const issues2 = treeValidationIssues(schema, child, { ...options, anyRoot: true, parent: tree.kind });
+    if (issues2)
+      return issues2;
+  }
+  return void 0;
+}
+
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/mvs/mvs-builder.js
 function createMVSBuilder(params = {}) {
   return new Root(params);
 }
@@ -208166,7 +208855,7 @@ function splitParams(params_custom_ref) {
   return { params, custom, ref };
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/mvs/mvs-tree-primitives.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/mvs/mvs-tree-primitives.js
 var _TubeBase = {
   /** Start point of the tube. */
   start: RequiredField(PrimitivePositionT, "Start point of the tube."),
@@ -208394,7 +209083,7 @@ var MVSPrimitiveParams = UnionParamsSchema("kind", "Kind of geometrical primitiv
   "box": SimpleParamsSchema(BoxParams)
 });
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/mvs/mvs-tree-representations.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/mvs/mvs-tree-representations.js
 var Cartoon = {
   /** Scales the corresponding visuals */
   size_factor: OptionalField(float, 1, "Scales the corresponding visuals."),
@@ -208427,6 +209116,12 @@ var Carbohydrate = {
   /** Scales the corresponding visuals */
   size_factor: OptionalField(float, 1, "Scales the corresponding visuals.")
 };
+var Putty = {
+  /** Scales the corresponding visuals */
+  size_factor: OptionalField(float, 1, "Scales the corresponding visuals."),
+  /** Controls how the tube radius is determined. */
+  size_theme: OptionalField(literal("uniform", "uncertainty"), "uniform", "Controls how the tube radius is determined. 'uniform' uses a constant radius scaled by size_factor. 'uncertainty' drives the radius from per-residue B-factor/RMSF values.")
+};
 var Surface = {
   /** Type of surface representation. (Default is 'molecular') */
   surface_type: OptionalField(literal("molecular", "gaussian"), "molecular", `Type of surface representation. (Default is 'molecular')`),
@@ -208442,7 +209137,8 @@ var MVSRepresentationParams = UnionParamsSchema("type", "Representation type", {
   line: SimpleParamsSchema(Line),
   spacefill: SimpleParamsSchema(Spacefill),
   carbohydrate: SimpleParamsSchema(Carbohydrate),
-  surface: SimpleParamsSchema(Surface)
+  surface: SimpleParamsSchema(Surface),
+  putty: SimpleParamsSchema(Putty)
 });
 var VolumeIsoSurface = {
   /** Relative isovalue. */
@@ -208504,7 +209200,8 @@ var MVSClipParams = UnionParamsSchema("type", "Clip type", {
   })
 });
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/tree/mvs/mvs-tree.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/tree/mvs/mvs-tree.js
+var SelectorT = union2(ComponentSelectorT, ComponentExpressionT, list(ComponentExpressionT));
 var _DataFromUriParams = {
   /** URL of the annotation resource. */
   uri: RequiredField(str2, "URL of the annotation resource."),
@@ -208624,7 +209321,7 @@ var MVSTreeSchema = TreeSchema({
       parent: ["structure"],
       params: SimpleParamsSchema({
         /** Defines what part of the parent structure should be included in this component. */
-        selector: RequiredField(union2(ComponentSelectorT, ComponentExpressionT, list(ComponentExpressionT)), "Defines what part of the parent structure should be included in this component.")
+        selector: RequiredField(SelectorT, "Defines what part of the parent structure should be included in this component.")
       })
     },
     /** This node instructs to create a component defined by an external annotation resource. */
@@ -208680,7 +209377,7 @@ var MVSTreeSchema = TreeSchema({
         /** Color to apply to the representation. Can be either an X11 color name (e.g. `"red"`) or a hexadecimal code (e.g. `"#FF0011"`). */
         color: OptionalField(ColorT, DefaultColor, 'Color to apply to the representation. Can be either an X11 color name (e.g. `"red"`) or a hexadecimal code (e.g. `"#FF0011"`).'),
         /** Defines to what part of the representation this color should be applied. */
-        selector: OptionalField(union2(ComponentSelectorT, ComponentExpressionT, list(ComponentExpressionT)), "all", "Defines to what part of the representation this color should be applied.")
+        selector: OptionalField(SelectorT, "all", "Defines to what part of the representation this color should be applied.")
       })
     },
     /** This node instructs to apply colors to a visual representation. The colors are defined by an external annotation resource. */
@@ -208692,7 +209389,9 @@ var MVSTreeSchema = TreeSchema({
         /** Name of the column in CIF or field name (key) in JSON that contains the color. */
         field_name: OptionalField(str2, "color", "Name of the column in CIF or field name (key) in JSON that contains the color."),
         /** Customize mapping of annotation values to colors. */
-        palette: OptionalField(nullable(Palette), null, "Customize mapping of annotation values to colors.")
+        palette: OptionalField(nullable(Palette), null, "Customize mapping of annotation values to colors."),
+        /** Defines to what part of the representation this coloring should be applied. */
+        selector: OptionalField(SelectorT, "all", "Defines to what part of the representation this coloring should be applied.")
       })
     },
     /** This node instructs to apply colors to a visual representation. The colors are defined by an annotation resource included in the same file this structure was loaded from. Only applicable if the structure was loaded from an mmCIF or BinaryCIF file. */
@@ -208704,7 +209403,9 @@ var MVSTreeSchema = TreeSchema({
         /** Name of the column in CIF or field name (key) in JSON that contains the color. */
         field_name: OptionalField(str2, "color", "Name of the column in CIF or field name (key) in JSON that contains the color."),
         /** Customize mapping of annotation values to colors. */
-        palette: OptionalField(nullable(Palette), null, "Customize mapping of annotation values to colors.")
+        palette: OptionalField(nullable(Palette), null, "Customize mapping of annotation values to colors."),
+        /** Defines to what part of the representation this coloring should be applied. */
+        selector: OptionalField(SelectorT, "all", "Defines to what part of the representation this coloring should be applied.")
       })
     },
     /** This node instructs to apply clipping to a visual representation. */
@@ -208738,7 +209439,11 @@ var MVSTreeSchema = TreeSchema({
       params: SimpleParamsSchema({
         ..._DataFromUriParams,
         /** Name of the column in CIF or field name (key) in JSON that contains the label text. */
-        field_name: OptionalField(str2, "label", "Name of the column in CIF or field name (key) in JSON that contains the label text.")
+        field_name: OptionalField(str2, "label", "Name of the column in CIF or field name (key) in JSON that contains the label text."),
+        /** Formatting template for the label text. Supports simplified f-string syntax. */
+        text_format: OptionalField(str2, "{}", "Formatting template for the label text. Supports simplified f-string syntax."),
+        /** Set of annotation fields for grouping annotation rows into label instances (i.e. annotation rows with the same values in all group-by fields will yield one label instance). Annotation row with undefined value in any group-by field is considered a separate label instance. */
+        group_by_fields: OptionalField(nullable(list(str2)), null, "Set of annotation fields for grouping annotation rows into label instances (i.e. annotation rows with the same values in all group-by fields will yield one label instance). Annotation row with undefined value in any group-by field is considered a separate label instance.")
       })
     },
     /** This node instructs to add labels (textual visual representations) to parts of a structure. The labels are defined by an annotation resource included in the same file this structure was loaded from. Only applicable if the structure was loaded from an mmCIF or BinaryCIF file. */
@@ -208748,7 +209453,11 @@ var MVSTreeSchema = TreeSchema({
       params: SimpleParamsSchema({
         ..._DataFromSourceParams,
         /** Name of the column in CIF or field name (key) in JSON that contains the label text. */
-        field_name: OptionalField(str2, "label", "Name of the column in CIF or field name (key) in JSON that contains the label text.")
+        field_name: OptionalField(str2, "label", "Name of the column in CIF or field name (key) in JSON that contains the label text."),
+        /** Formatting template for the label text. Supports simplified f-string syntax. */
+        text_format: OptionalField(str2, "{}", "Formatting template for the label text. Supports simplified f-string syntax."),
+        /** Set of annotation fields for grouping annotation rows into label instances (i.e. annotation rows with the same values in all group-by fields will yield one label instance). Annotation row with undefined value in any group-by field is considered a separate label instance. */
+        group_by_fields: OptionalField(nullable(list(str2)), null, "Set of annotation fields for grouping annotation rows into label instances (i.e. annotation rows with the same values in all group-by fields will yield one label instance). Annotation row with undefined value in any group-by field is considered a separate label instance.")
       })
     },
     /** This node instructs to add a tooltip to a component. "Tooltip" is a text which is not a part of the visualization but should be presented to the users when they interact with the component (typically, the tooltip will be shown somewhere on the screen when the user hovers over a visual representation of the component). */
@@ -208767,7 +209476,9 @@ var MVSTreeSchema = TreeSchema({
       params: SimpleParamsSchema({
         ..._DataFromUriParams,
         /** Name of the column in CIF or field name (key) in JSON that contains the tooltip text. */
-        field_name: OptionalField(str2, "tooltip", "Name of the column in CIF or field name (key) in JSON that contains the tooltip text.")
+        field_name: OptionalField(str2, "tooltip", "Name of the column in CIF or field name (key) in JSON that contains the tooltip text."),
+        /** Formatting template for the tooltip text. Supports simplified f-string syntax. */
+        text_format: OptionalField(str2, "{}", "Formatting template for the tooltip text. Supports simplified f-string syntax.")
       })
     },
     /** This node instructs to add tooltips to parts of a structure. The tooltips are defined by an annotation resource included in the same file this structure was loaded from. Only applicable if the structure was loaded from an mmCIF or BinaryCIF file. */
@@ -208777,7 +209488,9 @@ var MVSTreeSchema = TreeSchema({
       params: SimpleParamsSchema({
         ..._DataFromSourceParams,
         /** Name of the column in CIF or field name (key) in JSON that contains the tooltip text. */
-        field_name: OptionalField(str2, "tooltip", "Name of the column in CIF or field name (key) in JSON that contains the tooltip text.")
+        field_name: OptionalField(str2, "tooltip", "Name of the column in CIF or field name (key) in JSON that contains the tooltip text."),
+        /** Formatting template for the tooltip text. Supports simplified f-string syntax. */
+        text_format: OptionalField(str2, "{}", "Formatting template for the tooltip text. Supports simplified f-string syntax.")
       })
     },
     /** This node instructs to set the camera focus to a component (zoom in). */
@@ -208870,7 +209583,7 @@ var MVSTreeSchema = TreeSchema({
 });
 var FullMVSTreeSchema = TreeSchemaWithAllRequired(MVSTreeSchema);
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/extensions/mvs/mvs-data.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/extensions/mvs/mvs-data.js
 var GlobalMetadata = {
   create(metadata) {
     return {
@@ -208898,6 +209611,43 @@ var MVSData = {
   /** Encode `MVSData` to MVSJ (MolViewSpec-JSON) string. Use `space` parameter to control formatting (as with `JSON.stringify`). */
   toMVSJ(mvsData, space) {
     return JSON.stringify(mvsData, void 0, space);
+  },
+  /** Encode `MVSData` to MVSX (MolViewSpec JSON zipped together with referenced assets). Automatically fetches all referenced assets unless specified otherwise in `options`. */
+  async toMVSX(mvsData, options = {}) {
+    var _a3;
+    let { assets, baseUri, skipExternal, cache } = options;
+    mvsData = deepClone(mvsData);
+    const uriParamNames = ["uri", "url"];
+    const trees = mvsData.kind === "multiple" ? mvsData.snapshots.map((s3) => s3.root) : [mvsData.root];
+    if (!assets) {
+      assets = {};
+      cache !== null && cache !== void 0 ? cache : cache = {};
+      const theWindowUrl = windowUrl();
+      const uris = /* @__PURE__ */ new Set();
+      for (const tree of trees) {
+        findUris(tree, uriParamNames, uris);
+      }
+      for (const uri of uris) {
+        if (skipExternal && isAbsoluteUri(uri))
+          continue;
+        const resolvedUri = resolveUri(uri, baseUri, theWindowUrl);
+        const content = (_a3 = cache[resolvedUri]) !== null && _a3 !== void 0 ? _a3 : cache[resolvedUri] = await ajaxGet({ url: resolvedUri, type: "binary" }).run();
+        assets[uri] = content;
+      }
+    }
+    const uriMapping = {};
+    const namedAssets = [];
+    let counter = 0;
+    for (const uri in assets) {
+      const nameHint = uri.split("/").pop().replace(/[^\w\.+-]/g, "_").slice(0, 64);
+      const assetName = `./assets/${counter++}-${nameHint}`;
+      uriMapping[uri] = assetName;
+      namedAssets.push({ name: assetName, content: assets[uri] });
+    }
+    for (const tree of trees) {
+      replaceUris(tree, uriMapping, uriParamNames);
+    }
+    return await createMVSX(mvsData, namedAssets);
   },
   /** Validate `MVSData`. Return `true` if OK; `false` if not OK.
    * If `options.noExtra` is true, presence of any extra node parameters is treated as an issue. */
@@ -209003,14 +209753,22 @@ function snapshotValidationIssues(snapshot, options = {}) {
 function utcNowISO() {
   return (/* @__PURE__ */ new Date()).toISOString();
 }
-
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/3d/common.js
-var EPSILON = 1e-6;
-function equalEps(a3, b, eps) {
-  return Math.abs(a3 - b) <= eps;
+function isAbsoluteUri(uri) {
+  try {
+    const url = new URL(uri);
+    return !!url.protocol;
+  } catch (_a3) {
+    return false;
+  }
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/3d/vec3.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/3d/common.js
+var EPSILON = 1e-6;
+function equalEps(a3, b2, eps) {
+  return Math.abs(a3 - b2) <= eps;
+}
+
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/3d/vec3.js
 var _isFinite = isFinite;
 function Vec3() {
   return Vec3.zero();
@@ -209101,66 +209859,73 @@ function Vec3() {
     return out;
   }
   Vec32.copy = copy;
-  function add(out, a3, b) {
-    out[0] = a3[0] + b[0];
-    out[1] = a3[1] + b[1];
-    out[2] = a3[2] + b[2];
+  function add(out, a3, b2) {
+    out[0] = a3[0] + b2[0];
+    out[1] = a3[1] + b2[1];
+    out[2] = a3[2] + b2[2];
     return out;
   }
   Vec32.add = add;
-  function sub(out, a3, b) {
-    out[0] = a3[0] - b[0];
-    out[1] = a3[1] - b[1];
-    out[2] = a3[2] - b[2];
+  function sub(out, a3, b2) {
+    out[0] = a3[0] - b2[0];
+    out[1] = a3[1] - b2[1];
+    out[2] = a3[2] - b2[2];
     return out;
   }
   Vec32.sub = sub;
-  function mul(out, a3, b) {
-    out[0] = a3[0] * b[0];
-    out[1] = a3[1] * b[1];
-    out[2] = a3[2] * b[2];
+  function mul(out, a3, b2) {
+    out[0] = a3[0] * b2[0];
+    out[1] = a3[1] * b2[1];
+    out[2] = a3[2] * b2[2];
     return out;
   }
   Vec32.mul = mul;
-  function div(out, a3, b) {
-    out[0] = a3[0] / b[0];
-    out[1] = a3[1] / b[1];
-    out[2] = a3[2] / b[2];
+  function div(out, a3, b2) {
+    out[0] = a3[0] / b2[0];
+    out[1] = a3[1] / b2[1];
+    out[2] = a3[2] / b2[2];
     return out;
   }
   Vec32.div = div;
-  function scale(out, a3, b) {
-    out[0] = a3[0] * b;
-    out[1] = a3[1] * b;
-    out[2] = a3[2] * b;
+  function mod(out, a3, b2) {
+    out[0] = a3[0] % b2[0];
+    out[1] = a3[1] % b2[1];
+    out[2] = a3[2] % b2[2];
+    return out;
+  }
+  Vec32.mod = mod;
+  function scale(out, a3, b2) {
+    out[0] = a3[0] * b2;
+    out[1] = a3[1] * b2;
+    out[2] = a3[2] * b2;
     return out;
   }
   Vec32.scale = scale;
-  function scaleAndAdd(out, a3, b, scale2) {
-    out[0] = a3[0] + b[0] * scale2;
-    out[1] = a3[1] + b[1] * scale2;
-    out[2] = a3[2] + b[2] * scale2;
+  function scaleAndAdd(out, a3, b2, scale2) {
+    out[0] = a3[0] + b2[0] * scale2;
+    out[1] = a3[1] + b2[1] * scale2;
+    out[2] = a3[2] + b2[2] * scale2;
     return out;
   }
   Vec32.scaleAndAdd = scaleAndAdd;
-  function scaleAndSub(out, a3, b, scale2) {
-    out[0] = a3[0] - b[0] * scale2;
-    out[1] = a3[1] - b[1] * scale2;
-    out[2] = a3[2] - b[2] * scale2;
+  function scaleAndSub(out, a3, b2, scale2) {
+    out[0] = a3[0] - b2[0] * scale2;
+    out[1] = a3[1] - b2[1] * scale2;
+    out[2] = a3[2] - b2[2] * scale2;
     return out;
   }
   Vec32.scaleAndSub = scaleAndSub;
-  function addScalar(out, a3, b) {
-    out[0] = a3[0] + b;
-    out[1] = a3[1] + b;
-    out[2] = a3[2] + b;
+  function addScalar(out, a3, b2) {
+    out[0] = a3[0] + b2;
+    out[1] = a3[1] + b2;
+    out[2] = a3[2] + b2;
     return out;
   }
   Vec32.addScalar = addScalar;
-  function subScalar(out, a3, b) {
-    out[0] = a3[0] - b;
-    out[1] = a3[1] - b;
-    out[2] = a3[2] - b;
+  function subScalar(out, a3, b2) {
+    out[0] = a3[0] - b2;
+    out[1] = a3[1] - b2;
+    out[2] = a3[2] - b2;
     return out;
   }
   Vec32.subScalar = subScalar;
@@ -209199,17 +209964,17 @@ function Vec3() {
     return out;
   }
   Vec32.abs = abs2;
-  function min(out, a3, b) {
-    out[0] = Math.min(a3[0], b[0]);
-    out[1] = Math.min(a3[1], b[1]);
-    out[2] = Math.min(a3[2], b[2]);
+  function min(out, a3, b2) {
+    out[0] = Math.min(a3[0], b2[0]);
+    out[1] = Math.min(a3[1], b2[1]);
+    out[2] = Math.min(a3[2], b2[2]);
     return out;
   }
   Vec32.min = min;
-  function max(out, a3, b) {
-    out[0] = Math.max(a3[0], b[0]);
-    out[1] = Math.max(a3[1], b[1]);
-    out[2] = Math.max(a3[2], b[2]);
+  function max(out, a3, b2) {
+    out[0] = Math.max(a3[0], b2[0]);
+    out[1] = Math.max(a3[1], b2[1]);
+    out[2] = Math.max(a3[2], b2[2]);
     return out;
   }
   Vec32.max = max;
@@ -209220,13 +209985,13 @@ function Vec3() {
     return out;
   }
   Vec32.clamp = clamp3;
-  function distance(a3, b) {
-    const x2 = b[0] - a3[0], y3 = b[1] - a3[1], z3 = b[2] - a3[2];
+  function distance(a3, b2) {
+    const x2 = b2[0] - a3[0], y3 = b2[1] - a3[1], z3 = b2[2] - a3[2];
     return Math.sqrt(x2 * x2 + y3 * y3 + z3 * z3);
   }
   Vec32.distance = distance;
-  function squaredDistance(a3, b) {
-    const x2 = b[0] - a3[0], y3 = b[1] - a3[1], z3 = b[2] - a3[2];
+  function squaredDistance(a3, b2) {
+    const x2 = b2[0] - a3[0], y3 = b2[1] - a3[1], z3 = b2[2] - a3[2];
     return x2 * x2 + y3 * y3 + z3 * z3;
   }
   Vec32.squaredDistance = squaredDistance;
@@ -209270,48 +210035,48 @@ function Vec3() {
     return out;
   }
   Vec32.normalize = normalize3;
-  function dot(a3, b) {
-    return a3[0] * b[0] + a3[1] * b[1] + a3[2] * b[2];
+  function dot(a3, b2) {
+    return a3[0] * b2[0] + a3[1] * b2[1] + a3[2] * b2[2];
   }
   Vec32.dot = dot;
-  function cross(out, a3, b) {
-    const ax = a3[0], ay = a3[1], az = a3[2], bx = b[0], by = b[1], bz = b[2];
+  function cross(out, a3, b2) {
+    const ax = a3[0], ay = a3[1], az = a3[2], bx = b2[0], by = b2[1], bz = b2[2];
     out[0] = ay * bz - az * by;
     out[1] = az * bx - ax * bz;
     out[2] = ax * by - ay * bx;
     return out;
   }
   Vec32.cross = cross;
-  function lerp(out, a3, b, t3) {
+  function lerp(out, a3, b2, t3) {
     const ax = a3[0], ay = a3[1], az = a3[2];
-    out[0] = ax + t3 * (b[0] - ax);
-    out[1] = ay + t3 * (b[1] - ay);
-    out[2] = az + t3 * (b[2] - az);
+    out[0] = ax + t3 * (b2[0] - ax);
+    out[1] = ay + t3 * (b2[1] - ay);
+    out[2] = az + t3 * (b2[2] - az);
     return out;
   }
   Vec32.lerp = lerp;
   const slerpRelVec = zero();
-  function slerp(out, a3, b, t3) {
-    const d3 = clamp(dot(a3, b), -1, 1);
+  function slerp(out, a3, b2, t3) {
+    const d3 = clamp(dot(a3, b2), -1, 1);
     const theta = Math.acos(d3) * t3;
-    scaleAndAdd(slerpRelVec, b, a3, -d3);
+    scaleAndAdd(slerpRelVec, b2, a3, -d3);
     normalize3(slerpRelVec, slerpRelVec);
     return add(out, scale(out, a3, Math.cos(theta)), scale(slerpRelVec, slerpRelVec, Math.sin(theta)));
   }
   Vec32.slerp = slerp;
-  function hermite(out, a3, b, c3, d3, t3) {
+  function hermite(out, a3, b2, c3, d3, t3) {
     const factorTimes2 = t3 * t3;
     const factor1 = factorTimes2 * (2 * t3 - 3) + 1;
     const factor2 = factorTimes2 * (t3 - 2) + t3;
     const factor3 = factorTimes2 * (t3 - 1);
     const factor4 = factorTimes2 * (3 - 2 * t3);
-    out[0] = a3[0] * factor1 + b[0] * factor2 + c3[0] * factor3 + d3[0] * factor4;
-    out[1] = a3[1] * factor1 + b[1] * factor2 + c3[1] * factor3 + d3[1] * factor4;
-    out[2] = a3[2] * factor1 + b[2] * factor2 + c3[2] * factor3 + d3[2] * factor4;
+    out[0] = a3[0] * factor1 + b2[0] * factor2 + c3[0] * factor3 + d3[0] * factor4;
+    out[1] = a3[1] * factor1 + b2[1] * factor2 + c3[1] * factor3 + d3[1] * factor4;
+    out[2] = a3[2] * factor1 + b2[2] * factor2 + c3[2] * factor3 + d3[2] * factor4;
     return out;
   }
   Vec32.hermite = hermite;
-  function bezier(out, a3, b, c3, d3, t3) {
+  function bezier(out, a3, b2, c3, d3, t3) {
     const inverseFactor = 1 - t3;
     const inverseFactorTimesTwo = inverseFactor * inverseFactor;
     const factorTimes2 = t3 * t3;
@@ -209319,23 +210084,23 @@ function Vec3() {
     const factor2 = 3 * t3 * inverseFactorTimesTwo;
     const factor3 = 3 * factorTimes2 * inverseFactor;
     const factor4 = factorTimes2 * t3;
-    out[0] = a3[0] * factor1 + b[0] * factor2 + c3[0] * factor3 + d3[0] * factor4;
-    out[1] = a3[1] * factor1 + b[1] * factor2 + c3[1] * factor3 + d3[1] * factor4;
-    out[2] = a3[2] * factor1 + b[2] * factor2 + c3[2] * factor3 + d3[2] * factor4;
+    out[0] = a3[0] * factor1 + b2[0] * factor2 + c3[0] * factor3 + d3[0] * factor4;
+    out[1] = a3[1] * factor1 + b2[1] * factor2 + c3[1] * factor3 + d3[1] * factor4;
+    out[2] = a3[2] * factor1 + b2[2] * factor2 + c3[2] * factor3 + d3[2] * factor4;
     return out;
   }
   Vec32.bezier = bezier;
-  function quadraticBezier2(out, a3, b, c3, t3) {
-    out[0] = quadraticBezier(a3[0], b[0], c3[0], t3);
-    out[1] = quadraticBezier(a3[1], b[1], c3[1], t3);
-    out[2] = quadraticBezier(a3[2], b[2], c3[2], t3);
+  function quadraticBezier2(out, a3, b2, c3, t3) {
+    out[0] = quadraticBezier(a3[0], b2[0], c3[0], t3);
+    out[1] = quadraticBezier(a3[1], b2[1], c3[1], t3);
+    out[2] = quadraticBezier(a3[2], b2[2], c3[2], t3);
     return out;
   }
   Vec32.quadraticBezier = quadraticBezier2;
-  function spline2(out, a3, b, c3, d3, t3, tension) {
-    out[0] = spline(a3[0], b[0], c3[0], d3[0], t3, tension);
-    out[1] = spline(a3[1], b[1], c3[1], d3[1], t3, tension);
-    out[2] = spline(a3[2], b[2], c3[2], d3[2], t3, tension);
+  function spline2(out, a3, b2, c3, d3, t3, tension) {
+    out[0] = spline(a3[0], b2[0], c3[0], d3[0], t3, tension);
+    out[1] = spline(a3[1], b2[1], c3[1], d3[1], t3, tension);
+    out[2] = spline(a3[2], b2[2], c3[2], d3[2], t3, tension);
     return out;
   }
   Vec32.spline = spline2;
@@ -209408,11 +210173,11 @@ function Vec3() {
     return out;
   }
   Vec32.transformQuat = transformQuat;
-  function angle(a3, b) {
-    const denominator = Math.sqrt(squaredMagnitude(a3) * squaredMagnitude(b));
+  function angle(a3, b2) {
+    const denominator = Math.sqrt(squaredMagnitude(a3) * squaredMagnitude(b2));
     if (denominator === 0)
       return Math.PI / 2;
-    const theta = dot(a3, b) / denominator;
+    const theta = dot(a3, b2) / denominator;
     return Math.acos(clamp(theta, -1, 1));
   }
   Vec32.angle = angle;
@@ -209423,10 +210188,10 @@ function Vec3() {
   const tmp_dh_abc = zero();
   const tmp_dh_bcd = zero();
   const tmp_dh_cross = zero();
-  function dihedralAngle(a3, b, c3, d3) {
-    sub(tmp_dh_ab, a3, b);
-    sub(tmp_dh_cb, c3, b);
-    sub(tmp_dh_bc, b, c3);
+  function dihedralAngle(a3, b2, c3, d3) {
+    sub(tmp_dh_ab, a3, b2);
+    sub(tmp_dh_cb, c3, b2);
+    sub(tmp_dh_bc, b2, c3);
     sub(tmp_dh_dc, d3, c3);
     cross(tmp_dh_abc, tmp_dh_ab, tmp_dh_cb);
     cross(tmp_dh_bcd, tmp_dh_bc, tmp_dh_dc);
@@ -209439,28 +210204,40 @@ function Vec3() {
     return Vec32.set(out, radius * Math.cos(azimuth) * Math.sin(inclination), radius * Math.sin(azimuth) * Math.sin(inclination), radius * Math.cos(inclination));
   }
   Vec32.directionFromSpherical = directionFromSpherical;
-  function exactEquals(a3, b) {
-    return a3[0] === b[0] && a3[1] === b[1] && a3[2] === b[2];
+  function exactEquals(a3, b2) {
+    return a3[0] === b2[0] && a3[1] === b2[1] && a3[2] === b2[2];
   }
   Vec32.exactEquals = exactEquals;
-  function equals3(a3, b) {
+  function equals3(a3, b2) {
     const a0 = a3[0], a1 = a3[1], a22 = a3[2];
-    const b0 = b[0], b1 = b[1], b2 = b[2];
-    return Math.abs(a0 - b0) <= EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a22 - b2) <= EPSILON * Math.max(1, Math.abs(a22), Math.abs(b2));
+    const b0 = b2[0], b1 = b2[1], b22 = b2[2];
+    return Math.abs(a0 - b0) <= EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a22 - b22) <= EPSILON * Math.max(1, Math.abs(a22), Math.abs(b22));
   }
   Vec32.equals = equals3;
   const rotTemp = zero();
-  function makeRotation(mat, a3, b) {
-    const by = angle(a3, b);
+  function makeRotation(mat, a3, b2) {
+    const by = angle(a3, b2);
     if (Math.abs(by) < 1e-4)
       return Mat4.setIdentity(mat);
     if (Math.abs(by - Math.PI) < EPSILON) {
       return Mat4.fromRotation(mat, Math.PI, Math.abs(a3[0]) < 0.9 ? Vec32.unitX : Vec32.unitZ);
     }
-    const axis = cross(rotTemp, a3, b);
+    const axis = cross(rotTemp, a3, b2);
     return Mat4.fromRotation(mat, by, axis);
   }
   Vec32.makeRotation = makeRotation;
+  const tmpCrossAxis = Vec32();
+  function rotateAroundAxis(out, v3, axis, angle2) {
+    const cos = Math.cos(angle2);
+    const sin = Math.sin(angle2);
+    const dot2 = Vec32.dot(v3, axis);
+    Vec32.cross(tmpCrossAxis, axis, v3);
+    out[0] = v3[0] * cos + tmpCrossAxis[0] * sin + axis[0] * dot2 * (1 - cos);
+    out[1] = v3[1] * cos + tmpCrossAxis[1] * sin + axis[1] * dot2 * (1 - cos);
+    out[2] = v3[2] * cos + tmpCrossAxis[2] * sin + axis[2] * dot2 * (1 - cos);
+    return out;
+  }
+  Vec32.rotateAroundAxis = rotateAroundAxis;
   function isZero(v3) {
     return v3[0] === 0 && v3[1] === 0 && v3[2] === 0;
   }
@@ -209489,8 +210266,8 @@ function Vec3() {
     return sub(out, p3, tmpProject);
   }
   Vec32.projectOnPlane = projectOnPlane;
-  function orthogonalize(out, a3, b) {
-    normalize3(out, cross(out, cross(out, a3, b), a3));
+  function orthogonalize(out, a3, b2) {
+    normalize3(out, cross(out, cross(out, a3, b2), a3));
     if (!Vec32.isZero(out))
       return out;
     out[0] = 1;
@@ -209505,7 +210282,7 @@ function Vec3() {
     normalize3(out, cross(out, cross(out, a3, out), a3));
     if (!Vec32.isZero(out))
       return out;
-    normalize3(out, b);
+    normalize3(out, b2);
     if (!Vec32.isZero(out))
       return out;
     out[0] = 1;
@@ -209514,8 +210291,8 @@ function Vec3() {
     return out;
   }
   Vec32.orthogonalize = orthogonalize;
-  function matchDirection(out, a3, b) {
-    if (dot(a3, b) > 0)
+  function matchDirection(out, a3, b2) {
+    if (dot(a3, b2) > 0)
       copy(out, a3);
     else
       negate(out, copy(out, a3));
@@ -209546,15 +210323,15 @@ function Vec3() {
   Vec32.orthogonalDirection = orthogonalDirection;
   const triangleNormalTmpAB = zero();
   const triangleNormalTmpAC = zero();
-  function triangleNormal(out, a3, b, c3) {
-    sub(triangleNormalTmpAB, b, a3);
+  function triangleNormal(out, a3, b2, c3) {
+    sub(triangleNormalTmpAB, b2, a3);
     sub(triangleNormalTmpAC, c3, a3);
     return normalize3(out, cross(out, triangleNormalTmpAB, triangleNormalTmpAC));
   }
   Vec32.triangleNormal = triangleNormal;
   const centerTmpV = zero();
-  function center(out, a3, b) {
-    return Vec32.scaleAndAdd(out, a3, Vec32.sub(centerTmpV, b, a3), 0.5);
+  function center(out, a3, b2) {
+    return Vec32.scaleAndAdd(out, a3, Vec32.sub(centerTmpV, b2, a3), 0.5);
   }
   Vec32.center = center;
   function toString(a3, precision) {
@@ -209572,7 +210349,7 @@ function Vec3() {
   Vec32.negUnitZ = create3(0, 0, -1);
 })(Vec3 || (Vec3 = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/3d/mat3.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/3d/mat3.js
 function Mat3() {
   return Mat3.zero();
 }
@@ -209703,9 +210480,9 @@ function Mat3() {
     return copy(zero(), a3);
   }
   Mat32.clone = clone2;
-  function areEqual(a3, b, eps) {
+  function areEqual(a3, b2, eps) {
     for (let i4 = 0; i4 < 9; i4++) {
-      if (Math.abs(a3[i4] - b[i4]) > eps)
+      if (Math.abs(a3[i4] - b2[i4]) > eps)
         return false;
     }
     return true;
@@ -209832,35 +210609,35 @@ function Mat3() {
     return a3[0] + a3[4] + a3[8];
   }
   Mat32.trace = trace;
-  function sub(out, a3, b) {
-    out[0] = a3[0] - b[0];
-    out[1] = a3[1] - b[1];
-    out[2] = a3[2] - b[2];
-    out[3] = a3[3] - b[3];
-    out[4] = a3[4] - b[4];
-    out[5] = a3[5] - b[5];
-    out[6] = a3[6] - b[6];
-    out[7] = a3[7] - b[7];
-    out[8] = a3[8] - b[8];
+  function sub(out, a3, b2) {
+    out[0] = a3[0] - b2[0];
+    out[1] = a3[1] - b2[1];
+    out[2] = a3[2] - b2[2];
+    out[3] = a3[3] - b2[3];
+    out[4] = a3[4] - b2[4];
+    out[5] = a3[5] - b2[5];
+    out[6] = a3[6] - b2[6];
+    out[7] = a3[7] - b2[7];
+    out[8] = a3[8] - b2[8];
     return out;
   }
   Mat32.sub = sub;
-  function add(out, a3, b) {
-    out[0] = a3[0] + b[0];
-    out[1] = a3[1] + b[1];
-    out[2] = a3[2] + b[2];
-    out[3] = a3[3] + b[3];
-    out[4] = a3[4] + b[4];
-    out[5] = a3[5] + b[5];
-    out[6] = a3[6] + b[6];
-    out[7] = a3[7] + b[7];
-    out[8] = a3[8] + b[8];
+  function add(out, a3, b2) {
+    out[0] = a3[0] + b2[0];
+    out[1] = a3[1] + b2[1];
+    out[2] = a3[2] + b2[2];
+    out[3] = a3[3] + b2[3];
+    out[4] = a3[4] + b2[4];
+    out[5] = a3[5] + b2[5];
+    out[6] = a3[6] + b2[6];
+    out[7] = a3[7] + b2[7];
+    out[8] = a3[8] + b2[8];
     return out;
   }
   Mat32.add = add;
-  function mul(out, a3, b) {
+  function mul(out, a3, b2) {
     const a00 = a3[0], a01 = a3[1], a02 = a3[2], a10 = a3[3], a11 = a3[4], a12 = a3[5], a20 = a3[6], a21 = a3[7], a22 = a3[8];
-    const b00 = b[0], b01 = b[1], b02 = b[2], b10 = b[3], b11 = b[4], b12 = b[5], b20 = b[6], b21 = b[7], b22 = b[8];
+    const b00 = b2[0], b01 = b2[1], b02 = b2[2], b10 = b2[3], b11 = b2[4], b12 = b2[5], b20 = b2[6], b21 = b2[7], b22 = b2[8];
     out[0] = b00 * a00 + b01 * a10 + b02 * a20;
     out[1] = b00 * a01 + b01 * a11 + b02 * a21;
     out[2] = b00 * a02 + b01 * a12 + b02 * a22;
@@ -209981,8 +210758,8 @@ function Mat3() {
   }
   Mat32.directionTransform = directionTransform;
   Mat32.Identity = identity4();
-  function innerProduct(a3, b) {
-    return a3[0] * b[0] + a3[1] * b[1] + a3[2] * b[2] + a3[3] * b[3] + a3[4] * b[4] + a3[5] * b[5] + a3[6] * b[6] + a3[7] * b[7] + a3[8] * b[8];
+  function innerProduct(a3, b2) {
+    return a3[0] * b2[0] + a3[1] * b2[1] + a3[2] * b2[2] + a3[3] * b2[3] + a3[4] * b2[4] + a3[5] * b2[5] + a3[6] * b2[6] + a3[7] * b2[7] + a3[8] * b2[8];
   }
   Mat32.innerProduct = innerProduct;
   function adjointFromMat4(out, m3) {
@@ -210009,7 +210786,7 @@ function Mat3() {
   Mat32.adjointFromMat4 = adjointFromMat4;
 })(Mat3 || (Mat3 = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/3d/quat.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/3d/quat.js
 function Quat() {
   return Quat.zero();
 }
@@ -210071,9 +210848,9 @@ function Quat() {
     return rad;
   }
   Quat2.getAxisAngle = getAxisAngle;
-  function multiply(out, a3, b) {
+  function multiply(out, a3, b2) {
     const ax = a3[0], ay = a3[1], az = a3[2], aw = a3[3];
-    const bx = b[0], by = b[1], bz = b[2], bw = b[3];
+    const bx = b2[0], by = b2[1], bz = b2[2], bw = b2[3];
     out[0] = ax * bw + aw * bx + ay * bz - az * by;
     out[1] = ay * bw + aw * by + az * bx - ax * bz;
     out[2] = az * bw + aw * bz + ax * by - ay * bx;
@@ -210123,9 +210900,9 @@ function Quat() {
     return out;
   }
   Quat2.calculateW = calculateW;
-  function slerp(out, a3, b, t3) {
+  function slerp(out, a3, b2, t3) {
     const ax = a3[0], ay = a3[1], az = a3[2], aw = a3[3];
-    let bx = b[0], by = b[1], bz = b[2], bw = b[3];
+    let bx = b2[0], by = b2[1], bz = b2[2], bw = b2[3];
     let omega, cosom, sinom, scale0, scale1;
     cosom = ax * bx + ay * by + az * bz + aw * bw;
     if (cosom < 0) {
@@ -210170,8 +210947,8 @@ function Quat() {
     return out;
   }
   Quat2.conjugate = conjugate;
-  function dot(a3, b) {
-    return a3[0] * b[0] + a3[1] * b[1] + a3[2] * b[2] + a3[3] * b[3];
+  function dot(a3, b2) {
+    return a3[0] * b2[0] + a3[1] * b2[1] + a3[2] * b2[2] + a3[3] * b2[3];
   }
   Quat2.dot = dot;
   function fromMat3(out, m3) {
@@ -210260,8 +211037,8 @@ function Quat() {
   }
   Quat2.fromEuler = fromEuler;
   const fromUnitVec3Temp = [0, 0, 0];
-  function fromUnitVec3(out, a3, b) {
-    let r3 = Vec3.dot(a3, b) + 1;
+  function fromUnitVec3(out, a3, b2) {
+    let r3 = Vec3.dot(a3, b2) + 1;
     if (r3 < EPSILON) {
       r3 = 0;
       if (Math.abs(a3[0]) > Math.abs(a3[2])) {
@@ -210270,7 +211047,7 @@ function Quat() {
         Vec3.set(fromUnitVec3Temp, 0, -a3[2], a3[1]);
       }
     } else {
-      Vec3.cross(fromUnitVec3Temp, a3, b);
+      Vec3.cross(fromUnitVec3Temp, a3, b2);
     }
     out[0] = fromUnitVec3Temp[0];
     out[1] = fromUnitVec3Temp[1];
@@ -210335,21 +211112,21 @@ function Quat() {
     return out;
   }
   Quat2.set = set2;
-  function exactEquals(a3, b) {
-    return a3[0] === b[0] && a3[1] === b[1] && a3[2] === b[2] && a3[3] === b[3];
+  function exactEquals(a3, b2) {
+    return a3[0] === b2[0] && a3[1] === b2[1] && a3[2] === b2[2] && a3[3] === b2[3];
   }
   Quat2.exactEquals = exactEquals;
-  function equals3(a3, b) {
+  function equals3(a3, b2) {
     const a0 = a3[0], a1 = a3[1], a22 = a3[2], a32 = a3[3];
-    const b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
-    return Math.abs(a0 - b0) <= EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a22 - b2) <= EPSILON * Math.max(1, Math.abs(a22), Math.abs(b2)) && Math.abs(a32 - b3) <= EPSILON * Math.max(1, Math.abs(a32), Math.abs(b3));
+    const b0 = b2[0], b1 = b2[1], b22 = b2[2], b3 = b2[3];
+    return Math.abs(a0 - b0) <= EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a22 - b22) <= EPSILON * Math.max(1, Math.abs(a22), Math.abs(b22)) && Math.abs(a32 - b3) <= EPSILON * Math.max(1, Math.abs(a32), Math.abs(b3));
   }
   Quat2.equals = equals3;
-  function add(out, a3, b) {
-    out[0] = a3[0] + b[0];
-    out[1] = a3[1] + b[1];
-    out[2] = a3[2] + b[2];
-    out[3] = a3[3] + b[3];
+  function add(out, a3, b2) {
+    out[0] = a3[0] + b2[0];
+    out[1] = a3[1] + b2[1];
+    out[2] = a3[2] + b2[2];
+    out[3] = a3[3] + b2[3];
     return out;
   }
   Quat2.add = add;
@@ -210363,8 +211140,8 @@ function Quat() {
     return x2 * x2 + y3 * y3 + z3 * z3 + w3 * w3;
   }
   Quat2.squaredMagnitude = squaredMagnitude;
-  function angle(a3, b) {
-    return 2 * Math.acos(Math.abs(clamp(dot(a3, b), -1, 1)));
+  function angle(a3, b2) {
+    return 2 * Math.acos(Math.abs(clamp(dot(a3, b2), -1, 1)));
   }
   Quat2.angle = angle;
   function normalize3(out, a3) {
@@ -210386,8 +211163,8 @@ function Quat() {
   const rotTmpVec3 = [0, 0, 0];
   const rotTmpVec3UnitX = [1, 0, 0];
   const rotTmpVec3UnitY = [0, 1, 0];
-  function rotationTo(out, a3, b) {
-    const dot2 = Vec3.dot(a3, b);
+  function rotationTo(out, a3, b2) {
+    const dot2 = Vec3.dot(a3, b2);
     if (dot2 < -0.999999) {
       Vec3.cross(rotTmpVec3, rotTmpVec3UnitX, a3);
       if (Vec3.magnitude(rotTmpVec3) < 1e-6)
@@ -210402,7 +211179,7 @@ function Quat() {
       out[3] = 1;
       return out;
     } else {
-      Vec3.cross(rotTmpVec3, a3, b);
+      Vec3.cross(rotTmpVec3, a3, b2);
       out[0] = rotTmpVec3[0];
       out[1] = rotTmpVec3[1];
       out[2] = rotTmpVec3[2];
@@ -210413,9 +211190,9 @@ function Quat() {
   Quat2.rotationTo = rotationTo;
   const sqlerpTemp1 = zero();
   const sqlerpTemp2 = zero();
-  function sqlerp(out, a3, b, c3, d3, t3) {
+  function sqlerp(out, a3, b2, c3, d3, t3) {
     slerp(sqlerpTemp1, a3, d3, t3);
-    slerp(sqlerpTemp2, b, c3, t3);
+    slerp(sqlerpTemp2, b2, c3, t3);
     slerp(out, sqlerpTemp1, sqlerpTemp2, 2 * t3 * (1 - t3));
     return out;
   }
@@ -210441,7 +211218,7 @@ function Quat() {
   Quat2.Identity = identity4();
 })(Quat || (Quat = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/3d/mat4.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/3d/mat4.js
 function Mat4() {
   return Mat4.zero();
 }
@@ -210529,9 +211306,9 @@ function Mat4() {
     return false;
   }
   Mat42.hasNaN = hasNaN;
-  function areEqual(a3, b, eps) {
+  function areEqual(a3, b2, eps) {
     for (let i4 = 0; i4 < 16; i4++) {
-      if (Math.abs(a3[i4] - b[i4]) > eps)
+      if (Math.abs(a3[i4] - b2[i4]) > eps)
         return false;
     }
     return true;
@@ -210772,76 +211549,76 @@ function Mat4() {
     return out;
   }
   Mat42.invert = invert;
-  function mul(out, a3, b) {
+  function mul(out, a3, b2) {
     const a00 = a3[0], a01 = a3[1], a02 = a3[2], a03 = a3[3], a10 = a3[4], a11 = a3[5], a12 = a3[6], a13 = a3[7], a20 = a3[8], a21 = a3[9], a22 = a3[10], a23 = a3[11], a30 = a3[12], a31 = a3[13], a32 = a3[14], a33 = a3[15];
-    let b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
-    out[0] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
-    out[1] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
-    out[2] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
-    out[3] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33;
-    b0 = b[4];
-    b1 = b[5];
-    b2 = b[6];
-    b3 = b[7];
-    out[4] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
-    out[5] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
-    out[6] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
-    out[7] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33;
-    b0 = b[8];
-    b1 = b[9];
-    b2 = b[10];
-    b3 = b[11];
-    out[8] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
-    out[9] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
-    out[10] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
-    out[11] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33;
-    b0 = b[12];
-    b1 = b[13];
-    b2 = b[14];
-    b3 = b[15];
-    out[12] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
-    out[13] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
-    out[14] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
-    out[15] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33;
+    let b0 = b2[0], b1 = b2[1], b22 = b2[2], b3 = b2[3];
+    out[0] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+    out[1] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+    out[2] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+    out[3] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+    b0 = b2[4];
+    b1 = b2[5];
+    b22 = b2[6];
+    b3 = b2[7];
+    out[4] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+    out[5] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+    out[6] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+    out[7] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+    b0 = b2[8];
+    b1 = b2[9];
+    b22 = b2[10];
+    b3 = b2[11];
+    out[8] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+    out[9] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+    out[10] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+    out[11] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+    b0 = b2[12];
+    b1 = b2[13];
+    b22 = b2[14];
+    b3 = b2[15];
+    out[12] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+    out[13] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+    out[14] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+    out[15] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
     return out;
   }
   Mat42.mul = mul;
-  function mulOffset(out, a3, b, oOut, oA, oB) {
+  function mulOffset(out, a3, b2, oOut, oA, oB) {
     const a00 = a3[0 + oA], a01 = a3[1 + oA], a02 = a3[2 + oA], a03 = a3[3 + oA], a10 = a3[4 + oA], a11 = a3[5 + oA], a12 = a3[6 + oA], a13 = a3[7 + oA], a20 = a3[8 + oA], a21 = a3[9 + oA], a22 = a3[10 + oA], a23 = a3[11 + oA], a30 = a3[12 + oA], a31 = a3[13 + oA], a32 = a3[14 + oA], a33 = a3[15 + oA];
-    let b0 = b[0 + oB], b1 = b[1 + oB], b2 = b[2 + oB], b3 = b[3 + oB];
-    out[0 + oOut] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
-    out[1 + oOut] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
-    out[2 + oOut] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
-    out[3 + oOut] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33;
-    b0 = b[4 + oB];
-    b1 = b[5 + oB];
-    b2 = b[6 + oB];
-    b3 = b[7 + oB];
-    out[4 + oOut] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
-    out[5 + oOut] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
-    out[6 + oOut] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
-    out[7 + oOut] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33;
-    b0 = b[8 + oB];
-    b1 = b[9 + oB];
-    b2 = b[10 + oB];
-    b3 = b[11 + oB];
-    out[8 + oOut] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
-    out[9 + oOut] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
-    out[10 + oOut] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
-    out[11 + oOut] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33;
-    b0 = b[12 + oB];
-    b1 = b[13 + oB];
-    b2 = b[14 + oB];
-    b3 = b[15 + oB];
-    out[12 + oOut] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
-    out[13 + oOut] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
-    out[14 + oOut] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
-    out[15 + oOut] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33;
+    let b0 = b2[0 + oB], b1 = b2[1 + oB], b22 = b2[2 + oB], b3 = b2[3 + oB];
+    out[0 + oOut] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+    out[1 + oOut] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+    out[2 + oOut] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+    out[3 + oOut] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+    b0 = b2[4 + oB];
+    b1 = b2[5 + oB];
+    b22 = b2[6 + oB];
+    b3 = b2[7 + oB];
+    out[4 + oOut] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+    out[5 + oOut] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+    out[6 + oOut] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+    out[7 + oOut] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+    b0 = b2[8 + oB];
+    b1 = b2[9 + oB];
+    b22 = b2[10 + oB];
+    b3 = b2[11 + oB];
+    out[8 + oOut] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+    out[9 + oOut] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+    out[10 + oOut] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+    out[11 + oOut] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+    b0 = b2[12 + oB];
+    b1 = b2[13 + oB];
+    b22 = b2[14 + oB];
+    b3 = b2[15 + oB];
+    out[12 + oOut] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+    out[13 + oOut] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+    out[14 + oOut] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+    out[15 + oOut] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
     return out;
   }
   Mat42.mulOffset = mulOffset;
-  function mul3(out, a3, b, c3) {
-    return mul(out, mul(out, a3, b), c3);
+  function mul3(out, a3, b2, c3) {
+    return mul(out, mul(out, a3, b2), c3);
   }
   Mat42.mul3 = mul3;
   function translate(out, a3, v3) {
@@ -211088,11 +211865,10 @@ function Mat4() {
     Vec3.normalize(tangent0, tangent0);
     const tangent1 = Vec3.cross(_v3pb, normal, tangent0);
     Vec3.normalize(tangent1, tangent1);
-    setAxes(out, normal, tangent0, tangent1);
+    fromBasis(out, tangent0, tangent1, normal);
     out[12] = point[0];
     out[13] = point[1];
     out[14] = point[2];
-    out[15] = 1;
     return out;
   }
   Mat42.fromPlane = fromPlane;
@@ -211256,44 +212032,44 @@ function Mat4() {
   Mat42.fromQuat = fromQuat;
   function fromEuler(out, euler, order) {
     const x2 = euler[0], y3 = euler[1], z3 = euler[2];
-    const a3 = Math.cos(x2), b = Math.sin(x2);
+    const a3 = Math.cos(x2), b2 = Math.sin(x2);
     const c3 = Math.cos(y3), d3 = Math.sin(y3);
     const e3 = Math.cos(z3), f4 = Math.sin(z3);
     if (order === "XYZ") {
-      const ae = a3 * e3, af = a3 * f4, be = b * e3, bf = b * f4;
+      const ae = a3 * e3, af = a3 * f4, be = b2 * e3, bf = b2 * f4;
       out[0] = c3 * e3;
       out[4] = -c3 * f4;
       out[8] = d3;
       out[1] = af + be * d3;
       out[5] = ae - bf * d3;
-      out[9] = -b * c3;
+      out[9] = -b2 * c3;
       out[2] = bf - ae * d3;
       out[6] = be + af * d3;
       out[10] = a3 * c3;
     } else if (order === "YXZ") {
       const ce = c3 * e3, cf = c3 * f4, de = d3 * e3, df = d3 * f4;
-      out[0] = ce + df * b;
-      out[4] = de * b - cf;
+      out[0] = ce + df * b2;
+      out[4] = de * b2 - cf;
       out[8] = a3 * d3;
       out[1] = a3 * f4;
       out[5] = a3 * e3;
-      out[9] = -b;
-      out[2] = cf * b - de;
-      out[6] = df + ce * b;
+      out[9] = -b2;
+      out[2] = cf * b2 - de;
+      out[6] = df + ce * b2;
       out[10] = a3 * c3;
     } else if (order === "ZXY") {
       const ce = c3 * e3, cf = c3 * f4, de = d3 * e3, df = d3 * f4;
-      out[0] = ce - df * b;
+      out[0] = ce - df * b2;
       out[4] = -a3 * f4;
-      out[8] = de + cf * b;
-      out[1] = cf + de * b;
+      out[8] = de + cf * b2;
+      out[1] = cf + de * b2;
       out[5] = a3 * e3;
-      out[9] = df - ce * b;
+      out[9] = df - ce * b2;
       out[2] = -a3 * d3;
-      out[6] = b;
+      out[6] = b2;
       out[10] = a3 * c3;
     } else if (order === "ZYX") {
-      const ae = a3 * e3, af = a3 * f4, be = b * e3, bf = b * f4;
+      const ae = a3 * e3, af = a3 * f4, be = b2 * e3, bf = b2 * f4;
       out[0] = c3 * e3;
       out[4] = be * d3 - af;
       out[8] = ae * d3 + bf;
@@ -211301,21 +212077,21 @@ function Mat4() {
       out[5] = bf * d3 + ae;
       out[9] = af * d3 - be;
       out[2] = -d3;
-      out[6] = b * c3;
+      out[6] = b2 * c3;
       out[10] = a3 * c3;
     } else if (order === "YZX") {
-      const ac = a3 * c3, ad = a3 * d3, bc = b * c3, bd = b * d3;
+      const ac = a3 * c3, ad = a3 * d3, bc = b2 * c3, bd = b2 * d3;
       out[0] = c3 * e3;
       out[4] = bd - ac * f4;
       out[8] = bc * f4 + ad;
       out[1] = f4;
       out[5] = a3 * e3;
-      out[9] = -b * e3;
+      out[9] = -b2 * e3;
       out[2] = -d3 * e3;
       out[6] = ad * f4 + bc;
       out[10] = ac - bd * f4;
     } else if (order === "XZY") {
-      const ac = a3 * c3, ad = a3 * d3, bc = b * c3, bd = b * d3;
+      const ac = a3 * c3, ad = a3 * d3, bc = b2 * c3, bd = b2 * d3;
       out[0] = c3 * e3;
       out[4] = -f4;
       out[8] = d3 * e3;
@@ -211323,7 +212099,7 @@ function Mat4() {
       out[5] = a3 * e3;
       out[9] = ad * f4 - bc;
       out[2] = bc * f4 - ad;
-      out[6] = b * e3;
+      out[6] = b2 * e3;
       out[10] = bd * f4 + ac;
     }
     out[3] = 0;
@@ -211340,7 +212116,7 @@ function Mat4() {
     const x2 = 2 * near / (right3 - left3);
     const y3 = 2 * near / (top - bottom);
     const a3 = (right3 + left3) / (right3 - left3);
-    const b = (top + bottom) / (top - bottom);
+    const b2 = (top + bottom) / (top - bottom);
     const c3 = -(far + near) / (far - near);
     const d3 = -2 * far * near / (far - near);
     out[0] = x2;
@@ -211352,7 +212128,7 @@ function Mat4() {
     out[6] = 0;
     out[7] = 0;
     out[8] = a3;
-    out[9] = b;
+    out[9] = b2;
     out[10] = c3;
     out[11] = -1;
     out[12] = 0;
@@ -211535,7 +212311,7 @@ function Mat4() {
   Mat42.id = identity4();
 })(Mat4 || (Mat4 = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/3d/vec2.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/3d/vec2.js
 function Vec2() {
   return Vec2.zero();
 }
@@ -211596,33 +212372,33 @@ function Vec2() {
     return out;
   }
   Vec22.set = set2;
-  function add(out, a3, b) {
-    out[0] = a3[0] + b[0];
-    out[1] = a3[1] + b[1];
+  function add(out, a3, b2) {
+    out[0] = a3[0] + b2[0];
+    out[1] = a3[1] + b2[1];
     return out;
   }
   Vec22.add = add;
-  function sub(out, a3, b) {
-    out[0] = a3[0] - b[0];
-    out[1] = a3[1] - b[1];
+  function sub(out, a3, b2) {
+    out[0] = a3[0] - b2[0];
+    out[1] = a3[1] - b2[1];
     return out;
   }
   Vec22.sub = sub;
-  function mul(out, a3, b) {
-    out[0] = a3[0] * b[0];
-    out[1] = a3[1] * b[1];
+  function mul(out, a3, b2) {
+    out[0] = a3[0] * b2[0];
+    out[1] = a3[1] * b2[1];
     return out;
   }
   Vec22.mul = mul;
-  function div(out, a3, b) {
-    out[0] = a3[0] / b[0];
-    out[1] = a3[1] / b[1];
+  function div(out, a3, b2) {
+    out[0] = a3[0] / b2[0];
+    out[1] = a3[1] / b2[1];
     return out;
   }
   Vec22.div = div;
-  function scale(out, a3, b) {
-    out[0] = a3[0] * b;
-    out[1] = a3[1] * b;
+  function scale(out, a3, b2) {
+    out[0] = a3[0] * b2;
+    out[1] = a3[1] * b2;
     return out;
   }
   Vec22.scale = scale;
@@ -211644,13 +212420,13 @@ function Vec2() {
     return out;
   }
   Vec22.floor = floor;
-  function distance(a3, b) {
-    const x2 = b[0] - a3[0], y3 = b[1] - a3[1];
+  function distance(a3, b2) {
+    const x2 = b2[0] - a3[0], y3 = b2[1] - a3[1];
     return Math.sqrt(x2 * x2 + y3 * y3);
   }
   Vec22.distance = distance;
-  function squaredDistance(a3, b) {
-    const x2 = b[0] - a3[0], y3 = b[1] - a3[1];
+  function squaredDistance(a3, b2) {
+    const x2 = b2[0] - a3[0], y3 = b2[1] - a3[1];
     return x2 * x2 + y3 * y3;
   }
   Vec22.squaredDistance = squaredDistance;
@@ -211685,8 +212461,8 @@ function Vec2() {
     return out;
   }
   Vec22.normalize = normalize3;
-  function areEqual(a3, b) {
-    return a3[0] === b[0] && a3[1] === b[1];
+  function areEqual(a3, b2) {
+    return a3[0] === b2[0] && a3[1] === b2[1];
   }
   Vec22.areEqual = areEqual;
   function toString(a3, precision) {
@@ -211695,7 +212471,7 @@ function Vec2() {
   Vec22.toString = toString;
 })(Vec2 || (Vec2 = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/3d/vec4.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/3d/vec4.js
 function Vec4() {
   return Vec4.zero();
 }
@@ -211786,24 +212562,24 @@ function Vec4() {
     return out;
   }
   Vec42.set = set2;
-  function add(out, a3, b) {
-    out[0] = a3[0] + b[0];
-    out[1] = a3[1] + b[1];
-    out[2] = a3[2] + b[2];
-    out[3] = a3[3] + b[3];
+  function add(out, a3, b2) {
+    out[0] = a3[0] + b2[0];
+    out[1] = a3[1] + b2[1];
+    out[2] = a3[2] + b2[2];
+    out[3] = a3[3] + b2[3];
     return out;
   }
   Vec42.add = add;
-  function distance(a3, b) {
-    const x2 = b[0] - a3[0], y3 = b[1] - a3[1], z3 = b[2] - a3[2], w3 = b[3] - a3[3];
+  function distance(a3, b2) {
+    const x2 = b2[0] - a3[0], y3 = b2[1] - a3[1], z3 = b2[2] - a3[2], w3 = b2[3] - a3[3];
     return Math.sqrt(x2 * x2 + y3 * y3 + z3 * z3 + w3 * w3);
   }
   Vec42.distance = distance;
-  function scale(out, a3, b) {
-    out[0] = a3[0] * b;
-    out[1] = a3[1] * b;
-    out[2] = a3[2] * b;
-    out[4] = a3[4] * b;
+  function scale(out, a3, b2) {
+    out[0] = a3[0] * b2;
+    out[1] = a3[1] * b2;
+    out[2] = a3[2] * b2;
+    out[4] = a3[4] * b2;
     return out;
   }
   Vec42.scale = scale;
@@ -211831,8 +212607,8 @@ function Vec4() {
     return out;
   }
   Vec42.floor = floor;
-  function squaredDistance(a3, b) {
-    const x2 = b[0] - a3[0], y3 = b[1] - a3[1], z3 = b[2] - a3[2], w3 = b[3] - a3[3];
+  function squaredDistance(a3, b2) {
+    const x2 = b2[0] - a3[0], y3 = b2[1] - a3[1], z3 = b2[2] - a3[2], w3 = b2[3] - a3[3];
     return x2 * x2 + y3 * y3 + z3 * z3 + w3 * w3;
   }
   Vec42.squaredDistance = squaredDistance;
@@ -211855,8 +212631,8 @@ function Vec4() {
     return out;
   }
   Vec42.transformMat4 = transformMat4;
-  function dot(a3, b) {
-    return a3[0] * b[0] + a3[1] * b[1] + a3[2] * b[2] + a3[3] * b[3];
+  function dot(a3, b2) {
+    return a3[0] * b2[0] + a3[1] * b2[1] + a3[2] * b2[2] + a3[3] * b2[3];
   }
   Vec42.dot = dot;
   function inverse(out, a3) {
@@ -211867,14 +212643,14 @@ function Vec4() {
     return out;
   }
   Vec42.inverse = inverse;
-  function exactEquals(a3, b) {
-    return a3[0] === b[0] && a3[1] === b[1] && a3[2] === b[2] && a3[3] === b[3];
+  function exactEquals(a3, b2) {
+    return a3[0] === b2[0] && a3[1] === b2[1] && a3[2] === b2[2] && a3[3] === b2[3];
   }
   Vec42.exactEquals = exactEquals;
-  function equals3(a3, b) {
+  function equals3(a3, b2) {
     const a0 = a3[0], a1 = a3[1], a22 = a3[2], a32 = a3[3];
-    const b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
-    return Math.abs(a0 - b0) <= EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a22 - b2) <= EPSILON * Math.max(1, Math.abs(a22), Math.abs(b2)) && Math.abs(a32 - b3) <= EPSILON * Math.max(1, Math.abs(a32), Math.abs(b3));
+    const b0 = b2[0], b1 = b2[1], b22 = b2[2], b3 = b2[3];
+    return Math.abs(a0 - b0) <= EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a22 - b22) <= EPSILON * Math.max(1, Math.abs(a22), Math.abs(b22)) && Math.abs(a32 - b3) <= EPSILON * Math.max(1, Math.abs(a32), Math.abs(b3));
   }
   Vec42.equals = equals3;
   function toString(a3, precision) {
@@ -211883,7 +212659,7 @@ function Vec4() {
   Vec42.toString = toString;
 })(Vec4 || (Vec4 = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/tensor.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/tensor.js
 var Tensor;
 (function(Tensor2) {
   function Layout(dimensions, axisOrderSlowToFast, ctor) {
@@ -211961,12 +212737,12 @@ var Tensor;
     return out;
   }
   Tensor2.toVec4 = toVec4;
-  function areEqualExact(a3, b) {
+  function areEqualExact(a3, b2) {
     const len = a3.length;
-    if (len !== b.length)
+    if (len !== b2.length)
       return false;
     for (let i4 = 0; i4 < len; i4++)
-      if (a3[i4] !== b[i4])
+      if (a3[i4] !== b2[i4])
         return false;
     return true;
   }
@@ -212181,9 +212957,204 @@ var Tensor;
     return (xs) => reorder(xs, indices);
   }
   Tensor2.convertToCanonicalAxisIndicesSlowToFast = convertToCanonicalAxisIndicesSlowToFast;
+  function floodfill1(tensor, threshold) {
+    const [xn] = tensor.space.dimensions;
+    const { data } = tensor;
+    const visited = new Uint8Array(data.length);
+    let leftEnd = -1;
+    if (data[0] < threshold) {
+      for (let x2 = 0; x2 < xn && data[x2] < threshold; x2++) {
+        visited[x2] = 1;
+        leftEnd = x2;
+      }
+    }
+    if (data[xn - 1] < threshold) {
+      for (let x2 = xn - 1; x2 > leftEnd && data[x2] < threshold; x2--) {
+        visited[x2] = 1;
+      }
+    }
+    return visited;
+  }
+  function floodfill2(tensor, threshold) {
+    const [xn, yn] = tensor.space.dimensions;
+    const { dataOffset: o3, getCoords: getCoords2 } = tensor.space;
+    const { data } = tensor;
+    const visited = new Uint8Array(data.length);
+    const stack = [];
+    const coords = [0, 0];
+    const xn1 = xn - 1;
+    const yn1 = yn - 1;
+    const isBoundary = (x2, y3) => x2 === 0 || y3 === 0 || x2 === xn1 || y3 === yn1;
+    for (let y3 = 0; y3 < yn; y3++) {
+      for (let x2 = 0; x2 < xn; x2++) {
+        const offset = o3(x2, y3);
+        if (!visited[offset] && data[offset] < threshold && isBoundary(x2, y3)) {
+          stack.push(offset);
+          while (stack.length > 0) {
+            const voffset = stack.pop();
+            if (visited[voffset])
+              continue;
+            visited[voffset] = 1;
+            getCoords2(voffset, coords);
+            const [vx, vy] = coords;
+            if (vx > 0) {
+              const noffset = o3(vx - 1, vy);
+              if (!visited[noffset] && data[noffset] < threshold) {
+                stack.push(noffset);
+              }
+            }
+            if (vx < xn1) {
+              const noffset = o3(vx + 1, vy);
+              if (!visited[noffset] && data[noffset] < threshold) {
+                stack.push(noffset);
+              }
+            }
+            if (vy > 0) {
+              const noffset = o3(vx, vy - 1);
+              if (!visited[noffset] && data[noffset] < threshold) {
+                stack.push(noffset);
+              }
+            }
+            if (vy < yn1) {
+              const noffset = o3(vx, vy + 1);
+              if (!visited[noffset] && data[noffset] < threshold) {
+                stack.push(noffset);
+              }
+            }
+          }
+        }
+      }
+    }
+    return visited;
+  }
+  function floodfill3(tensor, threshold) {
+    const [xn, yn, zn] = tensor.space.dimensions;
+    const { dataOffset: o3, getCoords: getCoords2 } = tensor.space;
+    const stack = [];
+    const coords = [0, 0, 0];
+    const xn1 = xn - 1;
+    const yn1 = yn - 1;
+    const zn1 = zn - 1;
+    const isBoundary = (x2, y3, z3) => x2 === 0 || y3 === 0 || z3 === 0 || x2 === xn1 || y3 === yn1 || z3 === zn1;
+    const { data } = tensor;
+    const visited = new Uint8Array(data.length);
+    for (let z3 = 0; z3 < zn; z3++) {
+      for (let y3 = 0; y3 < yn; y3++) {
+        for (let x2 = 0; x2 < xn; x2++) {
+          const offset = o3(x2, y3, z3);
+          if (data[offset] < threshold && isBoundary(x2, y3, z3) && !visited[offset]) {
+            stack.push(offset);
+            while (stack.length > 0) {
+              const voffset = stack.pop();
+              if (visited[voffset])
+                continue;
+              visited[voffset] = 1;
+              getCoords2(voffset, coords);
+              const [vx, vy, vz] = coords;
+              if (vx > 0) {
+                const noffset = o3(vx - 1, vy, vz);
+                if (!visited[noffset] && data[noffset] < threshold) {
+                  stack.push(noffset);
+                }
+              }
+              if (vx < xn1) {
+                const noffset = o3(vx + 1, vy, vz);
+                if (!visited[noffset] && data[noffset] < threshold) {
+                  stack.push(noffset);
+                }
+              }
+              if (vy > 0) {
+                const noffset = o3(vx, vy - 1, vz);
+                if (!visited[noffset] && data[noffset] < threshold) {
+                  stack.push(noffset);
+                }
+              }
+              if (vy < yn1) {
+                const noffset = o3(vx, vy + 1, vz);
+                if (!visited[noffset] && data[noffset] < threshold) {
+                  stack.push(noffset);
+                }
+              }
+              if (vz > 0) {
+                const noffset = o3(vx, vy, vz - 1);
+                if (!visited[noffset] && data[noffset] < threshold) {
+                  stack.push(noffset);
+                }
+              }
+              if (vz < zn1) {
+                const noffset = o3(vx, vy, vz + 1);
+                if (!visited[noffset] && data[noffset] < threshold) {
+                  stack.push(noffset);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return visited;
+  }
+  function floodfill(tensor, threshold) {
+    switch (tensor.space.dimensions.length) {
+      case 1:
+        return floodfill1(tensor, threshold);
+      case 2:
+        return floodfill2(tensor, threshold);
+      case 3:
+        return floodfill3(tensor, threshold);
+      default:
+        throw new Error("Floodfill only implemented for rank-1, rank-2 and rank-3 tensors.");
+    }
+  }
+  Tensor2.floodfill = floodfill;
+  function floodfilledGet(mode, threshold, visited, tensor) {
+    const { dataOffset: o3 } = tensor.space;
+    const fillValue = threshold * 2;
+    switch (tensor.space.dimensions.length) {
+      case 1:
+        return mode === "outside" ? (data, i4) => {
+          const v3 = data[i4];
+          return v3 < threshold && visited[i4] ? fillValue : v3;
+        } : (data, i4) => {
+          const v3 = data[i4];
+          return v3 < threshold && !visited[i4] ? fillValue : v3;
+        };
+      case 2:
+        return mode === "outside" ? (data, i4, j3) => {
+          const e3 = o3(i4, j3);
+          const v3 = data[e3];
+          return v3 < threshold && visited[e3] ? fillValue : v3;
+        } : (data, i4, j3) => {
+          const e3 = o3(i4, j3);
+          const v3 = data[e3];
+          return v3 < threshold && !visited[e3] ? fillValue : v3;
+        };
+      case 3:
+        return mode === "outside" ? (data, i4, j3, k3) => {
+          const e3 = o3(i4, j3, k3);
+          const v3 = data[e3];
+          return v3 < threshold && visited[e3] ? fillValue : v3;
+        } : (data, i4, j3, k3) => {
+          const e3 = o3(i4, j3, k3);
+          const v3 = data[e3];
+          return v3 < threshold && !visited[e3] ? fillValue : v3;
+        };
+      default:
+        throw new Error("Floodfill only implemented for rank-1, rank-2 and rank-3 tensors.");
+    }
+  }
+  function createFloodfilled(tensor, threshold, mode) {
+    const visited = floodfill(tensor, threshold);
+    const newSpace = {
+      ...tensor.space,
+      get: floodfilledGet(mode, threshold, visited, tensor)
+    };
+    return Tensor2.create(newSpace, tensor.data);
+  }
+  Tensor2.createFloodfilled = createFloodfilled;
 })(Tensor || (Tensor = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-math/linear-algebra/3d/euler.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-math/linear-algebra/3d/euler.js
 function Euler() {
   return Euler.zero();
 }
@@ -212305,8 +213276,8 @@ function Euler() {
     return set2(out, v3[0], v3[1], v3[2]);
   }
   Euler2.fromVec3 = fromVec3;
-  function exactEquals(a3, b) {
-    return a3[0] === b[0] && a3[1] === b[1] && a3[2] === b[2];
+  function exactEquals(a3, b2) {
+    return a3[0] === b2[0] && a3[1] === b2[1] && a3[2] === b2[2];
   }
   Euler2.exactEquals = exactEquals;
   function fromArray(e3, array4, offset) {
@@ -212325,8 +213296,8 @@ function Euler() {
   Euler2.toArray = toArray;
 })(Euler || (Euler = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-util/color/utils.js
-var hexColorRegex2 = /^#([0-9A-F]{3}){1,2}$/i;
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-util/color/utils.js
+var hexColorRegex2 = /^#([0-9A-F]{3}|[0-9A-F]{4}|[0-9A-F]{6}|[0-9A-F]{8})$/i;
 var rgbColorRegex = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/i;
 function decodeColor(colorString) {
   if (colorString === void 0 || colorString === null)
@@ -212335,6 +213306,10 @@ function decodeColor(colorString) {
   if (hexColorRegex2.test(colorString)) {
     if (colorString.length === 4) {
       colorString = `#${colorString[1]}${colorString[1]}${colorString[2]}${colorString[2]}${colorString[3]}${colorString[3]}`;
+    } else if (colorString.length === 5) {
+      colorString = `#${colorString[1]}${colorString[1]}${colorString[2]}${colorString[2]}${colorString[3]}${colorString[3]}`;
+    } else if (colorString.length === 9) {
+      colorString = colorString.substring(0, 7);
     }
     result = Color.fromHexStyle(colorString);
     if (result !== void 0 && !isNaN(result))
@@ -212347,15 +213322,15 @@ function decodeColor(colorString) {
   if (rgbMatch) {
     const r3 = parseInt(rgbMatch[1], 10);
     const g2 = parseInt(rgbMatch[2], 10);
-    const b = parseInt(rgbMatch[3], 10);
-    if (r3 >= 0 && r3 <= 255 && g2 >= 0 && g2 <= 255 && b >= 0 && b <= 255) {
-      return Color.fromRgb(r3, g2, b);
+    const b2 = parseInt(rgbMatch[3], 10);
+    if (r3 >= 0 && r3 <= 255 && g2 >= 0 && g2 <= 255 && b2 >= 0 && b2 <= 255) {
+      return Color.fromRgb(r3, g2, b2);
     }
   }
   return void 0;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/type.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/type.js
 var Type2;
 (function(Type3) {
   function Variable2(name, type4, isConstraint) {
@@ -212392,7 +213367,7 @@ var Type2;
   Type3.oneOfValues = oneOfValues;
 })(Type2 || (Type2 = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/expression.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/expression.js
 var Expression;
 (function(Expression2) {
   function Symbol2(name) {
@@ -212425,7 +213400,7 @@ var Expression;
   Expression2.isSymbol = isSymbol3;
 })(Expression || (Expression = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/symbol.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/symbol.js
 function Argument(type4, params) {
   const { description = void 0, isOptional = false, isRest = false, defaultValue = void 0 } = params || {};
   return { type: type4, isOptional, isRest, defaultValue, description };
@@ -212458,7 +213433,7 @@ function isSymbol(x2) {
   return typeof s3 === "function" && !!s3.info && !!s3.args && typeof s3.info.namespace === "string" && !!s3.type;
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/helpers.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/helpers.js
 function symbol(args, type4, description) {
   return MSymbol("", args, type4, description);
 }
@@ -212472,7 +213447,7 @@ function symbolList(table) {
 }
 function formatKey(key) {
   const regex = /([a-z])([A-Z])([a-z]|$)/g;
-  return key.replace(regex, (s3, a3, b, c3) => `${a3}-${b.toLocaleLowerCase()}${c3}`).replace(regex, (s3, a3, b, c3) => `${a3}-${b.toLocaleLowerCase()}${c3}`);
+  return key.replace(regex, (s3, a3, b2, c3) => `${a3}-${b2.toLocaleLowerCase()}${c3}`).replace(regex, (s3, a3, b2, c3) => `${a3}-${b2.toLocaleLowerCase()}${c3}`);
 }
 function _normalizeTable(namespace, key, obj) {
   if (isSymbol(obj)) {
@@ -212501,7 +213476,7 @@ function _symbolList(obj, list4) {
   }
 }
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/symbol-table/core.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/symbol-table/core.js
 var Types;
 (function(Types3) {
   Types3.AnyVar = Type2.Variable("a", Type2.Any);
@@ -212660,7 +213635,7 @@ var SymbolMap = (function() {
   return map3;
 })();
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/symbol-table/structure-query.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/symbol-table/structure-query.js
 var Types2;
 (function(Types3) {
   Types3.ElementSymbol = Type2.Value("Structure", "ElementSymbol");
@@ -212937,7 +213912,7 @@ var structureQuery = {
   bondProperty
 };
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/symbol-table/internal.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/symbol-table/internal.js
 var generator2 = {
   "@header": "Generators",
   bundleElement: symbol(Arguments.Dictionary({
@@ -212963,7 +213938,7 @@ var internal = {
   generator: generator2
 };
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/symbol-table.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/symbol-table.js
 var MolScriptSymbolTable = { core, structureQuery, internal };
 normalizeTable(MolScriptSymbolTable);
 var SymbolList2 = symbolList(MolScriptSymbolTable);
@@ -212974,7 +213949,7 @@ var SymbolMap2 = (function() {
   return map3;
 })();
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/builder.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/builder.js
 var MolScriptBuilder;
 (function(MolScriptBuilder2) {
   MolScriptBuilder2.core = MolScriptSymbolTable.core;
@@ -213042,7 +214017,7 @@ var MolScriptBuilder;
   ;
 })(MolScriptBuilder || (MolScriptBuilder = {}));
 
-// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.5.0_react@19.2.3_react-dom@19.2.3__react@19.2.3/node_modules/molstar/lib/mol-script/language/expression-formatter.js
+// ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/molstar@5.8.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14_fp-ts@2.16.11/node_modules/molstar/lib/mol-script/language/expression-formatter.js
 var { isLiteral, isSymbol: isSymbol2, isArgumentsArray } = Expression;
 var Writer = class {
   constructor() {
@@ -213158,7 +214133,7 @@ function formatMolScript(e3) {
   return writer.getStr();
 }
 
-// https://jsr.io/@molstar/mol-view-stories/1.0.4/src/utils.ts
+// https://jsr.io/@molstar/mol-view-stories/1.1.0/src/utils.ts
 var StoryFileExtension = ".mvstory";
 var BuilderLib = {
   Vec3,
@@ -213173,23 +214148,18 @@ var BuilderLib = {
 var BuilderLibNamespaces = Object.keys(BuilderLib);
 function adjustedCameraPosition(camera) {
   const f4 = camera.mode === "orthographic" ? 1 / (2 * Math.tan(camera.fov / 2)) : 1 / (2 * Math.sin(camera.fov / 2));
-  const delta = Vec3.sub(
-    Vec3(),
-    camera.position,
-    camera.target
-  );
-  return Vec3.scaleAndAdd(
-    Vec3(),
-    camera.target,
-    delta,
-    1 / f4
-  );
+  const delta = Vec3.sub(Vec3(), camera.position, camera.target);
+  return Vec3.scaleAndAdd(Vec3(), camera.target, delta, 1 / f4);
 }
 var createStateProvider = (code) => {
   return new Function("builder", "index", "__lib__", code);
 };
 async function getMVSSnapshot(story, scene, index) {
   try {
+    console.log("[getMVSSnapshot] Scene:", scene.header);
+    console.log("[getMVSSnapshot] story.javascript present:", !!story.javascript);
+    console.log("[getMVSSnapshot] story.javascript:", story.javascript?.substring(0, 100) || "(empty)");
+    console.log("[getMVSSnapshot] scene.javascript:", scene.javascript?.substring(0, 100) || "(empty)");
     const stateProvider = createStateProvider(`
 const { ${Object.keys(BuilderLib).join(", ")} } = __lib__;
 async function _run_builder() {
@@ -213268,9 +214238,7 @@ async function downloadStoriesCode(version, asset) {
     return codeCache.get(cacheKey);
   }
   try {
-    const req = fetch(
-      `https://cdn.jsdelivr.net/npm/molstar@${version}/build/mvs-stories/mvs-stories.${asset}`
-    );
+    const req = fetch(`https://cdn.jsdelivr.net/npm/molstar@${version}/build/mvs-stories/mvs-stories.${asset}`);
     const response = await req;
     if (!response.ok) {
       codeCache.delete(cacheKey);
@@ -213317,7 +214285,7 @@ async function createSelfHostedZip(story, options) {
   return new Uint8Array(zip2);
 }
 
-// https://jsr.io/@molstar/mol-view-stories/1.0.4/src/story-manager.ts
+// https://jsr.io/@molstar/mol-view-stories/1.1.0/src/story-manager.ts
 var StoryManager = class _StoryManager {
   story;
   constructor(story) {
@@ -213585,7 +214553,7 @@ var StoryManager = class _StoryManager {
   }
 };
 
-// https://jsr.io/@molstar/mol-view-stories/1.0.4/src/monaco-utils.ts
+// https://jsr.io/@molstar/mol-view-stories/1.1.0/src/monaco-utils.ts
 function setupMonacoCodeCompletion(monaco, mvsTypes, commonCode) {
   monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
   monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
@@ -213633,7 +214601,7 @@ function setupMonacoCodeCompletion(monaco, mvsTypes, commonCode) {
   });
 }
 
-// https://jsr.io/@molstar/mol-view-stories/1.0.4/src/mvs-types.ts
+// https://jsr.io/@molstar/mol-view-stories/1.1.0/src/mvs-types.ts
 var MVSTypes = `
 namespace _ {
     /**
@@ -215038,6 +216006,8 @@ namespace _ {
             field_name: OptionalField<string>;
             /** Customize mapping of annotation values to colors. */
             palette: OptionalField<CategoricalPalette | DiscretePalette | ContinuousPalette | null>;
+            /** Defines to what part of the representation this coloring should be applied. */
+            selector: OptionalField<ComponentSelectorT | ComponentExpressionT | ComponentExpressionT[]>;
             /** URL of the annotation resource. */
             uri: RequiredField<string>;
             /** Format of the annotation resource. */
@@ -215060,6 +216030,8 @@ namespace _ {
             field_name: OptionalField<string>;
             /** Customize mapping of annotation values to colors. */
             palette: OptionalField<CategoricalPalette | DiscretePalette | ContinuousPalette | null>;
+            /** Defines to what part of the representation this coloring should be applied. */
+            selector: OptionalField<ComponentSelectorT | ComponentExpressionT | ComponentExpressionT[]>;
             /** Annotation schema defines what fields in the annotation will be taken into account. */
             schema: RequiredField<SchemaT>;
             /** Header of the CIF block to read annotation from. If \`null\`, block is selected based on \`block_index\`. */
@@ -215108,6 +216080,10 @@ namespace _ {
         label_from_uri: SimpleParamsSchema<{
             /** Name of the column in CIF or field name (key) in JSON that contains the label text. */
             field_name: OptionalField<string>;
+            /** Formatting template for the label text. Supports simplified f-string syntax. */
+            text_format: OptionalField<string>;
+            /** Set of annotation fields for grouping annotation rows into label instances (i.e. annotation rows with the same values in all group-by fields will yield one label instance). Annotation row with undefined value in any group-by field is considered a separate label instance. */
+            group_by_fields: OptionalField<string[] | null>;
             /** URL of the annotation resource. */
             uri: RequiredField<string>;
             /** Format of the annotation resource. */
@@ -215128,6 +216104,10 @@ namespace _ {
         label_from_source: SimpleParamsSchema<{
             /** Name of the column in CIF or field name (key) in JSON that contains the label text. */
             field_name: OptionalField<string>;
+            /** Formatting template for the label text. Supports simplified f-string syntax. */
+            text_format: OptionalField<string>;
+            /** Set of annotation fields for grouping annotation rows into label instances (i.e. annotation rows with the same values in all group-by fields will yield one label instance). Annotation row with undefined value in any group-by field is considered a separate label instance. */
+            group_by_fields: OptionalField<string[] | null>;
             /** Annotation schema defines what fields in the annotation will be taken into account. */
             schema: RequiredField<SchemaT>;
             /** Header of the CIF block to read annotation from. If \`null\`, block is selected based on \`block_index\`. */
@@ -215148,6 +216128,8 @@ namespace _ {
         tooltip_from_uri: SimpleParamsSchema<{
             /** Name of the column in CIF or field name (key) in JSON that contains the tooltip text. */
             field_name: OptionalField<string>;
+            /** Formatting template for the tooltip text. Supports simplified f-string syntax. */
+            text_format: OptionalField<string>;
             /** URL of the annotation resource. */
             uri: RequiredField<string>;
             /** Format of the annotation resource. */
@@ -215168,6 +216150,8 @@ namespace _ {
         tooltip_from_source: SimpleParamsSchema<{
             /** Name of the column in CIF or field name (key) in JSON that contains the tooltip text. */
             field_name: OptionalField<string>;
+            /** Formatting template for the tooltip text. Supports simplified f-string syntax. */
+            text_format: OptionalField<string>;
             /** Annotation schema defines what fields in the annotation will be taken into account. */
             schema: RequiredField<SchemaT>;
             /** Header of the CIF block to read annotation from. If \`null\`, block is selected based on \`block_index\`. */
@@ -215642,7 +216626,7 @@ namespace _ {
     }
     
     /**
-     * Copyright (c) 2023-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
+     * Copyright (c) 2023-2026 mol* contributors, licensed under MIT, See LICENSE file for more info.
      *
      * @author Adam Midlik <midlik@gmail.com>
      * @author David Sehnal <david.sehnal@gmail.com>
@@ -215712,6 +216696,22 @@ namespace _ {
         fromMVSJ(mvsjString: string): MVSData;
         /** Encode \`MVSData\` to MVSJ (MolViewSpec-JSON) string. Use \`space\` parameter to control formatting (as with \`JSON.stringify\`). */
         toMVSJ(mvsData: MVSData, space?: string | number): string;
+        /** Encode \`MVSData\` to MVSX (MolViewSpec JSON zipped together with referenced assets). Automatically fetches all referenced assets unless specified otherwise in \`options\`. */
+        toMVSX(mvsData: MVSData, options?: {
+            /** Explicitely define assets to be included in the MVSX (binary data or string with asset content).
+             * If not specified, assets will be fetched automatically. */
+            assets?: {
+                [uri: string]: Uint8Array<ArrayBuffer> | string;
+            };
+            /** Base URI for resolving relative URIs (only applies if \`assets\` not specified). */
+            baseUri?: string;
+            /** Do not include external resources (i.e. absolute URIs) in the MVSX (default is to include both relative and absolute URIs) (only applies if \`assets\` not specified). */
+            skipExternal?: boolean;
+            /** Optional cache for sharing fetched assets across multiple \`toMVSX\` calls (only applies if \`assets\` not specified). */
+            cache?: {
+                [absoluteUri: string]: Uint8Array<ArrayBuffer> | string;
+            };
+        }): Promise<Uint8Array<ArrayBuffer>>;
         /** Validate \`MVSData\`. Return \`true\` if OK; \`false\` if not OK.
          * If \`options.noExtra\` is true, presence of any extra node parameters is treated as an issue. */
         isValid(mvsData: MVSData, options?: {
@@ -215972,7 +216972,7 @@ namespace _ {
     }
     
     /**
-     * Copyright (c) 2017-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
+     * Copyright (c) 2017-2026 mol* contributors, licensed under MIT, See LICENSE file for more info.
      *
      * @author David Sehnal <david.sehnal@gmail.com>
      * @author Alexander Rose <alexander.rose@weirdbyte.de>
@@ -216135,6 +217135,7 @@ namespace _ {
          */
         function equals(a: Vec3, b: Vec3): boolean;
         function makeRotation(mat: Mat4, a: Vec3, b: Vec3): Mat4;
+        function rotateAroundAxis(out: Vec3, v: Vec3, axis: Vec3, angle: number): Vec3;
         function isZero(v: Vec3): boolean;
         /** Project \`point\` onto \`vector\` starting from \`origin\` */
         function projectPointOnVector(out: Vec3, point: Vec3, vector: Vec3, origin: Vec3): Vec3;
@@ -216381,7 +217382,7 @@ if (monacoEnvironment2?.globalAPI) {
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/editor/editor.api.js
 init_editor_api2();
 
-// https://jsr.io/@molstar/molstar-components/0.5.0/src/MolViewEditor.tsx
+// https://jsr.io/@molstar/molstar-components/0.5.2/src/MolViewEditor.tsx
 init_monaco_contribution();
 
 // ../../../Library/Caches/deno/deno_esbuild/registry.npmjs.org/monaco-editor@0.55.1/node_modules/monaco-editor/esm/vs/basic-languages/typescript/typescript.js
@@ -216859,7 +217860,7 @@ var language3 = {
   tokenizer: language2.tokenizer
 };
 
-// https://jsr.io/@molstar/molstar-components/0.5.0/src/MolViewEditor.tsx
+// https://jsr.io/@molstar/molstar-components/0.5.2/src/MolViewEditor.tsx
 var DEFAULT_CODE = `const structure = builder
   .download({ url: 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif' })
   .parse({ format: 'bcif' })
@@ -216965,13 +217966,13 @@ function MolViewEditor({
       }
     }
   }, [initialCode, isReady]);
-  return _("div", {
+  return k("div", {
     ref: containerRef,
     style: { width: "100%", height, border: "1px solid #333" }
   });
 }
 
-// https://jsr.io/@molstar/molstar-components/0.5.0/src/EditorWithViewer.tsx
+// https://jsr.io/@molstar/molstar-components/0.5.2/src/EditorWithViewer.tsx
 function EditorWithViewer({
   initialCode,
   layout: layout2 = "horizontal",
@@ -217088,20 +218089,20 @@ function EditorWithViewer({
     minWidth: layout2 === "horizontal" ? "400px" : "auto",
     minHeight: viewerHeight
   };
-  return _(
+  return k(
     "div",
     { style: containerStyle },
-    _(
+    k(
       "div",
       { style: editorContainerStyle },
-      _(MolViewEditor, {
+      k(MolViewEditor, {
         initialCode: currentCode,
         onCodeChange: handleCodeChange,
         onSave: handleSave,
         height: editorHeight,
         editorOptions
       }),
-      showBottomControlPanel && showAutoUpdateToggle && _(
+      showBottomControlPanel && showAutoUpdateToggle && k(
         "div",
         {
           style: {
@@ -217113,7 +218114,7 @@ function EditorWithViewer({
             alignItems: "center"
           }
         },
-        _(
+        k(
           "label",
           {
             style: {
@@ -217124,19 +218125,19 @@ function EditorWithViewer({
               fontSize: "14px"
             }
           },
-          _("input", {
+          k("input", {
             type: "checkbox",
             checked: autoUpdateEnabled,
             onChange: (e3) => setAutoUpdateEnabled(e3.target.checked),
             style: { cursor: "pointer" }
           }),
-          _(
+          k(
             "span",
             null,
             "Auto-update (runs code automatically after typing)"
           )
         ),
-        _(
+        k(
           "label",
           {
             style: {
@@ -217147,16 +218148,16 @@ function EditorWithViewer({
               fontSize: "14px"
             }
           },
-          _("input", {
+          k("input", {
             type: "checkbox",
             checked: showLogPanel,
             onChange: (e3) => setShowLogPanel(e3.target.checked),
             style: { cursor: "pointer" }
           }),
-          _("span", null, "Show execution log")
+          k("span", null, "Show execution log")
         )
       ),
-      showBottomControlPanel && showLog && showLogPanel && logs.length > 0 && _(
+      showBottomControlPanel && showLog && showLogPanel && logs.length > 0 && k(
         "details",
         {
           open: logExpanded,
@@ -217167,7 +218168,7 @@ function EditorWithViewer({
             backgroundColor: "#1a1a1a"
           }
         },
-        _(
+        k(
           "summary",
           {
             style: {
@@ -217179,7 +218180,7 @@ function EditorWithViewer({
           },
           `Execution Log (${logs.length} ${logs.length === 1 ? "entry" : "entries"}) - Click to ${logExpanded ? "collapse" : "expand"}`
         ),
-        _(
+        k(
           "div",
           {
             style: {
@@ -217191,7 +218192,7 @@ function EditorWithViewer({
             }
           },
           logs.map(
-            (log2, idx) => _(
+            (log2, idx) => k(
               "div",
               {
                 key: idx,
@@ -217201,7 +218202,7 @@ function EditorWithViewer({
                   color: log2.level === "error" ? "#ff6b6b" : log2.level === "success" ? "#51cf66" : "#ccc"
                 }
               },
-              _(
+              k(
                 "span",
                 { style: { opacity: 0.6 } },
                 `[${log2.timestamp.toLocaleTimeString()}]`
@@ -217212,7 +218213,7 @@ function EditorWithViewer({
           )
         )
       ),
-      showBottomControlPanel && error && _(
+      showBottomControlPanel && error && k(
         "div",
         {
           style: {
@@ -217228,10 +218229,10 @@ function EditorWithViewer({
         `Error: ${error}`
       )
     ),
-    _(
+    k(
       "div",
       { style: viewerContainerStyle },
-      mvsData ? _(MolstarViewer, {
+      mvsData ? k(MolstarViewer, {
         mvsData,
         config: {
           layoutIsExpanded: false,
@@ -217245,7 +218246,7 @@ function EditorWithViewer({
           viewportShowAnimation: false
         },
         style: { height: "100%", width: "100%" }
-      }) : _(
+      }) : k(
         "div",
         {
           style: {
@@ -217275,7 +218276,7 @@ async function initializeMolViewSpecViewers() {
       console.error("EditorWithViewer component not found");
       return;
     }
-    if (!_ || !G) {
+    if (!k || !R) {
       console.error("Preact h/render functions not found");
       return;
     }
@@ -217326,8 +218327,8 @@ async function initializeMolViewSpecViewers() {
           showAutoUpdateToggle: false,
           showBottomControlPanel: false
         };
-        G(
-          _(EditorWithViewer, {
+        R(
+          k(EditorWithViewer, {
             initialCode: sceneCode,
             hiddenCode: storyCode,
             ...defaultProps,

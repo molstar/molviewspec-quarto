@@ -142,11 +142,55 @@ Built-in CSS includes dark mode support via `@media (prefers-color-scheme: dark)
 
 **Code blocks showing as plain text**: Ensure you're using `{.molviewspec}` with the dot prefix, not `{molviewspec}`.
 
+## Updating Versions
+
+When upgrading dependencies or cutting a new release, do these steps in order:
+
+### 1. Update `deno.json` and rebuild the JS bundle
+
+Update the `@molstar/molstar-components` version (and any other deps) in `deno.json`, then rebuild:
+
+```bash
+deno task build
+```
+
+This regenerates:
+- `_extensions/molviewspec-quarto/molviewspec.js`
+- `assets/molstar-components.css`
+- `assets/editor.worker.js`
+- `assets/ts.worker.js`
+- `assets/codicon-*.ttf`
+
+### 2. Update the standalone molstar bundle
+
+Download the latest molstar JS and CSS from the CDN (check latest version via `npm view molstar version`):
+
+```bash
+MOLSTAR_VERSION=5.8.0
+curl -L -o _extensions/molviewspec-quarto/assets/molstar.js \
+  "https://unpkg.com/molstar@${MOLSTAR_VERSION}/build/viewer/molstar.js"
+curl -L -o _extensions/molviewspec-quarto/assets/molstar.css \
+  "https://unpkg.com/molstar@${MOLSTAR_VERSION}/build/viewer/molstar.css"
+```
+
+### 3. Bump the extension version
+
+Update `version` in `_extensions/molviewspec-quarto/_extension.yml`.
+
+### 4. Re-render the HTML output files
+
+The rendered HTML embeds the extension version in asset paths (e.g. `molviewspec-quarto-1.1.0/`), so regenerate them after bumping the version:
+
+```bash
+quarto render index.qmd
+quarto render example.qmd
+```
+
 ## Extension Distribution
 
 Users install via:
 ```bash
-quarto add zachcp/molviewspec-quarto
+quarto add molstar/molviewspec-quarto
 ```
 
 Or manually copy `_extensions/molviewspec-quarto/` directory to their project's `_extensions/` folder.
