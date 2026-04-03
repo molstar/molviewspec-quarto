@@ -146,7 +146,7 @@ Built-in CSS includes dark mode support via `@media (prefers-color-scheme: dark)
 
 Users install via:
 ```bash
-quarto add zachcp/molviewspec-quarto
+quarto add molstar/molviewspec-quarto
 ```
 
 Or manually copy `_extensions/molviewspec-quarto/` directory to their project's `_extensions/` folder.
